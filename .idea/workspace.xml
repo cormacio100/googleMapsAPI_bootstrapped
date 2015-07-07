@@ -2,14 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed0c8b9f-e5ba-46a6-863c-e10c2d3c3aa1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/controller_admin.php" afterPath="$PROJECT_DIR$/mvc/controller_admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/controller_fault.php" afterPath="$PROJECT_DIR$/mvc/controller_fault.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/custom.css" afterPath="$PROJECT_DIR$/css/custom.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/mapScripts/displayMapAndMarker.js" afterPath="$PROJECT_DIR$/js/mapScripts/displayMapAndMarker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/templates/index-v2.html.twig" afterPath="$PROJECT_DIR$/mvc/templates/index-v2.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/templates/mapReportFaultForm3.html.twig" afterPath="$PROJECT_DIR$/mvc/templates/mapReportFaultForm3.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/model.php" afterPath="$PROJECT_DIR$/mvc/model.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/to-do/to-do.txt" afterPath="$PROJECT_DIR$/to-do/to-do.txt" />
     </list>
     <ignored path="GoogleMapAPI_Bootstrapped.iws" />
@@ -39,7 +31,7 @@
         <entry file="file://$PROJECT_DIR$/to-do/to-do.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.027823241" vertical-offset="0" max-vertical-offset="612">
-              <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+              <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -576,7 +568,7 @@
     <entry file="file://$PROJECT_DIR$/to-do/to-do.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.027823241" vertical-offset="0" max-vertical-offset="612">
-          <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+          <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
           <folding />
         </state>
       </provider>
