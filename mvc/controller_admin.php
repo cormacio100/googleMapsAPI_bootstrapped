@@ -322,15 +322,22 @@ function adminReportedFaults()
 	$startRecord=0;
 	$recordsPerPage=10;
 	$totalRecords=0;
+    $activePage=1;      /* defaults to first page */
 	$searchParam='fault';
 	$url='./adminReportedFaults';
 	$outputHTML=null;
-	
+
+    # check which page is selected in order to display the active page
+    if(isset($_GET['pageNum']))
+    {
+        $activePage=filter_input(INPUT_GET,'pageNum',FILTER_SANITIZE_NUMBER_INT);
+    }
+
 	# count how many records are set
 	$totalRecords=getTotalRecordsNum($searchParam,null,$teamRegion);
 	
 	# create a Pager Object for creating the links at the top of the page
-	$pager = new Pager($totalRecords,$recordsPerPage,$searchParam,$url,'ALL');
+	$pager = new Pager($totalRecords,$recordsPerPage,$searchParam,$url,'ALL',$activePage);
 	
 	$outputHTML	 = $pager->getOutputHTML();
 
@@ -346,7 +353,7 @@ function adminReportedFaults()
 		$recordsPerPage = filter_input(INPUT_GET,'recordsPerPage',FILTER_SANITIZE_NUMBER_INT);		
 	}
 	
-	# retrieve an array or reported faults
+	# retrieve an array or reported faults/sites
 	$reportedFaultsArr = getPageRecords($searchParam,$startRecord,$recordsPerPage,null,$teamRegion);
 
 	$args_array=array(
@@ -415,8 +422,6 @@ function adminSites()
 		$selectCounty=filter_input(INPUT_GET,'selectCounty',FILTER_SANITIZE_STRING);
 	}
 
-
-
 	##################################################
 	# include Pager class to generate pages
 	# need to first initialise values
@@ -434,8 +439,6 @@ function adminSites()
     {
         $activePage=filter_input(INPUT_GET,'pageNum',FILTER_SANITIZE_NUMBER_INT);
     }
-
-
 
 	# count how many records are set
 	$totalRecords=getTotalRecordsNum($searchParam,$selectCounty,$teamRegion);

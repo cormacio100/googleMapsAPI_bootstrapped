@@ -1,5 +1,5 @@
 // IN PROGRESS
-
+-Marker Details 
 
 /////////////////////////////////////////////////////
 
@@ -10,11 +10,12 @@
 -Will not stick to the bottom of the page
 
 // MAP SECTION
--On MapReportFaultForm3, put a pager on Previous Fault Reports list
--Show More/Less Detail is always needing to be clicked twice for Marker Details
+
+
 -{{ class | raw }}  what does it do?
 -Use form validation states on the forms
 -check if fields should be readonly
+-colour the status and field engineer update form sections
 
 // ALL
 -Make sure each page is marked up properly. E.G. has a main section

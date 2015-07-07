@@ -92,9 +92,74 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="faultReportForm1">
+                    <h4 class="leftHeader" >Fault Reports linked to e-Mail address: {{ faultRerportEmail }}</h4>
+                    <div class="row" id="paging">
+                        <nav class="col-sm-12">
+                            <ul class="pagination pagination-sm">
+                                {{ outputHTML | raw }}
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="row" id="faultReportMiniList">
+                        <div class="col-sm-12" >
+                            <ul>
+                                {% for faultReport in faultReportArr %}
+                                    <li><a href="./mapReportFault?formId=2&amp;action=review&amp;faultId={{ faultReport.faultId }}">Fault Ref:{{ faultReport.faultId }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <p id="newFaultReport">Click <strong><a href="./mapReportFault?formId=2&amp;faultReportEmail={{ faultReportEmail }}">here</strong></a> to submit a new <strong>Fault Report</strong><p>
+                </div>
                 <div id="siteDetails">
-                    <h4 class="leftHeader" id="leftHeader" >Details</h4>
-                    <p class="sd" ><span id="spanTitle1">Click on Markers to Display Details</span> <span id="spanDetails1" class="detail"></span></p>
+                    <h4 class="leftHeader">Click Map Markers For Details</h4>
+                    <div id="innerSiteDetails">
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title" id="leftHeader">
+                                        <a href="#mainDetails" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>Marker Details</a>
+                                    </h4>
+                                </div>
+                                <div id="mainDetails" class="panel-collapse collapse in">
+                                    <div class="panel-body" >
+                                        <p class="sd" ><span id="spanTitle1"></span><span id="spanDetails1" class="detail"></span></p>
+                                        <p class="sd" ><span id="spanTitle2"></span><span id="spanDetails2" class="detail"></span></p>
+                                        <p class="sd" ><span id="spanTitle3"></span><span id="spanDetails3" class="detail"></span></p>
+                                        <p class="sd" ><span id="spanTitle4"></span><span id="spanDetails4" class="detail"></span></p>
+                                        <p class="sd" ><span id="spanTitle5"></span><span id="spanDetails5" class="detail"></span></p>
+                                        <p class="sd" ><span id="spanTitle6"></span><span id="spanDetails6" class="detail"></span></p>
+                                        <p class="sd" ><span id="spanTitle7"></span><span id="spanDetails7" class="detail"></span></p>
+                                        <p class="sd" ><span id="spanTitle8"></span><span id="spanDetails8" class="detail"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a href="#more" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>More Details</a>
+                                    </h4>
+                                </div>
+                                <div id="more" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <p class="sd" ><span id="spanTitle9"></span><span id="spanDetails9" class="detail"></span></p>
+                                        <p class="sd" ><span id="spanTitle10"></span><span id="spanDetails10" class="detail"></span></p>
+                                        <p class="sd" ><span id="spanTitle11"></span><span id="spanDetails11" class="detail"></span></p>
+                                        <p class="sd" ><span id="spanTitle12"></span><span id="spanDetails12" class="detail"></span></p>
+                                        <p class="sd" ><span id="spanTitle13"></span><span id="spanDetails13" class="detail"></span></p>
+                                        <p class="sd" ><span id="spanTitle14"></span><span id="spanDetails14" class="detail"></span></p>
+                                        <p class="sd" ><span id="spanTitle15"></span><span id="spanDetails15" class="detail"></span></p>
+                                        <p class="sd" ><span id="spanTitle16"></span><span id="spanDetails16" class="detail"></span></p>
+                                        <p class="sd" ><span id="spanTitle17"></span><span id="spanDetails17" class="detail"></span></p>
+                                        <p class="sd" ><span id="spanTitle18"></span><span id="spanDetails18" class="detail"></span></p>
+                                        <p class="sd" ><span id="spanTitle19"></span><span id="spanDetails19" class="detail"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div id="innerSiteDetails">
                         <p class="sd" ><span id="spanTitle2"></span> <span id="spanDetails2" class="detail"></span></p>
                         <p class="sd" ><span id="spanTitle3"></span><span id="spanDetails3" class="detail"></span></p>
@@ -103,7 +168,7 @@
                         <p class="sd" ><span id="spanTitle6"></span><span id="spanDetails6" class="detail"></span></p>
                         <p class="sd" ><span id="spanTitle7"></span><span id="spanDetails7" class="detail"></span></p>
                         <p class="sd" ><span id="spanTitle8"></span><span id="spanDetails8" class="detail"></span></p>
-                        <p id="toggler"><a href="#" id="showMoreLess">Show More Details</a></p>
+
                         <div id="toggleDiv">
                             <p class="sd" ><span id="spanTitle9"></span><span id="spanDetails9" class="detail"></span></p>
                             <p class="sd" ><span id="spanTitle10"></span><span id="spanDetails10" class="detail"></span></p>
@@ -118,15 +183,6 @@
                             <p class="sd" ><span id="spanTitle19"></span><span id="spanDetails19" class="detail"></span></p>
                         </div>
                     </div>
-                </div>
-                <div id="faultReportForm1">
-                    <h4 class="leftHeader" >Fault Reports linked to e-Mail address: {{ faultRerportEmail }}</h4>
-                    <ul>
-                        {% for faultReport in faultReportArr %}
-                            <li><a href="./mapReportFault?formId=2&amp;action=review&amp;faultId={{ faultReport.faultId }}">Fault Ref:{{ faultReport.faultId }}</a></li>
-                        {% endfor %}
-                    </ul>
-                    <p id="newFaultReport">Click <strong><a href="./mapReportFault?formId=2&amp;faultReportEmail={{ faultReportEmail }}">here</strong></a> to submit a new <strong>Fault Report</strong><p>
                 </div>
             </div>
         </div>

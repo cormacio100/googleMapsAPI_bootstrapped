@@ -74,10 +74,28 @@ footer
     margin-bottom: 1em;
     padding-bottom:1em;
 }
+
+#paging .pagination-sm {
+    margin-top:0;
+    margin-bottom: 0;
+    padding-bottom:0;
+}
+
+#faultReportMiniList .col-sm-12 ul li
+{
+    color:#ffffff;
+}
+
 .row .col-sm-6 .alignRight
 {
     text-align: right;
     margin: 0.5em 0 0.5em 0;    /* line height is 1*/
+}
+
+#faultReportMiniList
+{
+    xborder-bottom:1px solid #ffffff;
+    margin-bottom:1em;
 }
 
 /* END PAGINATION */
@@ -180,7 +198,8 @@ main .row .col-sm-8
 /* MARKERS */
 .detailsDesc
 {
-    color:#ffffff;
+    xcolor:#ffffff;
+    font-weight:bold;
 }
 
 /* HEADINGS */

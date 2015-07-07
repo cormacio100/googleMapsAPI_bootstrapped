@@ -97,8 +97,8 @@ if(!isset($_SESSION))
  {
  	global $twig; 
 	
-	$navTop=true;
-	$navBottomMap=true;
+	//$navTop=true;
+	//$navBottomMap=true;
 	$faultStatusMenu=true;
 	
 	$isLoggedIn=null;
@@ -126,17 +126,17 @@ if(!isset($_SESSION))
 	$faultReportArr=array();
 	
 	# default HTML for the submit button
-	$button='<input type="submit" id="submitFaultReport" name="submitFaultReport" value="submit" class="btn">';
+	//$button='<input type="submit" id="submitFaultReport" name="submitFaultReport" value="submit" class="btn">';
 		
 	# default class in the form
 	$class='class="faultForm"';
 	$classAdmin='class="readOnly"';
 		
 	# argument array for template
-	$args_array=array(
-		'navTop' => $navTop,
-		'navBottomMap' => $navBottomMap,
-	);	
+	//$args_array=array(
+	//	'navTop' => $navTop,
+	//	'navBottomMap' => $navBottomMap,
+	//);
 
 	# template to display is determined by formId passed in
 	# check what form ID was passed in 
@@ -284,14 +284,52 @@ if(!isset($_SESSION))
 	else if('3'==$formId)
 	{
 		$faultReportArr=null;
-		
+
+		#((((((((((( Pager Values )))))))))))
+		$startRecord=0;
+		$recordsPerPage=5;
+		$totalRecords=0;
+        $activePage=1;
+        $searchParam='fault';
+		$url='./mapReportFault&formId=3';
+		$outputHTML=null;
+
+        # check which page is selected in order to display the active page
+        if(isset($_GET['pageNum']))
+        {
+            $activePage=filter_input(INPUT_GET,'pageNum',FILTER_SANITIZE_NUMBER_INT);
+        }
+
+        # count how many records are set
+        $totalRecords=getTotalRecordsNum($searchParam,$faultReportEmail,null);
+
+       //echo 'totalRecords is '.$totalRecords;exit;
+
+        # create a Pager Object for creating the links at the top of the page
+        $pager = new Pager($totalRecords,$recordsPerPage,$searchParam,$url,'ALL',$activePage);
+
+        $outputHTML	 = $pager->getOutputHTML();
+
+        # check the GET super global to see if startRecord & recordsPerPage have been passed in
+        if(isset($_GET['startRecord']))
+        {
+            $startRecord = filter_input(INPUT_GET,'startRecord',FILTER_SANITIZE_NUMBER_INT);
+        }
+        if(isset($_GET['recordsPerPage']))
+        {
+            $recordsPerPage = filter_input(INPUT_GET,'recordsPerPage',FILTER_SANITIZE_NUMBER_INT);
+        }
+
 		# check DB to see if previous faultId's exists against this email address. Only faultId's
-		$faultReportArr=checkForFaultReports($faultReportEmail);
-	
-		# add the array to the arguments array to be used in the template
+		//$faultReportArr=checkForFaultReports($faultReportEmail);
+
+        $faultReportArr = getPageRecords($searchParam,$startRecord,$recordsPerPage,$faultReportEmail,null);
+
+
+        # add the array to the arguments array to be used in the template
 		$args_array['faultRerportEmail']=$faultReportEmail;
 		$args_array['faultReportArr']=$faultReportArr;
-		
+		$args_array['outputHTML']=$outputHTML;
 		# add email address to hidden field
 		$args_array['faultReportEmail']=$faultReportEmail;
 		

@@ -452,6 +452,13 @@ function updatePassword($userName)
 		# if a single county was chosen
 		if('ALL'!==$selectOption)
 		{
+            /**
+             * If searchParam is set to site and selectOption is not ALL
+             * it is assumed that the selectOption is for county.
+             * This would need further checks if extra options were a possibility.
+             * Currently, it is not necessary
+             */
+
 			$query.=" WHERE county='".$selectOption."'";
 		}
 		else 
@@ -519,6 +526,16 @@ function updatePassword($userName)
 		{
 			$query.=" WHERE faultStatus='open'";
 		}
+
+		# ADD TO QUERY IF A SELECTOPTION WAS INCLUDED
+		if('ALL'!==$selectOption)
+        {
+            # check if the selectOption is an email address
+            if(!filter_var($selectOption,FILTER_VALIDATE_EMAIL)===false)
+            {
+                $query.=" AND faultReportEmail='".$selectOption."'";
+            }
+        }
 
 		# submit and execute the query
 		$totalRecordsNumArr=$db->getSingleRecord($query);
@@ -613,6 +630,16 @@ function updatePassword($userName)
 		{
 			$query.=" WHERE faultStatus='open'";
 		}
+        # ADD TO QUERY IF A SELECTOPTION WAS INCLUDED
+        if('ALL'!==$selectOption)
+        {
+            # check if the selectOption is an email address
+            if(!filter_var($selectOption,FILTER_VALIDATE_EMAIL)===false)
+            {
+                $query.=" AND faultReportEmail='".$selectOption."'";
+            }
+        }
+
 	}
 		
 	# pager Class adds limiters to page links. These are used to limit the range of records returned
