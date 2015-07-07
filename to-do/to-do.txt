@@ -1,0 +1,29 @@
+// IN PROGRESS
+
+
+/////////////////////////////////////////////////////
+
+// ADMIN SECTION
+
+
+// FOOTER SECTION
+-Will not stick to the bottom of the page
+
+// MAP SECTION
+-On MapReportFaultForm3, put a pager on Previous Fault Reports list
+-Show More/Less Detail is always needing to be clicked twice for Marker Details
+-{{ class | raw }}  what does it do?
+-Use form validation states on the forms
+-check if fields should be readonly
+
+// ALL
+-Make sure each page is marked up properly. E.G. has a main section
+
+
+// NAV
+-Put black background all the way across the top
+-have max width of nav set to 9. if more then then numbers move across
+-when page is sized smalled the colour of the options in the menu dropdown are not all correct
+
+// ALERTS
+-On page not found message alert. The menu options do not work, except "Home"
