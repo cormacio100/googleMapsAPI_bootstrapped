@@ -1,15 +1,11 @@
-
-/* when the page loads */
+/* SCRIPT LAUNCHES WHEN THE PAGE LOADS */
 window.onload=function()
 {
 	console.log('initialising');
 	
 	// hide the siteDetails div until show site button is pressed
-    document.getElementById('innerSiteDetails').style.display = 'none';
+    document.getElementById('morePanel').style.display = 'none';
 
-    // hide extra details div
-    document.getElementById('toggleDiv').style.display = 'none';
-	
 	// reference the initialise google map function
 	initialise();
 	
@@ -28,7 +24,7 @@ window.onload=function()
 	var clearSitesBtn=document.getElementById('clearSitesBtn');
 
 	/* create link object */
-	var showMoreLess=document.getElementById('showMoreLess');
+	//var showMoreLess=document.getElementById('showMoreLess');
 		
 	/* create a click event for each button object */
 	displayOnAirSitesBtn.onclick=function()
@@ -45,7 +41,7 @@ window.onload=function()
 	clearSitesBtn.onclick=function()
 	{
 		// need to show less detail 
-		document.getElementById('toggleDiv').style.display = 'none';
+		//document.getElementById('toggleDiv').style.display = 'none';
 		
 		// hide the siteDetails div until show site button is pressed
     	document.getElementById('innerSiteDetails').style.display = 'none';
@@ -55,7 +51,7 @@ window.onload=function()
 		link.setMap(null);
 	};
 	
-	showMoreLess.onclick=divToggle;			
+	//showMoreLess.onclick=divToggle;
 	
 	/* refresh OffAir Sites at a regular interval */
 	setInterval(displayOffAirSites,20000);
