@@ -1,5 +1,5 @@
 // IN PROGRESS
-
+-Put black background all the way across the top
 /////////////////////////////////////////////////////
 
 // ADMIN SECTION
@@ -9,7 +9,7 @@
 -Will not stick to the bottom of the page
 
 // MAP SECTION
-Need to put an IFrame around Fault report list so that the page doesn't refresh each time it's pressed
+Need to use AJAX so that the page doesn't refresh each time pager links for faults are pressed on MAP FORM 3 it's pressed
 
 -{{ class | raw }}  what does it do?
 -Use form validation states on the forms
@@ -20,7 +20,7 @@ Need to put an IFrame around Fault report list so that the page doesn't refresh 
 -Make sure each page is marked up properly. E.G. has a main section
 
 // NAV
--Put black background all the way across the top
+
 -have max width of nav set to 9 values in page. if more then then numbers move across
 -when page is sized smalled the colour of the options in the menu dropdown are not all correct
 

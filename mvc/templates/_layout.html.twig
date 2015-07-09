@@ -13,13 +13,14 @@
         <script src="js/respond.js"></script> <!-- allows IE8 work with bootstrap -->
 	</head>
 	<body>
+    
         <div class="container">
             {% include 'navigation.html.twig' %}
 
             {% block main %}{% endblock %}
 
         </div>
-        <div class="clearfooter"></div>
+
         {# include 'footer.html.twig' #}
         <!-- javascript -->
         {% block script %}{% endblock %}

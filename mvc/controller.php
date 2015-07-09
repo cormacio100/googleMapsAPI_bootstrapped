@@ -37,7 +37,7 @@ function index()
 		'navBottomHome' => $navBottomHome,
 	);
 	
-	$template='index-v1';
+	$template='index';
 	echo $twig->render($template.'.html.twig',$args_array);	
 }
 
