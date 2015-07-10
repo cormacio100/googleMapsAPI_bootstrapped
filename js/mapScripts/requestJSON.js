@@ -73,7 +73,7 @@ function requestJSON(dataSource,callingFunction)
 	httpReq.open('GET',dataSource,asynchronous);
 	
 	/*
-	 * STEP 4 - Open the request
+	 * STEP 4 - Send the request
 	 */	
 	httpReq.send();
 } //end function

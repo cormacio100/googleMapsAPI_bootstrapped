@@ -170,7 +170,8 @@ Class Pager
 		$linkText.='&amp;selectCounty='.$this->selectCounty;
 		$linkText.='&amp;startRecord='.$startRecord;
 		$linkText.='&amp;recordsPerPage='.$this->recordsPerPage;
-        $linkText.='&amp;pageNum='.$pageNum.'">';
+        $linkText.='&amp;pageNum='.$pageNum.'"';
+        $linkText.='onclick="myJavascriptFunction();">';
 		$linkText.=$pageNum;
 		$linkText.='<span class="sr-only">'.$pageNum.'</span>';
 		$linkText.='</a></li> ';

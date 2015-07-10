@@ -325,7 +325,6 @@ if(!isset($_SESSION))
 
         $faultReportArr = getPageRecords($searchParam,$startRecord,$recordsPerPage,$faultReportEmail,null);
 
-
         # add the array to the arguments array to be used in the template
 		$args_array['faultRerportEmail']=$faultReportEmail;
 		$args_array['faultReportArr']=$faultReportArr;
@@ -525,7 +524,7 @@ if(!isset($_SESSION))
 	}
 
 	# retrieve array of faults containing id, latitude and longitude
-	$faultArr=retrieveFaultLocationsByEmail($faultReportEmail);
+	$faultArr=retrieveFaultLocationsByEmail($faultReportEmail,'markers');
 		
 	$faultArrLen=sizeof($faultArr);
 
@@ -555,3 +554,35 @@ if(!isset($_SESSION))
 	echo $jsonOutput;
 
  }
+
+/**
+ * Function retrieves a list of Fault ID's and converts to JSON
+ * Fault IDs are then listed on mapReportFault form page 3
+ */
+
+function getFaultIdListLinkedToEmail()
+{
+    $searchParam=null;
+    $startRecord=0;
+    $recordsPerPage=5;
+    $url='./getFaultIdListLinkedToEmail';
+    $faultReportEmail=null;
+
+    if(isset($_GET['faultReportEmail']))
+    {
+        $faultReportEmail=filter_input(INPUT_GET,'faultReportEmail',FILTER_SANITIZE_STRING);
+    }
+
+    # retrive list of fault ID's
+    $faultReportArr = retrieveFaultLocationsByEmail($faultReportEmail,'idList',$startRecord,$recordsPerPage);
+
+    # encode the Site Object Array into JSON
+    header("Cache-Control: no-cache, must-revalidate");
+    header("Expires: 0");
+    header('Content-Type: application/json');
+
+    # encode the array as JSON
+    $jsonOutput=json_encode($faultReportArr);
+
+    echo $jsonOutput;
+}

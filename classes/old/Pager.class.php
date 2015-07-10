@@ -178,7 +178,8 @@ Class Pager
 		$linkText.='&amp;startRecord='.$startRecord;
 		$linkText.='&amp;recordsPerPage='.$this->recordsPerPage;
         $linkText.='&amp;pageNum='.$pageNum;
-        $linkText.='" target="#'.$pageNum.'">';
+        $linkText.='" target="#'.$pageNum.'"';
+        $linkText.='onclick="myJavascriptFunction();">';
 		$linkText.=$pageNum;
 		$linkText.='<span class="sr-only">'.$pageNum.'</span>';
 		$linkText.='</a></li> ';
