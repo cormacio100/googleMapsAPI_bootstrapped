@@ -113,7 +113,39 @@
                     </nav>
                 </div>
 
+                {# Initialise variables to show sites that are ON AIR and sites that are OFF AIR #}
+                {% set siteOnAir = 'Yes' %}
+                {% set siteOffAir = 'No' %}
 
+                <table class="table table-hover">
+                {% for site in sitesArr %}
+                    <tr>
+                        <td>
+                            <form method="POST" action="./adminUpdateSite" >
+                                <input type="submit" name="updateSite" value="update" class="btn btn-primary btn-xs">
+                                <label> On Air =</label>
+                                <select class="onAir" name="onAir">
+                                    {% if siteOnAir == site.onAir %}
+                                        <option value="Yes" selected>Yes</option>
+                                        <option value="No">No</option>
+                                    {% elseif siteOffAir == site.onAir %}
+                                        <option value="Yes">Yes</option>
+                                        <option value="No" selected>No</option>
+                                    {% endif %}
+                                </select>
+                                <label>Site ID:<span class="detail">{{ site.siteId }}</span></label>
+                                <label>County: <span class="detail">{{ site.county }}</span></label>
+                                <label>Site Name: <span class="detail">{{ site.siteName }}</span></label>
+                                <label>BSC: <span class="detail">{{ site._bsc }}</span></label>
+                                <label>RNC: <span class="detail">{{ site._rnc }}</span></label>
+                                <label>Cluster: <span class="detail">{{ site._clusterId }}</span></label>
+                                <input type="hidden" name="siteId" value="{{ site.siteId }}" >
+                                <input type="hidden" name="_clusterId" value="{{ site._clusterId }}">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </table>
 
                 {#</ul>#}
             </div>

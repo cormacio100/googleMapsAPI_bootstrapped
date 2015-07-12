@@ -1,7 +1,11 @@
 // IN PROGRESS
--Marker Details section is not expanding
+
 
 /////////////////////////////////////////////////////
+
+// AJAX
+-Put all AJAX calls on a separate controller
+
 
 // ADMIN SECTION
 
@@ -10,8 +14,6 @@
 -Will not stick to the bottom of the page
 
 // MAP SECTION
-
-
 -{{ class | raw }}  what does it do?
 -Use form validation states on the forms
 -check if fields should be readonly
