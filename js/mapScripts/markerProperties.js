@@ -1,4 +1,4 @@
-// SCRIPT APPLIES PROPERTIES AND AND MARKER ICONS
+// SCRIPT APPLIES PROPERTIES AND MARKER ICONS TO MARKER OBJECTS
 
 /*
  * 	Function applies custom properties to each marker 

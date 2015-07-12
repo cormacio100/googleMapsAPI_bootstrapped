@@ -1,6 +1,4 @@
 <?php
-
-
 /**
  * Function retrieves array of on air sites
  */
@@ -312,22 +310,32 @@ function updateFaultReport($faultId,$faultStatus,$faultUpdate)
  * @param $faultReportEmail - email address
  * @return $faultArr - array 
  */
-function retrieveFaultLocationsByEmail($faultReportEmail)
+function retrieveFaultLocationsByEmail($faultReportEmail,$queryType)
 {
 	$faultArr=array();
+    $query=null;
+
 	
 	# create a Database object
 	$db = new Database;
-	
-	# create the query
-	$query="SELECT faultId,faultStatus,faultMsisdn,faultType,faultLatitude,faultLongitude FROM fault";
+
+    # create the query depending on where request came from. If $queryType is 'idList' the default query is overwritten
+    $query = "SELECT faultId,faultStatus,faultMsisdn,faultType,faultLatitude,faultLongitude FROM fault";
+
+    if('idList'==$queryType)
+    {
+        $query = "SELECT faultId FROM fault";
+    }
+
 	$query.=" WHERE faultStatus='open'";
 	
 	if('ALL'!=$faultReportEmail)
 	{
 		$query.=" AND faultReportEmail='".$faultReportEmail."'";
 	}
-	
+
+   // echo $query;
+
 	# submit and execute the query
 	$faultArr=$db->getMultiRecords($query);
 	
@@ -338,6 +346,7 @@ function retrieveFaultLocationsByEmail($faultReportEmail)
 	# return result
 	return $faultArr;
 }
+
 
 /**
  * Function checks user against the fieldEngteam table to see if authentic 

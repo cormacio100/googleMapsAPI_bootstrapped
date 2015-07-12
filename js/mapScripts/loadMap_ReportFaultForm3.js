@@ -1,15 +1,17 @@
-
-/* when the page loads */
+/* SCRIPT LAUNCHES WHEN THE PAGE LOADS */
 window.onload=function()
 {
 	console.log('initialising');
 	
 	// hide the siteDetails div until show site button is pressed
-    document.getElementById('innerSiteDetails').style.display = 'none';
+    document.getElementById('morePanel').style.display = 'none';
 
+<<<<<<< HEAD
     // hide extra details div
     //document.getElementById('toggleDiv').style.display = 'none';
 	
+=======
+>>>>>>> 748173a4a9418942ebbe2999da44cdce4c8a25c7
 	// reference the initialise google map function
 	initialise();
 	

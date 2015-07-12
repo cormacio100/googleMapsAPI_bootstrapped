@@ -56,6 +56,8 @@ Class Pager
 	{
 		$startRecord=0;		# for the first page	
 
+        $this->outputHTML.='<ul class="nav nav-tabs">';
+
 		# loop through pages and build the link for each
 		for($pageNum=0;$pageNum<$this->totalPages;$pageNum++)
 		{
@@ -69,12 +71,17 @@ Class Pager
 			$startRecord+=$this->recordsPerPage;
 		}
 
+        $this->outputHTML.='<ul>';
+
+
+
+
         # create the previous and next page links
-        $this->prevPageHTML.=$this->createPrevPageLink($this->activePage);
-        $this->nextPageHTML.=$this->createNextPageLink($this->activePage);
+        //$this->prevPageHTML.=$this->createPrevPageLink($this->activePage);
+        //$this->nextPageHTML.=$this->createNextPageLink($this->activePage);
 
         # append the three navigation link strings
-        $this->outputHTML=$this->prevPageHTML.$this->outputHTML.$this->nextPageHTML;
+        //$this->outputHTML=$this->prevPageHTML.$this->outputHTML.$this->nextPageHTML;
 
         return $this->outputHTML;
 	}
@@ -170,7 +177,8 @@ Class Pager
 		$linkText.='&amp;selectCounty='.$this->selectCounty;
 		$linkText.='&amp;startRecord='.$startRecord;
 		$linkText.='&amp;recordsPerPage='.$this->recordsPerPage;
-        $linkText.='&amp;pageNum='.$pageNum.'"';
+        $linkText.='&amp;pageNum='.$pageNum;
+        $linkText.='" target="#'.$pageNum.'"';
         $linkText.='onclick="myJavascriptFunction();">';
 		$linkText.=$pageNum;
 		$linkText.='<span class="sr-only">'.$pageNum.'</span>';

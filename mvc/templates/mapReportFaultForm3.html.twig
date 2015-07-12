@@ -38,7 +38,7 @@
                 <aside class="row">
                     <div class="col-sm-12">
                         <div class="markerExplanation">
-                            <h5 class="rightHeader" >
+                            <h5 class="rightHeader">
                                 <img src="img/onAir_icon_sm.png" alt="Fault Icon">"On-Air" Site
                                 <img src="img/offAir_icon_sm.png" alt="Site Off-Air Icon">"Off-Air" Site
                                 <img src="img/fault_icon_sm.png" alt="Fault Icon">"Open" Fault Report
@@ -95,6 +95,8 @@
 
                 <div id="faultReportForm1">
                     <h4 class="leftHeader" >Fault Reports linked to e-Mail address: {{ faultRerportEmail }}</h4>
+
+
                     <div class="row" id="paging">
                         <nav class="col-sm-12">
                             <ul class="pagination pagination-sm">
@@ -136,10 +138,14 @@
                                     </div>
                                 </div>
                             </div>
+<<<<<<< HEAD
                             <div class="panel panel-default" id="moreDetails">
+=======
+                            <div id="morePanel" class="panel panel-default">
+>>>>>>> 748173a4a9418942ebbe2999da44cdce4c8a25c7
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a href="#more" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>More Details</a>
+                                        <a href="#more" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>Show More Details</a>
                                     </h4>
                                 </div>
                                 <div id="more" class="panel-collapse collapse">
@@ -165,15 +171,15 @@
         </div>
     </main>
 {% endblock %}
-
 {% block script %}
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="js/bootStrap/bootstrap.min.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src="js/mapScripts/paging.js"></script>
     <script src="js/mapScripts/requestJSON.js"></script>
     <script src="js/mapScripts/chooseCounty.js"></script>
     <script src="js/mapScripts/setMarkers.js"></script>
-    <script src="js/mapScripts/toggle.js"></script>
+    <!--<script src="js/mapScripts/toggle.js"></script>-->
     <script src="js/mapScripts/markerProperties.js"></script>
     <script src="js/mapScripts/displayMapAndMarker.js"></script>
     <script src="js/mapScripts/googleMap3.js"></script>

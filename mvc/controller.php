@@ -37,7 +37,7 @@ function index()
 		'navBottomHome' => $navBottomHome,
 	);
 	
-	$template='index-v1';
+	$template='index';
 	echo $twig->render($template.'.html.twig',$args_array);	
 }
 
@@ -224,6 +224,49 @@ function messageAlert()
 	{
 		header('Refresh:2; url=./'.$forwardTo);
 	}
+}
+
+
+/**
+ * FUNCTION TESTS PAGINATION WITH AJAX
+ *
+ * example taken from https://www.developphp.com/video/JavaScript/Ajax-Pagination-Tutorial-PHP-MySQL-Database-Results-Paged
+ *
+ */
+function paginationAjaxTest()
+{
+    global $twig;
+
+    #((((((((((( Pager Values )))))))))))
+    $startRecord=0;
+    $rpp=5;
+    $totalRecords=0;
+    $activePage=1;
+    $searchParam='fault';
+    $url='./mapReportFault&formId=3';
+    $outputHTML=null;
+    $faultReportEmail='cormac.liston@gmail.com';
+
+    # count how many records are set
+    $totalRows=getTotalRecordsNum($searchParam,$faultReportEmail,null);
+
+    # tells us the last page
+    $last=ceil($totalRows/$rpp);
+
+    # this makes sure the last cannot be less than 1
+
+    # retrive list of fault ID's
+    $faultReportArr = retrieveFaultLocationsByEmail($faultReportEmail,'idList',$startRecord,$rpp);
+
+
+    $args_array=array(
+        'totalRecords' => $totalRecords,
+        'rpp' => $rpp,
+        'last' => $last
+    );
+
+    $template='paginationAjaxTest';
+    echo $twig->render($template.'.html.twig',$args_array);
 }
 
 
