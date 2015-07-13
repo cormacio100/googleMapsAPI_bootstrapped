@@ -40,65 +40,6 @@
                         <form method="GET" action="./adminSites" class="countyForm alignRight">
                             <select id="selectCounty" name="selectCounty" class="detail">
                                 <option value="ALL">Select County from {{ teamRegion }}</option>
-                                {% if dublin == teamRegion %}
-                                    <option value="DN">Dublin</option>
-                                {% elseif northLeinster == teamRegion %}
-                                    <option value="LH">Louth</option>
-                                    <option value="MH">Meath</option>
-                                    <option value="KE">Kildare</option>
-                                    <option value="WH">Westmeath</option>
-                                    <option value="LD">Longford</option>
-                                    <option value="CN">Cavan</option>
-                                    <option value="MN">Monaghan</option>
-                                {% elseif southLeinster == teamRegion %}
-                                    <option value="WW">Wicklow</option>
-                                    <option value="WX">Wexford</option>
-                                    <option value="LS">Laois</option>
-                                    <option value="KK">Kilkenny</option>
-                                    <option value="CW">Carlow</option>
-                                    <option value="OY">Offaly</option>
-                                {% elseif southWest == teamRegion %}
-                                    <option value="TY">Tipperary</option>
-                                    <option value="WD">Waterford</option>
-                                    <option value="CE">Clare</option>
-                                    <option value="LK">Limerick</option>
-                                    <option value="CK">Cork</option>
-                                    <option value="KY">Kerry</option>
-                                {% elseif northWest == teamRegion %}
-                                    <option value="LM">Leitrim</option>
-                                    <option value="SO">Sligo</option>
-                                    <option value="RN">Roscommon</option>
-                                    <option value="MO">Mayo</option>
-                                    <option value="GY">Galway</option>
-                                    <option value="DL">Donegal</option>
-                                {% else %}
-                                    <option value="DN">Dublin</option>
-                                    <option value="LH">Louth</option>
-                                    <option value="MH">Meath</option>
-                                    <option value="KE">Kildare</option>
-                                    <option value="WH">Westmeath</option>
-                                    <option value="LD">Longford</option>
-                                    <option value="CN">Cavan</option>
-                                    <option value="MN">Monaghan</option>
-                                    <option value="WW">Wicklow</option>
-                                    <option value="WX">Wexford</option>
-                                    <option value="LS">Laois</option>
-                                    <option value="KK">Kilkenny</option>
-                                    <option value="CW">Carlow</option>
-                                    <option value="OY">Offaly</option>
-                                    <option value="TY">Tipperary</option>
-                                    <option value="WD">Waterford</option>
-                                    <option value="CE">Clare</option>
-                                    <option value="LK">Limerick</option>
-                                    <option value="CK">Cork</option>
-                                    <option value="KY">Kerry</option>
-                                    <option value="LM">Leitrim</option>
-                                    <option value="SO">Sligo</option>
-                                    <option value="RN">Roscommon</option>
-                                    <option value="MO">Mayo</option>
-                                    <option value="GY">Galway</option>
-                                    <option value="DL">Donegal</option>
-                                {% endif %}
                             </select>
                             <input type="submit" id="refineSearch" name="refineSearch" value="Refine Search" class="btn btn-primary btn-xs">
                         </form>

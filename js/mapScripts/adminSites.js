@@ -1,3 +1,10 @@
+var teamRegion;
+var searchParam;
+var selectCounty;
+var startRecord;
+var recordsPerPage;
+var pageNum;
+
 
 /**
  * Function received JSON content and parses it
@@ -82,11 +89,7 @@ function displaySiteDataInATable(stringJSON,callingFunction)
 
 }
 
-var searchParam;
-var selectCounty;
-var startRecord;
-var recordsPerPage;
-var pageNum;
+
 
 /**
  * Retrieve and display a list of sites
@@ -116,11 +119,136 @@ function displayAdminSites()
 }
 
 /**
+ * Function is used by displayCounties function ot add options to select Menu
+ */
+function addOptionToSelect(countyArr)
+{
+    var optionsArr=[];
+
+    for(i=0;i<countyArr.length;i++)
+    {
+        var option = document.createElement('option');
+        option.text = countyArr[i];
+        option.value = countyArr[i];
+        optionsArr.push(option);
+    }
+    return optionsArr;
+}
+
+/**
+ * Function looks at team region and then populates the SELECT box with relevant counties for that region
+ */
+function displayCounties()
+{
+    var optionsArr=[];      // declare an empty array to hold options...that are to be added
+    var countyArr=[];
+
+    var selectCounty=document.getElementById('selectCounty');
+
+    /*var option=document.createElement('option');
+    option.text = 'Test Option';
+    option.value = 'Test Option';
+    selectCounty.add(option);*/
+
+   /* {% set dublin = 'Dublin' %}
+    {% set northLeinster = 'North Leinster' %}
+    {% set southLeinster = 'South Leinster' %}
+    {% set northWest = 'North West' %}
+    {% set southWest = 'South West' %}*/
+
+    if('Dublin' == teamRegion)
+    {
+       /* var optionDN=document.createElement('option');
+        optionDN.text='DN';
+        optionDN.value='DN';
+        optionsArr.push(optionDN);*/
+
+        countyArr=['DN'];
+
+        optionsArr=addOptionToSelect(countyArr);
+
+    }
+    else if('North Leinster' == teamRegion)
+    {
+        countyArr=['LH','MH','KE','WH','LD','CN','MN'];
+
+        optionsArr=addOptionToSelect(countyArr);
+    }
+
+    for(var i=0; i<optionsArr.length;i++)
+    {
+        selectCounty.add(optionsArr[i]);
+    }
+
+/*<option value="LH">Louth</option>
+<option value="MH">Meath</option>
+<option value="KE">Kildare</option>
+<option value="WH">Westmeath</option>
+<option value="LD">Longford</option>
+<option value="CN">Cavan</option>
+<option value="MN">Monaghan</option>
+{% elseif southLeinster == teamRegion %}
+<option value="WW">Wicklow</option>
+<option value="WX">Wexford</option>
+<option value="LS">Laois</option>
+<option value="KK">Kilkenny</option>
+<option value="CW">Carlow</option>
+<option value="OY">Offaly</option>
+{% elseif southWest == teamRegion %}
+<option value="TY">Tipperary</option>
+<option value="WD">Waterford</option>
+<option value="CE">Clare</option>
+<option value="LK">Limerick</option>
+<option value="CK">Cork</option>
+<option value="KY">Kerry</option>
+{% elseif northWest == teamRegion %}
+<option value="LM">Leitrim</option>
+<option value="SO">Sligo</option>
+<option value="RN">Roscommon</option>
+<option value="MO">Mayo</option>
+<option value="GY">Galway</option>
+<option value="DL">Donegal</option>
+{% else %}
+<option value="DN">Dublin</option>
+<option value="LH">Louth</option>
+<option value="MH">Meath</option>
+<option value="KE">Kildare</option>
+<option value="WH">Westmeath</option>
+<option value="LD">Longford</option>
+<option value="CN">Cavan</option>
+<option value="MN">Monaghan</option>
+<option value="WW">Wicklow</option>
+<option value="WX">Wexford</option>
+<option value="LS">Laois</option>
+<option value="KK">Kilkenny</option>
+<option value="CW">Carlow</option>
+<option value="OY">Offaly</option>
+<option value="TY">Tipperary</option>
+<option value="WD">Waterford</option>
+<option value="CE">Clare</option>
+<option value="LK">Limerick</option>
+<option value="CK">Cork</option>
+<option value="KY">Kerry</option>
+<option value="LM">Leitrim</option>
+<option value="SO">Sligo</option>
+<option value="RN">Roscommon</option>
+<option value="MO">Mayo</option>
+<option value="GY">Galway</option>
+<option value="DL">Donegal</option>
+{% endif %}*/
+}
+
+/**
  * When the page loads
  */
 window.onload=function()
 {
     console.log('page loading');
+
+    teamRegion=document.getElementById('teamRegion').innerHTML;
+
+    // display the relevant counties for teamRegion in select box
+    displayCounties();
 
     displayAdminSites();
 }
