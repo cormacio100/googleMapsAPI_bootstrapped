@@ -59,6 +59,11 @@ function requestJSON(dataSource,callingFunction)
 				{
 					displayData(httpReq.responseText,callingFunction);
 				}
+				else if('displayAdminSites'==callingFunction)
+                {
+                    displaySiteDataInATable(httpReq.responseText,callingFunction);
+                }
+
 			}
 			else if(PAGENOTFOUND==httpReq.status)
 			{

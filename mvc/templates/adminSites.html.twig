@@ -106,14 +106,9 @@
 
                 </div><!--end row-->
                 <div class="row" id="paging">
-                    <nav class="col-sm-12">
-                        <ul class="pagination pagination-sm">
-                            {{ outputHTML | raw }}
-                        </ul>
-                    </nav>
+
                 </div>
-
-
+                <div id="adminSitesTableDiv"></div>
 
                 {#</ul>#}
             </div>
@@ -126,4 +121,7 @@
 {% block script %}
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="js/bootStrap/bootstrap.min.js"></script>
+    <script src="js/mapScripts/displayNonMarkerData.js"></script>
+    <script src="js/mapScripts/requestJSON.js"></script>
+    <script src="js/mapScripts/adminSites.js"></script>
 {% endblock %}

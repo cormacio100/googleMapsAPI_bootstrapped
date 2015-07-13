@@ -448,7 +448,7 @@ function adminSites()
 	# create a Pager Object for creating the links at the top of the page
 	$pager = new Pager($totalRecords,$recordsPerPage,$searchParam,$url,$selectCounty,$activePage);
 
-	$outputHTML=$pager->getOutputHTML();
+	//$outputHTML=$pager->getOutputHTML();
 
 	# check the GET superpGlobal to see if startRecord and recordsPerPage values have been passed
 	if(isset($_GET['startRecord']))
@@ -489,12 +489,24 @@ function retrieveAdminSites()
 {
     # array to hold the sites
     $sitesArr=array();
+    $sitesArrLen=null;
+
+    # array to hold the site Objects
+    $siteObjArr=array();
+
     $selectCounty='ALL';
+    $teamRegion=null;
 
     # check if a county was selected to refine search
     if(isset($_GET['selectCounty']))
     {
         $selectCounty=filter_input(INPUT_GET,'selectCounty',FILTER_SANITIZE_STRING);
+    }
+
+    # check what region the engineer is from
+    if(isset($_SESSION['teamRegion']))
+    {
+        $teamRegion=$_SESSION['teamRegion'];
     }
 
     ##################################################
@@ -506,7 +518,8 @@ function retrieveAdminSites()
     $totalRecords=0;
     $activePage=1;      /* defaults to first page */
     $searchParam='site';
-    $url='./retrieveAdminSites';
+    //$url='./retrieveAdminSites';
+    $url='#';
     $outputHTML=null;
 
     # check which page is selected in order to display the active page
@@ -537,16 +550,59 @@ function retrieveAdminSites()
     # retrieve an array or reported faults
     $sitesArr=getPageRecords($searchParam,$startRecord,$recordsPerPage,$selectCounty,$teamRegion);
 
+   // print_r($sitesArr);
+
+    # calculate size of the array
+    $sitesArrLen=sizeof($sitesArr);
+
+    //echo 'sitesArrLen is '.$sitesArrLen;exit;
+
+    # loop through array and create Site Objects from the Site Class
+    for($i=0; $i<$sitesArrLen;$i++)
+    {
+        $site=new Site(
+            $sitesArr[$i]['siteId'],
+            $sitesArr[$i]['siteName'],
+            $sitesArr[$i]['county'],
+            $sitesArr[$i]['latitude'],
+            $sitesArr[$i]['longitude'],
+            $sitesArr[$i]['onAir'],
+            $sitesArr[$i]['_bsc'],
+            $sitesArr[$i]['_rnc'],
+            $sitesArr[$i]['dcsRating'],
+            $sitesArr[$i]['gsmRating'],
+            $sitesArr[$i]['usmRating'],
+            $sitesArr[$i]['lteRating'],
+            $sitesArr[$i]['txnRating'],
+            $sitesArr[$i]['mprn'],
+            $sitesArr[$i]['wentOffAir'],
+            $sitesArr[$i]['backOnAir'],
+            $sitesArr[$i]['_clusterId'],
+            $sitesArr[$i]['_fieldEngId'],
+            null,
+            null,
+            null,
+            null
+        );
+
+        # add the site Object to an array
+        $siteObjArr[]=$site;
+    }
+
+    # put the pager link at the end of the array
+    $siteObjArr[]['outputHTML']=$outputHTML;
+
+    //echo 'size of SiteObjArr is '.sizeof($siteObjArr);exit;
+
     # convert data to JSON
     header("Cache-Control: no-cache, must-revalidate");
     header("Expires: 0");
     header('Content-Type: application/json');
 
     # encode the array as JSON
-    $jsonOutput=json_encode($sitesArr);
+    $jsonOutput=json_encode($siteObjArr);
 
     echo $jsonOutput;
-
 }
 
 

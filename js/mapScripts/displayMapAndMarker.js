@@ -307,11 +307,8 @@ function displayData(stringJSON,callingFunction)
 				clearDetails();				/* see file setMarkers.js */
 
                 // show the  extra details link
-<<<<<<< HEAD
+
                 document.getElementById('moreDetails').style.display = 'block';
-=======
-                document.getElementById('morePanel').style.display = 'block';
->>>>>>> 748173a4a9418942ebbe2999da44cdce4c8a25c7
 
                 // set the SPECIFIC LABELS in the details window
 				if (typeof(leftHeader) != 'undefined' && leftHeader != null)
@@ -515,16 +512,16 @@ function displayData(stringJSON,callingFunction)
 				clearDetails();				/* see file setMarkers.js */
 
                 // hide extra details link
-<<<<<<< HEAD
+
                 document.getElementById('moreDetails').style.display = 'none';
 
                 leftHeader.innerHTML='<a href="#mainDetails" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>BSC Controller Details</a>';
 				//leftHeader.innerHTML='BSC Controller Details';
-=======
-                document.getElementById('morePanel').style.display = 'none';
 
-				leftHeader.innerHTML='<a href="#mainDetails" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>BSC Controller Details</a>';
->>>>>>> 748173a4a9418942ebbe2999da44cdce4c8a25c7
+               // document.getElementById('morePanel').style.display = 'none';
+
+				//leftHeader.innerHTML='<a href="#mainDetails" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>BSC Controller Details</a>';
+
 		    	spanTitle1.innerHTML='<span class="detailsDesc">BSC ID: </span>';
 		    	spanTitle2.innerHTML='<span class="detailsDesc">BSC Latitude: </span>';
 		    	spanTitle3.innerHTML='<span class="detailsDesc">BSC Longitude: </span>';
@@ -542,19 +539,19 @@ function displayData(stringJSON,callingFunction)
 				clearDetails();				/* see file setMarkers.js */
 
                 // hide extra details link
-<<<<<<< HEAD
-                document.getElementById('moreDetails').style.display = 'none';
 
                 document.getElementById('moreDetails').style.display = 'none';
+
+                //document.getElementById('moreDetails').style.display = 'none';
 
                 leftHeader.innerHTML='<a href="#mainDetails" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>RNC Controller Details</a>';
 
                 //leftHeader.innerHTML='RNC Controller Details';
-=======
-                document.getElementById('morePanel').style.display = 'none';
 
-				leftHeader.innerHTML='<a href="#mainDetails" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>RNC Controller Details</a>';
->>>>>>> 748173a4a9418942ebbe2999da44cdce4c8a25c7
+                //document.getElementById('morePanel').style.display = 'none';
+
+				//leftHeader.innerHTML='<a href="#mainDetails" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>RNC Controller Details</a>';
+
 		    	spanTitle1.innerHTML='<span class="detailsDesc">RNC ID: </span>';
 		    	spanTitle2.innerHTML='<span class="detailsDesc">RNC Latitude: </span>';
 		    	spanTitle3.innerHTML='<span class="detailsDesc">RNC Longitude: </span>';
@@ -572,20 +569,12 @@ function displayData(stringJSON,callingFunction)
 				clearDetails();				/* see file setMarkers.js */
 
                 // hide extra details link
-<<<<<<< HEAD
                 document.getElementById('moreDetails').style.display = 'none';
 
 				// set the titles in the details window
-
                 leftHeader.innerHTML='<a href="#mainDetails" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>Fault Details</a>';
 
-                //leftHeader.innerHTML='Fault Details';
-=======
-                document.getElementById('morePanel').style.display = 'none';
-
 				// set the titles in the details window
-				leftHeader.innerHTML='<a href="#mainDetails" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>Fault Details</a>';
->>>>>>> 748173a4a9418942ebbe2999da44cdce4c8a25c7
 				spanTitle1.innerHTML='<span class="detailsDesc">Fault ID:';
 				spanTitle2.innerHTML='<span class="detailsDesc">Fault Latitude:';
 				spanTitle3.innerHTML='<span class="detailsDesc">Fault Longitude:';
