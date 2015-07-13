@@ -145,28 +145,12 @@ function displayCounties()
 
     var selectCounty=document.getElementById('selectCounty');
 
-    /*var option=document.createElement('option');
-    option.text = 'Test Option';
-    option.value = 'Test Option';
-    selectCounty.add(option);*/
-
-   /* {% set dublin = 'Dublin' %}
-    {% set northLeinster = 'North Leinster' %}
-    {% set southLeinster = 'South Leinster' %}
-    {% set northWest = 'North West' %}
-    {% set southWest = 'South West' %}*/
-
+    /* determine the counties for each region and create option menu elements for them */
     if('Dublin' == teamRegion)
     {
-       /* var optionDN=document.createElement('option');
-        optionDN.text='DN';
-        optionDN.value='DN';
-        optionsArr.push(optionDN);*/
-
         countyArr=['DN'];
 
         optionsArr=addOptionToSelect(countyArr);
-
     }
     else if('North Leinster' == teamRegion)
     {
@@ -174,40 +158,39 @@ function displayCounties()
 
         optionsArr=addOptionToSelect(countyArr);
     }
+    else if('South Leinster' == teamRegion)
+    {
+        countyArr=['WW','WX','LS','KK','CW','OY'];
 
+        optionsArr=addOptionToSelect(countyArr);
+    }
+    else if('North West'==teamRegion)
+    {
+        countyArr=['LM','SO','RN','MO','GY','DL'];
+
+        optionsArr=addOptionToSelect(countyArr);
+    }
+    else if('South West'==teamRegion)
+    {
+        countyArr=['TY','WD','CE','LK','CK','KY'];
+
+        optionsArr=addOptionToSelect(countyArr);
+    }
+    else
+    {
+        countyArr=['DN','LH','MH','KE','WH','LD','CN','MN','WW','WX','LS','KK','CW','OY','TY','WD','CE','LK','CK','KY','LM','SO','RN','MO','GY','DL'];
+
+        optionsArr=addOptionToSelect(countyArr);
+    }
+
+    /* add the options to the select menu */
     for(var i=0; i<optionsArr.length;i++)
     {
         selectCounty.add(optionsArr[i]);
     }
 
-/*<option value="LH">Louth</option>
-<option value="MH">Meath</option>
-<option value="KE">Kildare</option>
-<option value="WH">Westmeath</option>
-<option value="LD">Longford</option>
-<option value="CN">Cavan</option>
-<option value="MN">Monaghan</option>
-{% elseif southLeinster == teamRegion %}
-<option value="WW">Wicklow</option>
-<option value="WX">Wexford</option>
-<option value="LS">Laois</option>
-<option value="KK">Kilkenny</option>
-<option value="CW">Carlow</option>
-<option value="OY">Offaly</option>
-{% elseif southWest == teamRegion %}
-<option value="TY">Tipperary</option>
-<option value="WD">Waterford</option>
-<option value="CE">Clare</option>
-<option value="LK">Limerick</option>
-<option value="CK">Cork</option>
-<option value="KY">Kerry</option>
-{% elseif northWest == teamRegion %}
-<option value="LM">Leitrim</option>
-<option value="SO">Sligo</option>
-<option value="RN">Roscommon</option>
-<option value="MO">Mayo</option>
-<option value="GY">Galway</option>
-<option value="DL">Donegal</option>
+/*
+
 {% else %}
 <option value="DN">Dublin</option>
 <option value="LH">Louth</option>
