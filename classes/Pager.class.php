@@ -166,15 +166,29 @@ Class Pager
         }
 		$linkText.='<a href="';
 		$linkText.=$this->url;
-		$linkText.='?searchParam='.$this->searchParam;
-		$linkText.='&amp;selectCounty='.$this->selectCounty;
-		$linkText.='&amp;startRecord='.$startRecord;
-		$linkText.='&amp;recordsPerPage='.$this->recordsPerPage;
-        $linkText.='&amp;pageNum='.$pageNum.'"';
-        $linkText.='onclick="myJavascriptFunction();">';
-		$linkText.=$pageNum;
-		$linkText.='<span class="sr-only">'.$pageNum.'</span>';
-		$linkText.='</a></li> ';
+
+        // trying this on adminSites page. Uses all javascript
+        if('#'==$this->url)
+        {
+            $linkText.='" onclick="displayAdminSites2(';
+            $linkText.=$this->selectCounty.',';
+            $linkText.=$startRecord.',';
+            $linkText.=$this->recordsPerPage.',';
+            $linkText.=$pageNum;
+            $linkText.=')">';
+        }
+		else
+		{
+            $linkText .= '?searchParam=' . $this->searchParam;
+            $linkText .= '&amp;selectCounty=' . $this->selectCounty;
+            $linkText .= '&amp;startRecord=' . $startRecord;
+            $linkText .= '&amp;recordsPerPage=' . $this->recordsPerPage;
+            $linkText .= '&amp;pageNum=' . $pageNum . '">';
+        }
+
+        $linkText .= $pageNum;
+        $linkText .= '<span class="sr-only">' . $pageNum . '</span>';
+        $linkText .= '</a></li> ';
 
 		return $linkText;
 	}

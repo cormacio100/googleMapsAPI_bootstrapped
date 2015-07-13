@@ -69,10 +69,11 @@ getRoute()->get('/adminLogout','adminLogout');
 # alerts
 getRoute()->get('/messageAlert','messageAlert');
 
-# AJAX calls 
+# AJAX calls
 getRoute()->get('/retrieveAllSites','retrieveAllSites');
 getRoute()->get('/retrieveOffAirSites','retrieveOffAirSites');
 getRoute()->get('/retrieveSitesByCounty','retrieveSitesByCounty');
+getRoute()->get('/retrieveAdminSites','retrieveAdminSites');
 
 # discrete function to update passwords. Not accessible through Front End
 getRoute()->get('/adminUpdateUserPassword','adminUpdateUserPassword');

@@ -60,6 +60,8 @@ function clearDetails()
 
 /*
  * Function adds map markers to relevant arrays for use in setMarker.js file to display them
+ *
+ * Calls to this function come from Display data function
  */
 function addMarkerToArray(marker,callingFunction,objType)
 {
@@ -104,8 +106,10 @@ function addMarkerToArray(marker,callingFunction,objType)
 }
 
 /* 
- 	Function receives JSON String for sites, controllers and faults and converts it to an array of relevant objects.
- 	Each object then has a marker object created for it. Markers are then pushed onto a relevent marker array. 
+ *	Function receives JSON String for sites, controllers and faults and converts it to an array of relevant objects.
+ *	Each object then has a marker object created for it. Markers are then pushed onto a relevent marker array.
+ *
+ *  Calls to this function come from the requestJSON Function
  */
 function displayData(stringJSON,callingFunction)
 {
@@ -303,7 +307,8 @@ function displayData(stringJSON,callingFunction)
 				clearDetails();				/* see file setMarkers.js */
 
                 // show the  extra details link
-                document.getElementById('morePanel').style.display = 'block';
+
+                document.getElementById('moreDetails').style.display = 'block';
 
                 // set the SPECIFIC LABELS in the details window
 				if (typeof(leftHeader) != 'undefined' && leftHeader != null)
@@ -507,9 +512,16 @@ function displayData(stringJSON,callingFunction)
 				clearDetails();				/* see file setMarkers.js */
 
                 // hide extra details link
-                document.getElementById('morePanel').style.display = 'none';
 
-				leftHeader.innerHTML='<a href="#mainDetails" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>BSC Controller Details</a>';
+                document.getElementById('moreDetails').style.display = 'none';
+
+                leftHeader.innerHTML='<a href="#mainDetails" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>BSC Controller Details</a>';
+				//leftHeader.innerHTML='BSC Controller Details';
+
+               // document.getElementById('morePanel').style.display = 'none';
+
+				//leftHeader.innerHTML='<a href="#mainDetails" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>BSC Controller Details</a>';
+
 		    	spanTitle1.innerHTML='<span class="detailsDesc">BSC ID: </span>';
 		    	spanTitle2.innerHTML='<span class="detailsDesc">BSC Latitude: </span>';
 		    	spanTitle3.innerHTML='<span class="detailsDesc">BSC Longitude: </span>';
@@ -527,9 +539,19 @@ function displayData(stringJSON,callingFunction)
 				clearDetails();				/* see file setMarkers.js */
 
                 // hide extra details link
-                document.getElementById('morePanel').style.display = 'none';
 
-				leftHeader.innerHTML='<a href="#mainDetails" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>RNC Controller Details</a>';
+                document.getElementById('moreDetails').style.display = 'none';
+
+                //document.getElementById('moreDetails').style.display = 'none';
+
+                leftHeader.innerHTML='<a href="#mainDetails" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>RNC Controller Details</a>';
+
+                //leftHeader.innerHTML='RNC Controller Details';
+
+                //document.getElementById('morePanel').style.display = 'none';
+
+				//leftHeader.innerHTML='<a href="#mainDetails" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>RNC Controller Details</a>';
+
 		    	spanTitle1.innerHTML='<span class="detailsDesc">RNC ID: </span>';
 		    	spanTitle2.innerHTML='<span class="detailsDesc">RNC Latitude: </span>';
 		    	spanTitle3.innerHTML='<span class="detailsDesc">RNC Longitude: </span>';
@@ -547,10 +569,12 @@ function displayData(stringJSON,callingFunction)
 				clearDetails();				/* see file setMarkers.js */
 
                 // hide extra details link
-                document.getElementById('morePanel').style.display = 'none';
+                document.getElementById('moreDetails').style.display = 'none';
 
 				// set the titles in the details window
-				leftHeader.innerHTML='<a href="#mainDetails" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>Fault Details</a>';
+                leftHeader.innerHTML='<a href="#mainDetails" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>Fault Details</a>';
+
+				// set the titles in the details window
 				spanTitle1.innerHTML='<span class="detailsDesc">Fault ID:';
 				spanTitle2.innerHTML='<span class="detailsDesc">Fault Latitude:';
 				spanTitle3.innerHTML='<span class="detailsDesc">Fault Longitude:';

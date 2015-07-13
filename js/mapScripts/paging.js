@@ -1,3 +1,11 @@
+
+window.onload=function() {
+    /*
+     *
+     * Submit AJAX call and display on the page
+     *
+     * */
+}
 /*
 * example taken from https://www.developphp.com/video/JavaScript/Ajax-Pagination-Tutorial-PHP-MySQL-Database-Results-Paged
 * */
@@ -48,5 +56,6 @@ function request_page(pn)   /* pn = page number*/
         }
     }
     pagination_controls.innerHTML=paginationCtrls;
+
 
 }

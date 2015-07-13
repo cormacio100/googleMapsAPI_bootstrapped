@@ -494,7 +494,7 @@ if(!isset($_SESSION))
   * Function retrieves an array of fault Objects and returns
   * so that markers can be created on Map for the location of the fault 
   */
- function findFaultsByEmailForMapMarkers()
+/* function findFaultsByEmailForMapMarkers()
  {
  	# array to hold the faultObjects
  	$faultArr=array();
@@ -553,7 +553,72 @@ if(!isset($_SESSION))
 
 	echo $jsonOutput;
 
- }
+ }*/
+
+/**
+ * Function retrieves an array of fault Objects and returns
+ * so that markers can be created on Map for the location of the fault
+ */
+function findFaultsByEmailForMapMarkers()
+{
+    # array to hold the faultObjects
+    $faultArr=array();
+    $faultObjArr=array();	# array of fault objects
+    $faultReportEmail=null;
+    $faultArrLen=null;
+
+    if(isset($_GET['pageSource']))
+    {
+        $pageSource=filter_input(INPUT_GET, 'pageSource',FILTER_SANITIZE_STRING);
+
+        if('googleMap1'==$pageSource)
+        {
+            $faultReportEmail='ALL';
+        }
+    }
+    else
+    {
+        if(isset($_SESSION['faultReportEmail']))
+        {
+            $faultReportEmail=$_SESSION['faultReportEmail'];
+        }
+        else
+        {
+            $faultReportEmail='ALL';
+        }
+    }
+
+    # retrieve array of faults containing id, latitude and longitude
+    $faultArr=retrieveFaultLocationsByEmail($faultReportEmail,'markers');
+
+    $faultArrLen=sizeof($faultArr);
+
+    # loop through array and create a Fault Object from the ReportedFault class for each fault
+    for($i=0;$i<$faultArrLen;$i++)
+    {
+        $fault=new ReportedFault(
+            $faultArr[$i]['faultId'],
+            $faultArr[$i]['faultMsisdn'],
+            $faultArr[$i]['faultType'],
+            $faultArr[$i]['faultLatitude'],
+            $faultArr[$i]['faultLongitude']
+        );
+
+        # add the fault Object to an array
+        $faultObjArr[]=$fault;
+    }
+
+    # convert data to JSON
+    header("Cache-Control: no-cache, must-revalidate");
+    header("Expires: 0");
+    header('Content-Type: application/json');
+
+    # encode the array as JSON
+    $jsonOutput=json_encode($faultObjArr);
+
+    echo $jsonOutput;
+
+}
 
 /**
  * Function retrieves a list of Fault ID's and converts to JSON

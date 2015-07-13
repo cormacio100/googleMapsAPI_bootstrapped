@@ -4,7 +4,12 @@ window.onload=function()
 	console.log('initialising');
 	
 	// hide the siteDetails div until show site button is pressed
-    document.getElementById('morePanel').style.display = 'none';
+    document.getElementById('innerSiteDetails').style.display = 'none';
+
+
+    // hide extra details div
+    //document.getElementById('toggleDiv').style.display = 'none';
+	
 
 	// reference the initialise google map function
 	initialise();
@@ -48,7 +53,7 @@ window.onload=function()
 		
 		clearSites();				/* see file setMarkers.js */
 		
-		link.setMap(null);
+		link.setMap(null);          /* REMOVES POLYLINES  see displayMapAndMarkers.js */
 	};
 	
 	//showMoreLess.onclick=divToggle;
