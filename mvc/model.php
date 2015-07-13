@@ -484,30 +484,30 @@ function updatePassword($userName)
 			{
 				if('North Leinster'==$teamRegion)
 				{
-                    echo '<br>Model: North Leinster';
+                   // echo '<br>Model: North Leinster';
 					$query.=" WHERE county IN ('LH','MH','KE','WH','LD','CN','MN')";
 				}
 				if('South Leinster'==$teamRegion)
 				{
-                    echo '<br>Model: South Leinster';
+                    //echo '<br>Model: South Leinster';
 
 					$query.=" WHERE county IN ('WW','WX','LS','KK','CW','OY')";
 				}
 				if('South West'==$teamRegion)
 				{
-                    echo '<br>Model: South West';
+                   // echo '<br>Model: South West';
 
 					$query.=" WHERE county IN ('TY','WD','CE','LK','CK','KY')";
 				}
 				if('North West'==$teamRegion)
 				{
-                    echo '<br>Model: North West';
+                    //echo '<br>Model: North West';
 
 					$query.=" WHERE county IN ('LM','SO','RN','MO','GY','DL')";
 				}
 				if('Dublin'==$teamRegion)
 				{
-                    echo '<br>Model: Dublin';
+                    //echo '<br>Model: Dublin';
 					$query.=" WHERE county IN ('DN')";
 				}
 			}			

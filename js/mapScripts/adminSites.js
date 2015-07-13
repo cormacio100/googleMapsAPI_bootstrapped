@@ -10,7 +10,7 @@ var pageNum;
  */
 function displaySiteDataInATable(stringJSON,callingFunction)
 {
-    var messageArray = JSON.parse(stringJSON);
+    var messageArray=JSON.parse(stringJSON);
     var i;
     var htmlPaging=null;
     var htmlTable=null;
@@ -198,6 +198,7 @@ window.onload=function()
         document.getElementById('displaySelectedCounty').innerHTML=selectCounty;
 
         console.log('selectCounty is '+selectCounty);
+        displayAdminSites();
     }
 
     console.log('selectCounty is '+selectCounty);
