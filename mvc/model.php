@@ -513,7 +513,7 @@ function updatePassword($userName)
 			}			
 		}
 
-        echo '<br>'.$query.'<br>';
+        //echo '<br>'.$query.'<br>';
 
 		# submit and execute the query
 		$totalRecordsNumArr=$db->getSingleRecord($query);

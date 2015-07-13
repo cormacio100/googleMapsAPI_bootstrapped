@@ -34,9 +34,10 @@
                 </ol>
                 <div class="row" >
                     <div class="col-sm-6">
-                        <h4>{{ totalRecords }} Mobile Sites displayed for Region:<span>{{ teamRegion }}</span>, County:<span class="detail">{{ selectCounty }}</span></h4>
+                        <h4>{{ totalRecords }} Mobile Sites displayed for Region:<span>{{ teamRegion }}</span>, County:<span class="detail" id="displaySelectedCounty">{{ selectCounty }}</span></h4>
                     </div>
                     <div class="col-sm-6">
+                        <div  class="countyForm alignRight">
                         <!--<form method="GET" action="./adminSites" class="countyForm alignRight">-->
                             <!--menu dynamically created by Javascript-->
                             <select id="selectCounty" name="selectCounty" class="detail">
@@ -44,6 +45,7 @@
                             </select>
                             <input type="submit" id="refineSearch" name="refineSearch" value="Refine Search" class="btn btn-primary btn-xs">
                         <!--</form>-->
+                        </div>
                     </div>
 
                 </div><!--end row-->

@@ -194,6 +194,9 @@ window.onload=function()
         // retrieve the selected County
         selectCounty=document.getElementById('selectCounty').value;
 
+        // display the selected county on screen
+        document.getElementById('displaySelectedCounty').innerHTML=selectCounty;
+
         console.log('selectCounty is '+selectCounty);
     }
 

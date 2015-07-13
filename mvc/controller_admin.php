@@ -374,8 +374,6 @@ function adminReportedFaults()
 }
 
 
-
-
 /**
  * Funtion displays all sites and allows the admin to turn them on and off 
  * Used for initial load of the adminSites page
@@ -499,7 +497,6 @@ function retrieveAdminSites()
     $url='#';
     $outputHTML=null;
 
-
     # array to hold the sites retrieved from Query
     $sitesArr=array();
     $sitesArrLen=null;
@@ -522,17 +519,86 @@ function retrieveAdminSites()
         $teamRegion=$_SESSION['teamRegion'];
     }
 
-   // echo '<BR>team region is '.$teamRegion;
-
-    $totalRecords=getTotalRecordsNum($searchParam,$selectCounty,$teamRegion);
-
     # check which page is selected in order to display the active page
     if(isset($_GET['pageNum']))
     {
         $activePage=filter_input(INPUT_GET,'pageNum',FILTER_SANITIZE_NUMBER_INT);
     }
 
-     echo 'page num is '.$activePage;
+    $totalRecords=getTotalRecordsNum($searchParam,$selectCounty,$teamRegion);
+
+    # create a Pager Object to generate the pager links
+    $pager = new Pager($totalRecords,$recordsPerPage,$searchParam,$url,$selectCounty,$activePage);
+
+    # retrieve the pager links
+    $pager->getOutputHTML();
+
+    # in order to generate the records to be presented on the current page, you need to retrieve the LIMITERS
+    if(isset($_GET['startRecord']))
+    {
+        $startRecord=filter_input(INPUT_GET,'startRecord',FILTER_SANITIZE_NUMBER_INT);
+    }
+    if(isset($_GET['recordsPerPage']))
+    {
+        $recordsPerPage=filter_input(INPUT_GET,'recordsPerPage',FILTER_SANITIZE_NUMBER_INT);
+    }
+
+    # retrieve an array or reported faults
+    $sitesArr=getPageRecords($searchParam,$startRecord,$recordsPerPage,$selectCounty,$teamRegion);
+
+    # calculate size of the array
+    $sitesArrLen=sizeof($sitesArr);
+
+    //echo 'sitesArrLen is '.$sitesArrLen;exit;
+
+    # loop through array and create Site Objects from the Site Class
+    for($i=0; $i<$sitesArrLen;$i++)
+    {
+        $site=new Site(
+            $sitesArr[$i]['siteId'],
+            $sitesArr[$i]['siteName'],
+            $sitesArr[$i]['county'],
+            $sitesArr[$i]['latitude'],
+            $sitesArr[$i]['longitude'],
+            $sitesArr[$i]['onAir'],
+            $sitesArr[$i]['_bsc'],
+            $sitesArr[$i]['_rnc'],
+            $sitesArr[$i]['dcsRating'],
+            $sitesArr[$i]['gsmRating'],
+            $sitesArr[$i]['usmRating'],
+            $sitesArr[$i]['lteRating'],
+            $sitesArr[$i]['txnRating'],
+            $sitesArr[$i]['mprn'],
+            $sitesArr[$i]['wentOffAir'],
+            $sitesArr[$i]['backOnAir'],
+            $sitesArr[$i]['_clusterId'],
+            $sitesArr[$i]['_fieldEngId'],
+            null,
+            null,
+            null,
+            null
+        );
+
+        # add the site Object to an array
+        $siteObjArr[]=$site;
+    }
+
+    # put the pager link at the end of the array
+    $siteObjArr[]['outputHTML']=$outputHTML;
+
+    //echo 'size of SiteObjArr is '.sizeof($siteObjArr);exit;
+
+    # convert data to JSON
+    header("Cache-Control: no-cache, must-revalidate");
+    header("Expires: 0");
+    header('Content-Type: application/json');
+
+    # encode the array as JSON
+    $jsonOutput=json_encode($siteObjArr);
+
+    echo $jsonOutput;
+
+     //echo 'page num is '.$activePage;
     /*
     ##################################################
     # include Pager class to generate pages
@@ -629,7 +695,6 @@ function retrieveAdminSites()
 
     echo $jsonOutput;*/
 }
-
 
 /**
  * Funtion displays all sites and allows the admin to turn them on and off
