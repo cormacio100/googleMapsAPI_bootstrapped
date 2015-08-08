@@ -10,8 +10,8 @@
 function index()
 {
 	global $twig; 
-	$navTop=true;
-	$navBottomHome=true; 
+	//$navTop=true;
+	//$navBottomHome=true;
 	
 	$isLoggedIn=null;
 	$firstName=null;
@@ -33,8 +33,8 @@ function index()
 	$args_array=array(
 		'isLoggedIn' => $isLoggedIn,
 		'username' => $firstName.' '.$lastName,
-		'navTop' => $navTop,
-		'navBottomHome' => $navBottomHome,
+		//'navTop' => $navTop,
+		//'navBottomHome' => $navBottomHome,
 	);
 	
 	$template='index';
@@ -227,46 +227,16 @@ function messageAlert()
 }
 
 
-/**
- * FUNCTION TESTS PAGINATION WITH AJAX
- *
- * example taken from https://www.developphp.com/video/JavaScript/Ajax-Pagination-Tutorial-PHP-MySQL-Database-Results-Paged
- *
- */
-function paginationAjaxTest()
+################################################ TESTING #####################################
+function testModal()
 {
     global $twig;
 
-    #((((((((((( Pager Values )))))))))))
-    $startRecord=0;
-    $rpp=5;
-    $totalRecords=0;
-    $activePage=1;
-    $searchParam='fault';
-    $url='./mapReportFault&formId=3';
-    $outputHTML=null;
-    $faultReportEmail='cormac.liston@gmail.com';
-
-    # count how many records are set
-    $totalRows=getTotalRecordsNum($searchParam,$faultReportEmail,null);
-
-    # tells us the last page
-    $last=ceil($totalRows/$rpp);
-
-    # this makes sure the last cannot be less than 1
-
-    # retrive list of fault ID's
-    $faultReportArr = retrieveFaultLocationsByEmail($faultReportEmail,'idList',$startRecord,$rpp);
-
 
     $args_array=array(
-        'totalRecords' => $totalRecords,
-        'rpp' => $rpp,
-        'last' => $last
+
     );
 
-    $template='paginationAjaxTest';
+    $template='testModal';
     echo $twig->render($template.'.html.twig',$args_array);
 }
-
-

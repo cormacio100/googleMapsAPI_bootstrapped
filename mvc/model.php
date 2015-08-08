@@ -1,4 +1,6 @@
 <?php
+
+
 /**
  * Function retrieves array of on air sites
  */
@@ -188,7 +190,7 @@ function checkForFaultReports($email)
 	$db = new Database;
 	
 	# create the query
-	$query="SELECT faultId FROM fault WHERE faultReportEmail='".$email."'";
+	$query="SELECT faultId FROM fault WHERE faultReportEmail='".$email."' ORDER BY faultId DESC";
 	
 	# submit the query fro execution. Expecting possibly mutliple results
 	$faultReportArr = $db->getMultiRecords($query);
@@ -310,32 +312,22 @@ function updateFaultReport($faultId,$faultStatus,$faultUpdate)
  * @param $faultReportEmail - email address
  * @return $faultArr - array 
  */
-function retrieveFaultLocationsByEmail($faultReportEmail,$queryType)
+function retrieveFaultLocationsByEmail($faultReportEmail)
 {
 	$faultArr=array();
-    $query=null;
-
 	
 	# create a Database object
 	$db = new Database;
-
-    # create the query depending on where request came from. If $queryType is 'idList' the default query is overwritten
-    $query = "SELECT faultId,faultStatus,faultMsisdn,faultType,faultLatitude,faultLongitude FROM fault";
-
-    if('idList'==$queryType)
-    {
-        $query = "SELECT faultId FROM fault";
-    }
-
+	
+	# create the query
+	$query="SELECT faultId,faultStatus,faultMsisdn,faultType,faultLatitude,faultLongitude FROM fault";
 	$query.=" WHERE faultStatus='open'";
 	
 	if('ALL'!=$faultReportEmail)
 	{
 		$query.=" AND faultReportEmail='".$faultReportEmail."'";
 	}
-
-   // echo $query;
-
+	
 	# submit and execute the query
 	$faultArr=$db->getMultiRecords($query);
 	
@@ -346,7 +338,6 @@ function retrieveFaultLocationsByEmail($faultReportEmail,$queryType)
 	# return result
 	return $faultArr;
 }
-
 
 /**
  * Function checks user against the fieldEngteam table to see if authentic 
@@ -458,16 +449,9 @@ function updatePassword($userName)
 	# if calcualting total for sites admin page
 	if('site'==$searchParam)
 	{
-       // echo '<br>searchParam is '.$searchParam;
-
-       // echo '<br> selectOption is '.$selectOption;
-
-      //  echo '<br> teamRegion is '.$teamRegion;
-
 		# if a single county was chosen
 		if('ALL'!==$selectOption)
-        {
-
+		{
             /**
              * If searchParam is set to site and selectOption is not ALL
              * it is assumed that the selectOption is for county.
@@ -484,36 +468,26 @@ function updatePassword($userName)
 			{
 				if('North Leinster'==$teamRegion)
 				{
-                   // echo '<br>Model: North Leinster';
 					$query.=" WHERE county IN ('LH','MH','KE','WH','LD','CN','MN')";
 				}
 				if('South Leinster'==$teamRegion)
 				{
-                    //echo '<br>Model: South Leinster';
-
 					$query.=" WHERE county IN ('WW','WX','LS','KK','CW','OY')";
 				}
 				if('South West'==$teamRegion)
 				{
-                   // echo '<br>Model: South West';
-
 					$query.=" WHERE county IN ('TY','WD','CE','LK','CK','KY')";
 				}
 				if('North West'==$teamRegion)
 				{
-                    //echo '<br>Model: North West';
-
 					$query.=" WHERE county IN ('LM','SO','RN','MO','GY','DL')";
 				}
 				if('Dublin'==$teamRegion)
 				{
-                    //echo '<br>Model: Dublin';
 					$query.=" WHERE county IN ('DN')";
 				}
 			}			
 		}
-
-        //echo '<br>'.$query.'<br>';
 
 		# submit and execute the query
 		$totalRecordsNumArr=$db->getSingleRecord($query);

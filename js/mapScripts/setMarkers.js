@@ -255,7 +255,7 @@ function setAllMap(map,location,callingFunction)
 			// ensure the bottom half of the deatils pane is clear
 			clearMoreDetails();
 			// show less details
-			//divToggle();
+			divToggle();
 			
 			// 2 - the county selection should change back to ALL and the map should zoom out and center on athlone
 			selectedCounty=document.getElementById('selectCounty');

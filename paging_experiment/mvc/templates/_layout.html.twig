@@ -1,0 +1,29 @@
+{# _layout.html.twig #}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="BootStrap first attempt">
+        <meta name="author" content="Cormac Liston">
+
+		<title>{% block title %}{% endblock %}</title>
+		{% block style %}{% endblock %}
+
+        <script src="js/bootStrap/respond.js"></script> <!-- allows IE8 work with bootstrap -->
+        <script src="js/mapScripts/paging.js"></script>
+	</head>
+	<body>
+    
+        <div class="container">
+            {% include 'navigation.html.twig' %}
+
+            {% block main %}{% endblock %}
+
+        </div>
+
+        {# include 'footer.html.twig' #}
+        <!-- javascript -->
+        {% block script %}{% endblock %}
+	</body>
+</html>

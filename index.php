@@ -50,7 +50,6 @@ getRoute()->get('/mapFindControllers','mapFindControllers');
 getRoute()->post('/reportFaultEmailCheck','reportFaultEmailCheck');
 getRoute()->post('/createReportFault','createReportFault');
 getRoute()->get('/findFaultsByEmailForMapMarkers','findFaultsByEmailForMapMarkers');
-getRoute()->get('/getFaultIdListLinkedToEmail','getFaultIdListLinkedToEmail');
 
 # admin
 getRoute()->get('/admin','admin');
@@ -66,21 +65,20 @@ getRoute()->get('/adminUpdateFault','adminUpdateFault');
 getRoute()->post('/adminUpdateReportFault','adminUpdateReportFault');
 getRoute()->get('/adminLogout','adminLogout');
 
+
+#test
+getRoute()->get('/testModal','testModal');
+
 # alerts
 getRoute()->get('/messageAlert','messageAlert');
 
-# AJAX calls
+# AJAX calls 
 getRoute()->get('/retrieveAllSites','retrieveAllSites');
 getRoute()->get('/retrieveOffAirSites','retrieveOffAirSites');
 getRoute()->get('/retrieveSitesByCounty','retrieveSitesByCounty');
-getRoute()->get('/retrieveAdminSites','retrieveAdminSites');
 
 # discrete function to update passwords. Not accessible through Front End
 getRoute()->get('/adminUpdateUserPassword','adminUpdateUserPassword');
-
-# test
-getRoute()->get('/paginationAjaxTest','paginationAjaxTest');
-
 
 getRoute()->get('.*','error404');
 getRoute()->run();

@@ -59,11 +59,6 @@ function requestJSON(dataSource,callingFunction)
 				{
 					displayData(httpReq.responseText,callingFunction);
 				}
-				else if('displayAdminSites'==callingFunction)
-                {
-                    displaySiteDataInATable(httpReq.responseText,callingFunction);
-                }
-
 			}
 			else if(PAGENOTFOUND==httpReq.status)
 			{
@@ -78,7 +73,7 @@ function requestJSON(dataSource,callingFunction)
 	httpReq.open('GET',dataSource,asynchronous);
 	
 	/*
-	 * STEP 4 - Send the request
+	 * STEP 4 - Open the request
 	 */	
 	httpReq.send();
 } //end function

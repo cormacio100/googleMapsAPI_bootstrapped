@@ -81,10 +81,17 @@ footer
     padding-bottom:0;
 }
 
-#faultReportMiniList .col-sm-12 ul li
+.faultReportMiniList ul li,
+.faultReportFullList ul li
 {
-    color:#ffffff;
+    list-style-type: none;
 }
+
+.faultReportMiniList
+{
+    text-align:center;
+}
+
 
 .row .col-sm-6 .alignRight
 {

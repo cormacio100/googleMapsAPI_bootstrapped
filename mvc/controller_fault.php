@@ -284,18 +284,19 @@ if(!isset($_SESSION))
 	else if('3'==$formId)
 	{
 		$faultReportArr=null;
+        $faultReportArrFirstFive=null;
 
 		#((((((((((( Pager Values )))))))))))
-		$startRecord=0;
-		$recordsPerPage=5;
-		$totalRecords=0;
+        /* $startRecord=0;
+        $recordsPerPage=5;
+        $totalRecords=0;
         $activePage=1;
         $searchParam='fault';
-		$url='./mapReportFault&formId=3';
-		$outputHTML=null;
+        $url='./mapReportFault&formId=3';
+        $outputHTML=null;
 
         # check which page is selected in order to display the active page
-        if(isset($_GET['pageNum']))
+       if(isset($_GET['pageNum']))
         {
             $activePage=filter_input(INPUT_GET,'pageNum',FILTER_SANITIZE_NUMBER_INT);
         }
@@ -311,24 +312,37 @@ if(!isset($_SESSION))
         $outputHTML	 = $pager->getOutputHTML();
 
         # check the GET super global to see if startRecord & recordsPerPage have been passed in
-        if(isset($_GET['startRecord']))
+      if(isset($_GET['startRecord']))
         {
             $startRecord = filter_input(INPUT_GET,'startRecord',FILTER_SANITIZE_NUMBER_INT);
         }
         if(isset($_GET['recordsPerPage']))
         {
             $recordsPerPage = filter_input(INPUT_GET,'recordsPerPage',FILTER_SANITIZE_NUMBER_INT);
-        }
+        }*/
 
 		# check DB to see if previous faultId's exists against this email address. Only faultId's
-		//$faultReportArr=checkForFaultReports($faultReportEmail);
+		$faultReportArr=checkForFaultReports($faultReportEmail);
 
-        $faultReportArr = getPageRecords($searchParam,$startRecord,$recordsPerPage,$faultReportEmail,null);
+        //$faultReportArr = getPageRecords($searchParam,$startRecord,$recordsPerPage,$faultReportEmail,null);
+
+        if(sizeof($faultReportArr)>5)
+        {
+            for($i=0;$i<5;$i++)
+            {
+                $faultReportArrFirstFive[]=$faultReportArr[$i];
+            }
+        }
+        else
+        {
+            $faultReportArrFirstFive=$faultReportArr;
+        }
 
         # add the array to the arguments array to be used in the template
 		$args_array['faultRerportEmail']=$faultReportEmail;
 		$args_array['faultReportArr']=$faultReportArr;
-		$args_array['outputHTML']=$outputHTML;
+		$args_array['faultReportArrFirstFive']=$faultReportArrFirstFive;
+		//$args_array['outputHTML']=$outputHTML;
 		# add email address to hidden field
 		$args_array['faultReportEmail']=$faultReportEmail;
 		
@@ -494,7 +508,7 @@ if(!isset($_SESSION))
   * Function retrieves an array of fault Objects and returns
   * so that markers can be created on Map for the location of the fault 
   */
-/* function findFaultsByEmailForMapMarkers()
+ function findFaultsByEmailForMapMarkers()
  {
  	# array to hold the faultObjects
  	$faultArr=array();
@@ -524,7 +538,7 @@ if(!isset($_SESSION))
 	}
 
 	# retrieve array of faults containing id, latitude and longitude
-	$faultArr=retrieveFaultLocationsByEmail($faultReportEmail,'markers');
+	$faultArr=retrieveFaultLocationsByEmail($faultReportEmail);
 		
 	$faultArrLen=sizeof($faultArr);
 
@@ -553,101 +567,4 @@ if(!isset($_SESSION))
 
 	echo $jsonOutput;
 
- }*/
-
-/**
- * Function retrieves an array of fault Objects and returns
- * so that markers can be created on Map for the location of the fault
- */
-function findFaultsByEmailForMapMarkers()
-{
-    # array to hold the faultObjects
-    $faultArr=array();
-    $faultObjArr=array();	# array of fault objects
-    $faultReportEmail=null;
-    $faultArrLen=null;
-
-    if(isset($_GET['pageSource']))
-    {
-        $pageSource=filter_input(INPUT_GET, 'pageSource',FILTER_SANITIZE_STRING);
-
-        if('googleMap1'==$pageSource)
-        {
-            $faultReportEmail='ALL';
-        }
-    }
-    else
-    {
-        if(isset($_SESSION['faultReportEmail']))
-        {
-            $faultReportEmail=$_SESSION['faultReportEmail'];
-        }
-        else
-        {
-            $faultReportEmail='ALL';
-        }
-    }
-
-    # retrieve array of faults containing id, latitude and longitude
-    $faultArr=retrieveFaultLocationsByEmail($faultReportEmail,'markers');
-
-    $faultArrLen=sizeof($faultArr);
-
-    # loop through array and create a Fault Object from the ReportedFault class for each fault
-    for($i=0;$i<$faultArrLen;$i++)
-    {
-        $fault=new ReportedFault(
-            $faultArr[$i]['faultId'],
-            $faultArr[$i]['faultMsisdn'],
-            $faultArr[$i]['faultType'],
-            $faultArr[$i]['faultLatitude'],
-            $faultArr[$i]['faultLongitude']
-        );
-
-        # add the fault Object to an array
-        $faultObjArr[]=$fault;
-    }
-
-    # convert data to JSON
-    header("Cache-Control: no-cache, must-revalidate");
-    header("Expires: 0");
-    header('Content-Type: application/json');
-
-    # encode the array as JSON
-    $jsonOutput=json_encode($faultObjArr);
-
-    echo $jsonOutput;
-
-}
-
-/**
- * Function retrieves a list of Fault ID's and converts to JSON
- * Fault IDs are then listed on mapReportFault form page 3
- */
-
-function getFaultIdListLinkedToEmail()
-{
-    $searchParam=null;
-    $startRecord=0;
-    $recordsPerPage=5;
-    $url='./getFaultIdListLinkedToEmail';
-    $faultReportEmail=null;
-
-    if(isset($_GET['faultReportEmail']))
-    {
-        $faultReportEmail=filter_input(INPUT_GET,'faultReportEmail',FILTER_SANITIZE_STRING);
-    }
-
-    # retrive list of fault ID's
-    $faultReportArr = retrieveFaultLocationsByEmail($faultReportEmail,'idList',$startRecord,$recordsPerPage);
-
-    # encode the Site Object Array into JSON
-    header("Cache-Control: no-cache, must-revalidate");
-    header("Expires: 0");
-    header('Content-Type: application/json');
-
-    # encode the array as JSON
-    $jsonOutput=json_encode($faultReportArr);
-
-    echo $jsonOutput;
-}
+ }

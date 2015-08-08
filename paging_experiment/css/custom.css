@@ -1,0 +1,232 @@
+/* this is a custom style sheet */
+
+html,body
+{
+    xpadding-top:70px;
+    background-color:#b3d1ff;
+    height:100%;
+    width:100%;
+}
+
+div #container,
+main
+{
+    height:100%;
+    padding-bottom:50px;
+}
+
+footer
+{
+    padding:0.5em 0;
+    margin:1em 0 0 0;
+    border-top: 1px solid #ffffff;
+    text-align:center;
+    position:fixed;
+    bottom:0;
+    width:100%;
+}
+
+h1.noMargin
+{
+    margin:0;
+    padding:0;
+}
+
+#loading .progress .progress-bar .sr-only
+{
+    vertical-align: middle;
+    margin:0;
+    padding:0;
+}
+
+.row .navbar-nav .dropdown-menu
+{
+    background-color:#222222;
+}
+
+.row .navbar-nav li a,
+.row .navbar-nav .dropdown-menu li a,
+.row .navbar-header .navbar-toggle,
+.row .navbar-header .navbar-toggle .glyphicon-arrow-down
+{
+    color:#b3d1ff;
+}
+
+/* Highlights User that's logged in */
+.navDetail
+{
+    color:#ffffff;
+    margin-right:15px;
+}
+
+
+#logoImage
+{
+    margin:0;
+    padding:0;
+}
+
+.panel-body
+{
+    xbackground-color:#222222 !important;
+}
+
+/* PAGINATION */
+.pagination
+{
+    margin:0;
+}
+
+.pagination-sm
+{
+    margin-top:1em;
+    margin-bottom: 1em;
+    padding-bottom:1em;
+}
+
+#paging .pagination-sm {
+    margin-top:0;
+    margin-bottom: 0;
+    padding-bottom:0;
+}
+
+#faultReportMiniList .col-sm-12 ul li
+{
+    color:#ffffff;
+}
+
+.row .col-sm-6 .alignRight
+{
+    text-align: right;
+    margin: 0.5em 0 0.5em 0;    /* line height is 1*/
+}
+
+#faultReportMiniList
+{
+    xborder-bottom:1px solid #ffffff;
+    margin-bottom:1em;
+}
+
+/* END PAGINATION */
+
+/* FORMS */
+.required
+{
+    font-weight: bold;
+}
+
+#faultReportForm select
+{
+    margin:1em 0 0.5em 0;
+
+    padding: 5px 10px;
+}
+
+.col-sm-12 blockquote
+{
+    margin-top:1em;
+    margin-bottom: 0;
+    text-align:center;
+}
+
+/* ADMIN SITES */
+.table-hover .detail
+{
+    color:#ffffff;
+}
+
+.paraWhite
+{
+    oolor:#ffffff !important;
+}
+
+.tab-pane
+{
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 0.8em;
+    background-color: #ffffff;
+}
+
+/* END ADMIN SITES*/
+
+/* INDEX PAGE */
+aside blockquote
+{
+    margin:2em;
+    text-align:center;
+}
+
+/* FAULT DETAILS */
+#createReportFault div
+{
+    margin: 0.5em 0;
+}
+
+.markerExplanation div img
+{
+    margin:0.5em 0;
+}
+
+/* END FAULT DETAILS*/
+
+
+/* COLOUR THE GLYPHICONS */
+.glyphicon
+{
+    color: #222222;
+}
+.active .glyphicon
+{
+    color: #b3d1ff;
+}
+
+main .row .col-sm-8
+{
+    border-right:1px solid #ffffff;
+}
+
+/* GOOGLE MAP */
+#googleMap
+{
+    display:block;
+    margin-left:2em;
+    margin-right:2em;
+    width:90%;
+    height:650px;
+}
+
+.col-sm-4 div#faultReportForm,
+.col-sm-4 div#markerExplanation
+{
+    padding-bottom:1em;
+    xborder-bottom: 1px solid #ffffff;
+}
+
+/* MARKERS */
+.detailsDesc
+{
+    xcolor:#ffffff;
+    font-weight:bold;
+}
+
+/* HEADINGS */
+.leftHeader,
+.rightHeader
+{
+    background-color:#222222;
+    color:#ffffff;
+    padding:0.5em;
+}
+
+.leftHeader
+{
+    margin-top:0;
+}
+
+.rightHeader
+{
+    margin-top:1em
+}
+
