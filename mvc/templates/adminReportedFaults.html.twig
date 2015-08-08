@@ -37,7 +37,7 @@
                 <div id="reportedFaultsList">
                     <ul>
                         {% for reportedFault in reportedFaultsArr %}
-                            <li><a href="./adminUpdateFault?faultId={{ reportedFault.faultId }} ">Fault Id{{ reportedFault.faultId }} </a> - Status:<span class="detail">{{ reportedFault.faultStatus }}</span> - Raised: <span class="detail">{{ reportedFault.faultDateFrom | slice(0,10) }} </span>- County:<span class="detail">{{ reportedFault.faultCounty }}</span></li>
+                            <li><a href="./adminUpdateFault?faultId={{ reportedFault.faultId }} ">Fault Id  {{ reportedFault.faultId }} </a> - Status:<span class="detail">{{ reportedFault.faultStatus }}</span> - Raised: <span class="detail">{{ reportedFault.faultDateFrom | slice(0,10) }} </span>- County:<span class="detail">{{ reportedFault.faultCounty }}</span></li>
                         {% endfor %}
                     </ul>
                 </div>

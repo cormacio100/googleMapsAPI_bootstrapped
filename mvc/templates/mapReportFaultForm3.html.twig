@@ -102,6 +102,7 @@
                                 {% for faultReport in faultReportArrFirstFive %}
                                     <li><a href="./mapReportFault?formId=2&amp;action=review&amp;faultId={{ faultReport.faultId }}">Fault Ref:{{ faultReport.faultId }}</a></li>
                                 {% endfor %}
+                                <li>...</li>
                             </ul>
                         </div>
                         <div class="col-sm-6 faultReportFullList">
@@ -131,8 +132,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                     <p id="newFaultReport">Click <strong><a href="./mapReportFault?formId=2&amp;faultReportEmail={{ faultReportEmail }}">here</strong></a> to submit a new <strong>Fault Report</strong><p>
                 </div>

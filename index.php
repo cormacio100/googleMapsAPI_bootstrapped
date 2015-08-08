@@ -66,9 +66,6 @@ getRoute()->post('/adminUpdateReportFault','adminUpdateReportFault');
 getRoute()->get('/adminLogout','adminLogout');
 
 
-#test
-getRoute()->get('/testModal','testModal');
-
 # alerts
 getRoute()->get('/messageAlert','messageAlert');
 

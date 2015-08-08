@@ -8,7 +8,7 @@ body
     width:100%;
 }
 
-div #container,
+div .container,
 main
 {
     height:100%;
@@ -92,6 +92,11 @@ footer
     text-align:center;
 }
 
+#newFaultReport
+{
+    border-top:1px solid #ffffff;
+    padding:0.5em 0;
+}
 
 .row .col-sm-6 .alignRight
 {
@@ -131,6 +136,11 @@ footer
 .table-hover .detail
 {
     color:#ffffff;
+}
+
+#viewMapBtn
+{
+    float:right;
 }
 
 .paraWhite

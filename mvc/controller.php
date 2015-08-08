@@ -10,12 +10,9 @@
 function index()
 {
 	global $twig; 
-	//$navTop=true;
-	//$navBottomHome=true;
-	
-	$isLoggedIn=null;
-	$firstName=null;
-	$lastName=null;
+
+    # if a user has chosen this link they need to be logged out from admin section by default
+    clearUserSession();
 	
 	if(isset($_SESSION['isLoggedIn']))
 	{
@@ -31,8 +28,8 @@ function index()
 	}
 	
 	$args_array=array(
-		'isLoggedIn' => $isLoggedIn,
-		'username' => $firstName.' '.$lastName,
+		//'isLoggedIn' => $isLoggedIn,
+		//'username' => $firstName.' '.$lastName,
 		//'navTop' => $navTop,
 		//'navBottomHome' => $navBottomHome,
 	);
@@ -227,16 +224,3 @@ function messageAlert()
 }
 
 
-################################################ TESTING #####################################
-function testModal()
-{
-    global $twig;
-
-
-    $args_array=array(
-
-    );
-
-    $template='testModal';
-    echo $twig->render($template.'.html.twig',$args_array);
-}

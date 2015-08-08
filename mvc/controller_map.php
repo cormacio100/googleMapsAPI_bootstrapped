@@ -9,6 +9,10 @@
  */ 
 function map()
 {
+
+    # if a user was in admin section and clicked on this option then they need to be logged out
+    clearUserSession();
+
 	# Auto forward user to the Site Finder sub page
 	header('Location: ./mapReportFault');
 	exit;

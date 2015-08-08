@@ -11,22 +11,11 @@
  */
 function admin()
 {
-	# check if the user is logged in or not
-	
-	# if not then forward to login page
-	
-	# Auto forward user to the adminLoginfunction which displays the log in form 
-	if(isset($_SESSION['isLoggedIn']))
-	{
-		header('Location: ./adminSelectRegion');
-		exit;
-	}
-	else 
-	{
-		header('Location: ./adminLogin');
-		exit;
-	}
-	
+    # clear the user session by default upon reaching this page
+    clearUserSession();
+
+    header('Location: ./adminLogin');
+    exit;
 }
 
 /**
@@ -38,13 +27,16 @@ function adminLogin()
 	$navTop = true;  
 	$navBottomAdmin=true;
 
-	# checkif the user is already authenticated.
+	# check if the user is already authenticated.
 	# If so display the list of faults instead of the login screen
-	if(isset($_SESSION['isLoggedIn']))
+	/*if(isset($_SESSION['isLoggedIn']))
 	{
 		header('Location: ./adminSelectRegion');
 		exit;
-	}
+	}*/
+
+    clearUserSession();
+
 
 	# otherwise the user is presented with the login form
 	$args_array=array(
@@ -224,13 +216,27 @@ function adminLogout()
 		exit;
 	}
 	
-	# if the user is logged in the SESSION variables get cleared and user is forwarded with a logout message	
-	unset($_SESSION['adminUserName']);
-	unset($_SESSION['teamRegion']);
-	unset($_SESSION['isLoggedIn']);
+	# if the user is logged in the SESSION variables get cleared and user is forwarded with a logout message
+	//unset($_SESSION['adminUserName']);
+	//unset($_SESSION['teamRegion']);
+	//unset($_SESSION['isLoggedIn']);
+
+    clearUserSession();
 
 	header('Location: ./messageAlert?messageId=13&forwardTo=adminLogin');
 }
+
+/**
+ * Function clears the admin userSession
+ */
+function clearUserSession()
+{
+    # if the user is logged in the SESSION variables get cleared and user is forwarded with a logout message
+    unset($_SESSION['adminUserName']);
+    unset($_SESSION['teamRegion']);
+    unset($_SESSION['isLoggedIn']);
+}
+
 
 /**
  * Function updates the onAir status of a site as weel as the other sites on the same link as the site
@@ -258,7 +264,7 @@ function adminUpdateSite()
 		$onAir=filter_input(INPUT_POST,'onAir',FILTER_SANITIZE_STRING);
 	}
 	
-	# send siteId and clisterId to first find site Id's of sites on the same link as this site that are
+	# send siteId and clusterId to first find site Id's of sites on the same link as this site that are
 	# coming off this site. They all have their status updated
 	$updated=updateSiteCluster($siteId,$_clusterId,$onAir);
 	
@@ -282,8 +288,8 @@ function adminUpdateSite()
 function adminReportedFaults()
 {
 	global $twig; 
-	$navTop=true;
-	$navBottomAdmin=true;
+	//$navTop=true;
+	//$navBottomAdmin=true;
 	$admin=true;
 	$adminReportedFaults=true;
 	
@@ -341,8 +347,6 @@ function adminReportedFaults()
 	
 	$outputHTML	 = $pager->getOutputHTML();
 
-	//echo $outputHTML;exit;
-
 	# check the GET super global to see if startRecord & recordsPerPage have been passed in
 	if(isset($_GET['startRecord']))
 	{
@@ -352,15 +356,15 @@ function adminReportedFaults()
 	{
 		$recordsPerPage = filter_input(INPUT_GET,'recordsPerPage',FILTER_SANITIZE_NUMBER_INT);		
 	}
-	
+
 	# retrieve an array or reported faults/sites
 	$reportedFaultsArr = getPageRecords($searchParam,$startRecord,$recordsPerPage,null,$teamRegion);
 
 	$args_array=array(
 		'adminUserName' => $adminUserName,
 		'isLoggedIn' => $isLoggedIn,
-		'navTop' => $navTop, 
-		'navBottomAdmin' => $navBottomAdmin,
+		//'navTop' => $navTop,
+		//'navBottomAdmin' => $navBottomAdmin,
 		'reportedFaultsArr' => $reportedFaultsArr,
 		'teamRegion' => $teamRegion,
 		'totalRecords' => $totalRecords,

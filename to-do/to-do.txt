@@ -1,8 +1,11 @@
 // IN PROGRESS
+-- put a modal on site admin which displays GOOGLE MAP of sites at the moment
+
 
 /////////////////////////////////////////////////////
 
 // ADMIN SECTION
+-- put a modal on site admin which displays GOOGLE MAP of sites at the moment
 
 
 // FOOTER SECTION
