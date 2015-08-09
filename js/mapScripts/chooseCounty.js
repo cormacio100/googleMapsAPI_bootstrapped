@@ -148,7 +148,10 @@ function convertCountyVal(countyVal)
 function checkCounty()
 {
 	var countyVal = selectedCounty.value;
-	
+
+	console.log('countyVal is '+countyVal);
+
+
 	// check if the county needs to be converted from code to county name
 	if(countyVal.length==2)
 	{
@@ -157,7 +160,7 @@ function checkCounty()
 	
 	if('SELECT' == countyVal || 'ALL' == countyVal)
 	{
-		map.setCenter(myCenter);
+		map.setCenter(myCenter);s
 		map.setZoom(7);
 	}
 	else if('Clare' == countyVal || 'CE' ==countyVal)

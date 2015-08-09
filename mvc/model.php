@@ -640,11 +640,12 @@ function updatePassword($userName)
             }
         }
 
+        $query.=" ORDER BY faultId DESC";
 	}
 		
 	# pager Class adds limiters to page links. These are used to limit the range of records returned
 	$query.=" LIMIT ".$startRecord.", ".$recordsPerPage;
-	
+
 	# submit and execute the query
 	$recordsArr=$db->getMultiRecords($query);
 	

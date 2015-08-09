@@ -55,7 +55,7 @@ window.onload=function()
 		link.setMap(null);
 	};
 	
-	showMoreLess.onclick=divToggle;			
+	showMoreLess.onclick=divToggle;
 	
 	/* refresh OffAir Sites at a regular interval */
 	setInterval(displayOffAirSites,20000);

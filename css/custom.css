@@ -133,10 +133,12 @@ footer
 }
 
 /* ADMIN SITES */
-.table-hover .detail
+.table-hover .detail,
+.detail
 {
     color:#ffffff;
 }
+
 
 #viewMapBtn
 {
@@ -204,6 +206,14 @@ main .row .col-sm-8
     width:90%;
     height:650px;
 }
+#googleMapAdmin
+{
+    display:block;
+    margin-left:2em;
+    margin-right:2em;
+    width:90%;
+    height:450px;
+}
 
 .col-sm-4 div#faultReportForm,
 .col-sm-4 div#markerExplanation
@@ -238,3 +248,18 @@ main .row .col-sm-8
     margin-top:1em
 }
 
+/* MODAL customisation - checks for minimum size of screen first */
+
+@media screen and (min-width: 768px)
+{
+    #myModal .modal-dialog
+    {
+        width:500px;
+    }
+
+    #myModal .modal-body
+    {
+        max-height: 80vh;
+    }
+
+}
