@@ -1,6 +1,6 @@
-/*
+/**
  * SCRIPT SETS AND CLEAR MARKERS FROM THE MAP 
- * SCRIPT CLEARS MARKER DETAILS 
+ * SCRIPT CLEARS MARKER DETAILS
  */
 var onAirMarkers=[];		// array to hold marker objects for sites on air
 var offAirMarkers=[];		// array to hold marker objects for sites off air
@@ -12,7 +12,9 @@ var selectedCounty;			// the county selected by the user
 
 var refreshOnAirSites=false;		// variable is set to true whenever on air sites need to be refresh
 
-/* function clears the top section of details pane */
+/**
+ *   function clears the top section of details pane
+ */
 function clearLessDetails()
 {
 	/* CHECK DOM Object exists before populating */
@@ -94,7 +96,9 @@ function clearLessDetails()
 
 }
 
-/* function clears the lower section of details pane */
+/**
+ *   function clears the lower section of details pane
+ */
 function clearMoreDetails()
 {
 	if (typeof(spanTitle9) != 'undefined' && spanTitle9 != null)
@@ -190,7 +194,9 @@ function clearMoreDetails()
 
 }
 
-/* function sets the map for all markers in the relevant array */
+/**
+ *   function sets the map for all markers in the relevant array
+ s*/
 function setAllMap(map,location,callingFunction)
 {
 	if('displayOnAirSites'==callingFunction)
@@ -255,7 +261,7 @@ function setAllMap(map,location,callingFunction)
 			// ensure the bottom half of the deatils pane is clear
 			clearMoreDetails();
 			// show less details
-			divToggle();
+			//divToggle();
 			
 			// 2 - the county selection should change back to ALL and the map should zoom out and center on athlone
 			selectedCounty=document.getElementById('selectCounty');
@@ -303,22 +309,27 @@ function setAllMap(map,location,callingFunction)
 		}
 	}
 
-} // end if 
+   // hideLoading();
 
-/* function displays Markers depending on calling function */
+    //document.getElementById('loading').style.display = 'none';
+}
+
+/**
+ *   function displays Markers depending on calling function
+ */
 function showMarkers(callingFunction)
 {
 	setAllMap(map,null,callingFunction);
 }
 
-/* function clears markers from map and removes any reference to them */
+/**
+ *   function clears markers from map and removes any reference to them
+ */
 function clearMarker(callingFunction)
 {
 	// remove the markers from the map
 	setAllMap(null,null,callingFunction);
-	
-	//alert('refreshOnAirSites '+refreshOnAirSites);
-	
+
 	// check which array of markers needs to be emptied
 	if('displayOnAirSites'==callingFunction)
 	{

@@ -26,7 +26,18 @@
                     <li><a href="./map">Report a Fault</a> <span class="glyphicon glyphicon-circle-arrow-right"></span></li>
                     <li class="active">Service Faults</li>
                 </ol>
-                <h1>Service Faults</h1>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h1 class="noMargin">Service Faults</h1>
+                    </div>
+                    <div class="col-sm-8" id="loading">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+                                <span class="sr-only">75% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <div id="mapContainer">
@@ -38,7 +49,7 @@
                 <aside class="row">
                     <div class="col-sm-12">
                         <div class="markerExplanation">
-                            <h5 class="rightHeader" >
+                            <h5 class="rightHeader">
                                 <img src="img/onAir_icon_sm.png" alt="Fault Icon">"On-Air" Site
                                 <img src="img/offAir_icon_sm.png" alt="Site Off-Air Icon">"Off-Air" Site
                                 <img src="img/fault_icon_sm.png" alt="Fault Icon">"Open" Fault Report
@@ -96,41 +107,21 @@
                 <div id="faultReportForm1">
                     <h4 class="leftHeader" >Fault Reports linked to e-Mail address: {{ faultRerportEmail }}</h4>
 
-                    <div class="row">
-                        <div class="col-sm-6 faultReportMiniList">
+
+                    <div class="row" id="paging">
+                        <nav class="col-sm-12">
+                            <ul class="pagination pagination-sm">
+                                {{ outputHTML | raw }}
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="row" id="faultReportMiniList">
+                        <div class="col-sm-12" >
                             <ul>
-                                {% for faultReport in faultReportArrFirstFive %}
+                                {% for faultReport in faultReportArr %}
                                     <li><a href="./mapReportFault?formId=2&amp;action=review&amp;faultId={{ faultReport.faultId }}">Fault Ref:{{ faultReport.faultId }}</a></li>
                                 {% endfor %}
-                                <li>...</li>
                             </ul>
-                        </div>
-                        <div class="col-sm-6 faultReportFullList">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-                                View More
-                            </button>
-                            <!-- Modal -->
-                            <div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog modal-sm" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel">All Reported Faults for {{ faultReportEmail }}</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <ul>
-                                                {% for faultReport in faultReportArr %}
-                                                    <li><a href="./mapReportFault?formId=2&amp;action=review&amp;faultId={{ faultReport.faultId }}">Fault Ref:{{ faultReport.faultId }}</a></li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <p id="newFaultReport">Click <strong><a href="./mapReportFault?formId=2&amp;faultReportEmail={{ faultReportEmail }}">here</strong></a> to submit a new <strong>Fault Report</strong><p>
@@ -158,10 +149,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="panel panel-default">
+                            <div class="panel panel-default" id="moreDetails">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a href="#more" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>More Details</a>
+                                        <a href="#more" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><span class="glyphicon glyphicon-phone"></span>Show More Details</a>
                                     </h4>
                                 </div>
                                 <div id="more" class="panel-collapse collapse">
@@ -182,43 +173,21 @@
                             </div>
                         </div>
                     </div>
-                    <div id="innerSiteDetails">
-                        <p class="sd" ><span id="spanTitle2"></span> <span id="spanDetails2" class="detail"></span></p>
-                        <p class="sd" ><span id="spanTitle3"></span><span id="spanDetails3" class="detail"></span></p>
-                        <p class="sd" ><span id="spanTitle4"></span><span id="spanDetails4" class="detail"></span></p>
-                        <p class="sd" ><span id="spanTitle5"></span><span id="spanDetails5" class="detail"></span></p>
-                        <p class="sd" ><span id="spanTitle6"></span><span id="spanDetails6" class="detail"></span></p>
-                        <p class="sd" ><span id="spanTitle7"></span><span id="spanDetails7" class="detail"></span></p>
-                        <p class="sd" ><span id="spanTitle8"></span><span id="spanDetails8" class="detail"></span></p>
-
-                        <div id="toggleDiv">
-                            <p class="sd" ><span id="spanTitle9"></span><span id="spanDetails9" class="detail"></span></p>
-                            <p class="sd" ><span id="spanTitle10"></span><span id="spanDetails10" class="detail"></span></p>
-                            <p class="sd" ><span id="spanTitle11"></span><span id="spanDetails11" class="detail"></span></p>
-                            <p class="sd" ><span id="spanTitle12"></span><span id="spanDetails12" class="detail"></span></p>
-                            <p class="sd" ><span id="spanTitle13"></span><span id="spanDetails13" class="detail"></span></p>
-                            <p class="sd" ><span id="spanTitle14"></span><span id="spanDetails14" class="detail"></span></p>
-                            <p class="sd" ><span id="spanTitle15"></span><span id="spanDetails15" class="detail"></span></p>
-                            <p class="sd" ><span id="spanTitle16"></span><span id="spanDetails16" class="detail"></span></p>
-                            <p class="sd" ><span id="spanTitle17"></span><span id="spanDetails17" class="detail"></span></p>
-                            <p class="sd" ><span id="spanTitle18"></span><span id="spanDetails18" class="detail"></span></p>
-                            <p class="sd" ><span id="spanTitle19"></span><span id="spanDetails19" class="detail"></span></p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </main>
 {% endblock %}
-
 {% block script %}
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="js/bootStrap/bootstrap.min.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src="js/mapScripts/loading.js"></script>
+    <script src="js/mapScripts/paging.js"></script>
     <script src="js/mapScripts/requestJSON.js"></script>
     <script src="js/mapScripts/chooseCounty.js"></script>
     <script src="js/mapScripts/setMarkers.js"></script>
-    <script src="js/mapScripts/toggle.js"></script>
+    <!--<script src="js/mapScripts/toggle.js"></script>-->
     <script src="js/mapScripts/markerProperties.js"></script>
     <script src="js/mapScripts/displayMapAndMarker.js"></script>
     <script src="js/mapScripts/googleMap3.js"></script>

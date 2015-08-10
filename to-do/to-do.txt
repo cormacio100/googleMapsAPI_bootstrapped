@@ -1,17 +1,29 @@
 // IN PROGRESS
--- put a modal on site admin which displays GOOGLE MAP of sites at the moment
 
-/////////////////////////////////////////////////////
+-working on making pagination clientside
+    -Currently programing adminSites.js
+
+
+=======
+-Put black background all the way across the top
+
+
+// AJAX
+-Put all AJAX calls on a separate controller
+
 
 // ADMIN SECTION
--- put a modal on site admin which displays GOOGLE MAP of sites at the moment
+
 
 // FOOTER SECTION
 -Will not stick to the bottom of the page
 
 // MAP SECTION
--MARKER PROPERTIES NOT DISPLAYING
+<<<<<<< HEAD
+=======
+Need to use AJAX so that the page doesn't refresh each time pager links for faults are pressed on MAP FORM 3 it's pressed
 
+>>>>>>> 748173a4a9418942ebbe2999da44cdce4c8a25c7
 -{{ class | raw }}  what does it do?
 -Use form validation states on the forms
 -check if fields should be readonly
@@ -19,13 +31,11 @@
 
 // ALL
 -Make sure each page is marked up properly. E.G. has a main section
--Remove references to navTop and NavBottom
-- when site loads. put in browser detection to say site works best on Google Chrome
 
 // NAV
--Put black background all the way across the top
--have max width of nav set to 9. if more then then numbers move across
+
+-have max width of nav set to 9 values in page. if more then then numbers move across
 -when page is sized smalled the colour of the options in the menu dropdown are not all correct
 
 // ALERTS
--On page not found message alert. The menu options do not work, except "Home"
+

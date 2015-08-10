@@ -1,0 +1,161 @@
+{#--------------------------------#}
+{# templates/mapReportFaultForm1.html.twig #}
+{#--------------------------------#}
+
+{% extends "_layout.html.twig" %}
+
+{#--------------------------------#}
+
+{% block title %}Customer Care Map{% endblock %}
+
+{#--------------------------------#}
+
+{% block style %}
+    <style>
+        @import "css/bootstrap.min.css";
+        @import "css/custom.css";
+    </style>
+{% endblock %}
+
+{% set dublin = 'Dublin' %}
+{% set northLeinster = 'North Leinster' %}
+{% set southLeinster = 'South Leinster' %}
+{% set northWest = 'North West' %}
+{% set southWest = 'South West' %}
+
+{% block main %}
+    <main>
+        <div class="row">
+            <div class="col-sm-12">
+                <ol class="breadcrumb">
+                    <li><a href="./admin">Field Engineers</a> <span class="glyphicon glyphicon-circle-arrow-right"></span></li>
+                    <li><a href="./adminSelectRegion">Select Region</a> <span class="glyphicon glyphicon-circle-arrow-right"></span></li>
+                    <li class="active">Administer Sites</li>
+                </ol>
+                <div class="row" >
+                    <div class="col-sm-6">
+                        <h4>{{ totalRecords }} Mobile Sites displayed for Region:<span>{{ teamRegion }}</span>, County:<span class="detail">{{ selectCounty }}</span></h4>
+                    </div>
+                    <div class="col-sm-6">
+                        <form method="GET" action="./adminSites" class="countyForm alignRight">
+                            <select id="selectCounty" name="selectCounty" class="detail">
+                                <option value="ALL">Select County from {{ teamRegion }}</option>
+                                {% if dublin == teamRegion %}
+                                    <option value="DN">Dublin</option>
+                                {% elseif northLeinster == teamRegion %}
+                                    <option value="LH">Louth</option>
+                                    <option value="MH">Meath</option>
+                                    <option value="KE">Kildare</option>
+                                    <option value="WH">Westmeath</option>
+                                    <option value="LD">Longford</option>
+                                    <option value="CN">Cavan</option>
+                                    <option value="MN">Monaghan</option>
+                                {% elseif southLeinster == teamRegion %}
+                                    <option value="WW">Wicklow</option>
+                                    <option value="WX">Wexford</option>
+                                    <option value="LS">Laois</option>
+                                    <option value="KK">Kilkenny</option>
+                                    <option value="CW">Carlow</option>
+                                    <option value="OY">Offaly</option>
+                                {% elseif southWest == teamRegion %}
+                                    <option value="TY">Tipperary</option>
+                                    <option value="WD">Waterford</option>
+                                    <option value="CE">Clare</option>
+                                    <option value="LK">Limerick</option>
+                                    <option value="CK">Cork</option>
+                                    <option value="KY">Kerry</option>
+                                {% elseif northWest == teamRegion %}
+                                    <option value="LM">Leitrim</option>
+                                    <option value="SO">Sligo</option>
+                                    <option value="RN">Roscommon</option>
+                                    <option value="MO">Mayo</option>
+                                    <option value="GY">Galway</option>
+                                    <option value="DL">Donegal</option>
+                                {% else %}
+                                    <option value="DN">Dublin</option>
+                                    <option value="LH">Louth</option>
+                                    <option value="MH">Meath</option>
+                                    <option value="KE">Kildare</option>
+                                    <option value="WH">Westmeath</option>
+                                    <option value="LD">Longford</option>
+                                    <option value="CN">Cavan</option>
+                                    <option value="MN">Monaghan</option>
+                                    <option value="WW">Wicklow</option>
+                                    <option value="WX">Wexford</option>
+                                    <option value="LS">Laois</option>
+                                    <option value="KK">Kilkenny</option>
+                                    <option value="CW">Carlow</option>
+                                    <option value="OY">Offaly</option>
+                                    <option value="TY">Tipperary</option>
+                                    <option value="WD">Waterford</option>
+                                    <option value="CE">Clare</option>
+                                    <option value="LK">Limerick</option>
+                                    <option value="CK">Cork</option>
+                                    <option value="KY">Kerry</option>
+                                    <option value="LM">Leitrim</option>
+                                    <option value="SO">Sligo</option>
+                                    <option value="RN">Roscommon</option>
+                                    <option value="MO">Mayo</option>
+                                    <option value="GY">Galway</option>
+                                    <option value="DL">Donegal</option>
+                                {% endif %}
+                            </select>
+                            <input type="submit" id="refineSearch" name="refineSearch" value="Refine Search" class="btn btn-primary btn-xs">
+                        </form>
+                    </div>
+
+                </div><!--end row-->
+                <div class="row" id="paging">
+                    <nav class="col-sm-12">
+                        <ul class="pagination pagination-sm">
+                            {{ outputHTML | raw }}
+                        </ul>
+                    </nav>
+                </div>
+
+                {# Initialise variables to show sites that are ON AIR and sites that are OFF AIR #}
+                {% set siteOnAir = 'Yes' %}
+                {% set siteOffAir = 'No' %}
+
+                <table class="table table-hover">
+                {% for site in sitesArr %}
+                    <tr>
+                        <td>
+                            <form method="POST" action="./adminUpdateSite" >
+                                <input type="submit" name="updateSite" value="update" class="btn btn-primary btn-xs">
+                                <label> On Air =</label>
+                                <select class="onAir" name="onAir">
+                                    {% if siteOnAir == site.onAir %}
+                                        <option value="Yes" selected>Yes</option>
+                                        <option value="No">No</option>
+                                    {% elseif siteOffAir == site.onAir %}
+                                        <option value="Yes">Yes</option>
+                                        <option value="No" selected>No</option>
+                                    {% endif %}
+                                </select>
+                                <label>Site ID:<span class="detail">{{ site.siteId }}</span></label>
+                                <label>County: <span class="detail">{{ site.county }}</span></label>
+                                <label>Site Name: <span class="detail">{{ site.siteName }}</span></label>
+                                <label>BSC: <span class="detail">{{ site._bsc }}</span></label>
+                                <label>RNC: <span class="detail">{{ site._rnc }}</span></label>
+                                <label>Cluster: <span class="detail">{{ site._clusterId }}</span></label>
+                                <input type="hidden" name="siteId" value="{{ site.siteId }}" >
+                                <input type="hidden" name="_clusterId" value="{{ site._clusterId }}">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </table>
+
+                {#</ul>#}
+            </div>
+
+
+        </div>
+    </main>
+{% endblock %}
+
+{% block script %}
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="js/bootStrap/bootstrap.min.js"></script>
+{% endblock %}

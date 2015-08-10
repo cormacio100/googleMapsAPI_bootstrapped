@@ -1,6 +1,6 @@
 /* this is a custom style sheet */
 
-body
+html,body
 {
     xpadding-top:70px;
     background-color:#b3d1ff;
@@ -8,7 +8,7 @@ body
     width:100%;
 }
 
-div .container,
+div #container,
 main
 {
     height:100%;
@@ -19,15 +19,24 @@ footer
 {
     padding:0.5em 0;
     margin:1em 0 0 0;
-
-    xpadding:0;
-    xmargin:0;
-
     border-top: 1px solid #ffffff;
     text-align:center;
     position:fixed;
     bottom:0;
     width:100%;
+}
+
+h1.noMargin
+{
+    margin:0;
+    padding:0;
+}
+
+#loading .progress .progress-bar .sr-only
+{
+    vertical-align: middle;
+    margin:0;
+    padding:0;
 }
 
 .row .navbar-nav .dropdown-menu
@@ -49,7 +58,6 @@ footer
     color:#ffffff;
     margin-right:15px;
 }
-
 
 #logoImage
 {
@@ -77,25 +85,13 @@ footer
 
 #paging .pagination-sm {
     margin-top:0;
-    margin-bottom: 0;
+    margin-bottom: 0.3em;
     padding-bottom:0;
 }
 
-.faultReportMiniList ul li,
-.faultReportFullList ul li
+#faultReportMiniList .col-sm-12 ul li
 {
-    list-style-type: none;
-}
-
-.faultReportMiniList
-{
-    text-align:center;
-}
-
-#newFaultReport
-{
-    border-top:1px solid #ffffff;
-    padding:0.5em 0;
+    color:#ffffff;
 }
 
 .row .col-sm-6 .alignRight
@@ -133,16 +129,9 @@ footer
 }
 
 /* ADMIN SITES */
-.table-hover .detail,
-.detail
+.table-hover .detail
 {
     color:#ffffff;
-}
-
-
-#viewMapBtn
-{
-    float:right;
 }
 
 .paraWhite
@@ -157,6 +146,11 @@ footer
     border-bottom: 1px solid #ddd;
     padding: 0.8em;
     background-color: #ffffff;
+}
+
+#viewMapBtn
+{
+    float:right;
 }
 
 /* END ADMIN SITES*/
@@ -181,7 +175,6 @@ aside blockquote
 
 /* END FAULT DETAILS*/
 
-
 /* COLOUR THE GLYPHICONS */
 .glyphicon
 {
@@ -205,14 +198,6 @@ main .row .col-sm-8
     margin-right:2em;
     width:90%;
     height:650px;
-}
-#googleMapAdmin
-{
-    display:block;
-    margin-left:2em;
-    margin-right:2em;
-    width:90%;
-    height:450px;
 }
 
 .col-sm-4 div#faultReportForm,
@@ -248,18 +233,3 @@ main .row .col-sm-8
     margin-top:1em
 }
 
-/* MODAL customisation - checks for minimum size of screen first */
-
-@media screen and (min-width: 768px)
-{
-    #myModal .modal-dialog
-    {
-        width:500px;
-    }
-
-    #myModal .modal-body
-    {
-        max-height: 80vh;
-    }
-
-}

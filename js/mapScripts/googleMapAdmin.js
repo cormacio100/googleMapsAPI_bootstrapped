@@ -2,7 +2,7 @@
 /* initialise and display the map */
 function initialise()
 {
-	console.log('map loading');
+	console.log('map loading...');
 	
 	// focus center of map on center of the country e.g. Athlone
 	var myCenter=new google.maps.LatLng(53.427822, -7.938372);

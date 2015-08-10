@@ -1,3 +1,4 @@
+
 {#--------------------------------#}
 {# templates/mapReportFaultForm1.html.twig #}
 {#--------------------------------#}
@@ -39,11 +40,12 @@
                         {% for reportedFault in reportedFaultsArr %}
                             <tr>
                                 <td>
-                                    <a href="./adminUpdateFault?faultId={{ reportedFault.faultId }} ">Fault Id  {{ reportedFault.faultId }} </a> - Status:<span class="detail">{{ reportedFault.faultStatus }}</span> - Raised: <span class="detail">{{ reportedFault.faultDateFrom | slice(0,10) }} </span>- County:<span class="detail">{{ reportedFault.faultCounty }}</span>
+                                    <a href="./adminUpdateFault?faultId={{ reportedFault.faultId }} ">Fault Id: {{ reportedFault.faultId }} </a> - Status: <span class="detail">{{ reportedFault.faultStatus }}</span> - Raised: <span class="detail">{{ reportedFault.faultDateFrom | slice(0,10) }} </span>- County: <span class="detail">{{ reportedFault.faultCounty }}</span>
                                 </td>
                             </tr>
                         {% endfor %}
                     </table>
+
                 </div>
 
             </div>

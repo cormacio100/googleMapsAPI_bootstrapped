@@ -7,22 +7,27 @@ window.onload=function()
     // declare variables for DOM objects
     var viewMapBtn= document.getElementById('viewMapBtn');
     var teamRegion=document.getElementById('teamRegion');
-    var selectedCounty=document.getElementById('selectedCounty');
-    var myModalLabel=document.getElementById('myModalLabel');
-    myModalLabel.innerHTML='Map Loading';
+    selectedCounty=document.getElementById('selectedCounty');
+    //var myModalLabel=document.getElementById('myModalLabel');
+   // myModalLabel.innerHTML='Map Loading';
+
 
     /* When the "View Map of Sites Button is clicked" */
     viewMapBtn.onclick=function()
     {
         console.log('Map button clicked');
         console.log('teamRegion is '+teamRegion.innerHTML);
-        console.log('selectedCounty is '+selectedCounty.innerHTML);
+        console.log('selectedCounty is '+selectedCounty.value);
 
         initialise();   /* googleMapAdmin.js */
 
-        selectedCounty=document.getElementById('selectedCounty');
+       // county=document.getElementById('selectedCounty');
 
-        selectedCounty.value=selectedCounty.innerHTML;
+       // console.log('county is '+county);
+
+        //displayOffAirSites();
+
+        //selectedCounty.value=displaySelectedCounty.innerHTML;
 
         checkCounty();  /* chooseCounty.js */
 

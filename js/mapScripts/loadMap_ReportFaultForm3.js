@@ -1,17 +1,25 @@
 
-/* when the page loads */
+
+/**
+ * SCRIPT LAUNCHES WHEN THE PAGE LOADS
+ *
+ * global variables defined in displayMapAndMarker.js
+ */
 window.onload=function()
 {
 	console.log('initialising');
 	
 	// hide the siteDetails div until show site button is pressed
-    document.getElementById('innerSiteDetails').style.display = 'none';
+    document.getElementById('innerSiteDetails').style.display = 'none'; document.getElementById('innerSiteDetails').style.display = 'none';
 
-    // hide extra details div
-    document.getElementById('toggleDiv').style.display = 'none';
-	
+    // show the loading div
+    showLoading();
+
 	// reference the initialise google map function
 	initialise();
+
+    // hide the loading div
+    hideLoading();
 	
 	// display markers for reported faults
 	displayReportedFaults(); 				/* see file displayMapAndMarker.js */
@@ -28,16 +36,24 @@ window.onload=function()
 	var clearSitesBtn=document.getElementById('clearSitesBtn');
 
 	/* create link object */
-	var showMoreLess=document.getElementById('showMoreLess');
+	//var showMoreLess=document.getElementById('showMoreLess');
 		
 	/* create a click event for each button object */
 	displayOnAirSitesBtn.onclick=function()
 	{
 		selectedCounty=document.getElementById('selectCounty');
 
+        // display the loading div
+       // showLoading();
+
+        console.log('loading...');
+
 		checkCounty();				/* see file chooseCounty.js */
 		
 		displayOnAirSites();		/* see file displayMapAndMarker.js */
+
+        // hide the loading div
+        //hideLoading();
 	};
 	
 	displayControllersBtn.onclick=displayControllers;	/* see file displayMapAndMarker.js */
@@ -45,17 +61,17 @@ window.onload=function()
 	clearSitesBtn.onclick=function()
 	{
 		// need to show less detail 
-		document.getElementById('toggleDiv').style.display = 'none';
+		//document.getElementById('toggleDiv').style.display = 'none';
 		
 		// hide the siteDetails div until show site button is pressed
     	document.getElementById('innerSiteDetails').style.display = 'none';
 		
 		clearSites();				/* see file setMarkers.js */
 		
-		link.setMap(null);
+		link.setMap(null);          /* REMOVES POLYLINES  see displayMapAndMarkers.js */
 	};
 	
-	showMoreLess.onclick=divToggle;
+	//showMoreLess.onclick=divToggle;
 	
 	/* refresh OffAir Sites at a regular interval */
 	setInterval(displayOffAirSites,20000);

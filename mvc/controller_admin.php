@@ -11,11 +11,21 @@
  */
 function admin()
 {
-    # clear the user session by default upon reaching this page
-    clearUserSession();
-
-    header('Location: ./adminLogin');
-    exit;
+	# check if the user is logged in or not
+	
+	# if not then forward to login page
+	
+	# Auto forward user to the adminLoginfunction which displays the log in form 
+	if(isset($_SESSION['isLoggedIn']))
+	{
+		header('Location: ./adminSelectRegion');
+		exit;
+	}
+	else 
+	{
+		header('Location: ./adminLogin');
+		exit;
+	}
 }
 
 /**
@@ -27,16 +37,13 @@ function adminLogin()
 	$navTop = true;  
 	$navBottomAdmin=true;
 
-	# check if the user is already authenticated.
+	# checkif the user is already authenticated.
 	# If so display the list of faults instead of the login screen
-	/*if(isset($_SESSION['isLoggedIn']))
+	if(isset($_SESSION['isLoggedIn']))
 	{
 		header('Location: ./adminSelectRegion');
 		exit;
-	}*/
-
-    clearUserSession();
-
+	}
 
 	# otherwise the user is presented with the login form
 	$args_array=array(
@@ -216,27 +223,13 @@ function adminLogout()
 		exit;
 	}
 	
-	# if the user is logged in the SESSION variables get cleared and user is forwarded with a logout message
-	//unset($_SESSION['adminUserName']);
-	//unset($_SESSION['teamRegion']);
-	//unset($_SESSION['isLoggedIn']);
-
-    clearUserSession();
+	# if the user is logged in the SESSION variables get cleared and user is forwarded with a logout message	
+	unset($_SESSION['adminUserName']);
+	unset($_SESSION['teamRegion']);
+	unset($_SESSION['isLoggedIn']);
 
 	header('Location: ./messageAlert?messageId=13&forwardTo=adminLogin');
 }
-
-/**
- * Function clears the admin userSession
- */
-function clearUserSession()
-{
-    # if the user is logged in the SESSION variables get cleared and user is forwarded with a logout message
-    unset($_SESSION['adminUserName']);
-    unset($_SESSION['teamRegion']);
-    unset($_SESSION['isLoggedIn']);
-}
-
 
 /**
  * Function updates the onAir status of a site as weel as the other sites on the same link as the site
@@ -264,7 +257,7 @@ function adminUpdateSite()
 		$onAir=filter_input(INPUT_POST,'onAir',FILTER_SANITIZE_STRING);
 	}
 	
-	# send siteId and clusterId to first find site Id's of sites on the same link as this site that are
+	# send siteId and clisterId to first find site Id's of sites on the same link as this site that are
 	# coming off this site. They all have their status updated
 	$updated=updateSiteCluster($siteId,$_clusterId,$onAir);
 	
@@ -288,8 +281,8 @@ function adminUpdateSite()
 function adminReportedFaults()
 {
 	global $twig; 
-	//$navTop=true;
-	//$navBottomAdmin=true;
+	$navTop=true;
+	$navBottomAdmin=true;
 	$admin=true;
 	$adminReportedFaults=true;
 	
@@ -347,6 +340,8 @@ function adminReportedFaults()
 	
 	$outputHTML	 = $pager->getOutputHTML();
 
+	//echo $outputHTML;exit;
+
 	# check the GET super global to see if startRecord & recordsPerPage have been passed in
 	if(isset($_GET['startRecord']))
 	{
@@ -356,15 +351,15 @@ function adminReportedFaults()
 	{
 		$recordsPerPage = filter_input(INPUT_GET,'recordsPerPage',FILTER_SANITIZE_NUMBER_INT);		
 	}
-
+	
 	# retrieve an array or reported faults/sites
 	$reportedFaultsArr = getPageRecords($searchParam,$startRecord,$recordsPerPage,null,$teamRegion);
 
 	$args_array=array(
 		'adminUserName' => $adminUserName,
 		'isLoggedIn' => $isLoggedIn,
-		//'navTop' => $navTop,
-		//'navBottomAdmin' => $navBottomAdmin,
+		'navTop' => $navTop, 
+		'navBottomAdmin' => $navBottomAdmin,
 		'reportedFaultsArr' => $reportedFaultsArr,
 		'teamRegion' => $teamRegion,
 		'totalRecords' => $totalRecords,
@@ -377,19 +372,19 @@ function adminReportedFaults()
 	echo $twig->render($template.'.html.twig',$args_array);
 }
 
+
 /**
  * Funtion displays all sites and allows the admin to turn them on and off 
- * 
+ * Used for initial load of the adminSites page
  * Function utilises the Pager class to page results
  */
 function adminSites()
 {
 	global $twig; 
-	$navTop=true;           //
-	$navBottomAdmin=true;   //
+	//$navTop=true;           //
+	//$navBottomAdmin=true;   //
 	$admin=true;
 	$adminSites=true;
-	
 	$isLoggedIn=null;
 	$adminUserName=null;
 	$teamRegion=null;
@@ -416,10 +411,10 @@ function adminSites()
 		}
 	}
 
-	# array to hold the reported faults
+	# array to hold the sites
 	$sitesArr=array();
 	$selectCounty='ALL';
-	
+
 	# check if a county was selected to refine search
 	if(isset($_GET['selectCounty']))
 	{
@@ -449,15 +444,15 @@ function adminSites()
 
 	# create a Pager Object for creating the links at the top of the page
 	$pager = new Pager($totalRecords,$recordsPerPage,$searchParam,$url,$selectCounty,$activePage);
-	
+
 	$outputHTML=$pager->getOutputHTML();
-	
+
 	# check the GET superpGlobal to see if startRecord and recordsPerPage values have been passed
 	if(isset($_GET['startRecord']))
 	{
 		$startRecord=filter_input(INPUT_GET,'startRecord',FILTER_SANITIZE_NUMBER_INT);
 	}
-	
+
 	if(isset($_GET['recordsPerPage']))
 	{
 		$recordsPerPage=filter_input(INPUT_GET,'recordsPerPage',FILTER_SANITIZE_NUMBER_INT);
@@ -469,8 +464,8 @@ function adminSites()
 	$args_array=array(
 		'adminUserName' => $adminUserName,
 		'isLoggedIn' => $isLoggedIn,
-		'navTop' => $navTop, 
-		'navBottomAdmin' => $navBottomAdmin,
+		//'navTop' => $navTop,
+		//'navBottomAdmin' => $navBottomAdmin,
 		'sitesArr' => $sitesArr,
 		'selectCounty' => $selectCounty,
 		'totalRecords' => $totalRecords,
@@ -479,9 +474,230 @@ function adminSites()
 		'adminSites' => $adminSites,
 		'teamRegion' => $teamRegion,
 	);
-	
+
 	$template='adminSites';
 	echo $twig->render($template.'.html.twig',$args_array);
+}
+
+/**
+ * Function outputs AJAX for use on the adminSites page
+ */
+function retrieveAdminSites()
+{
+    # initialise variables
+    $totalRecords=0;
+    $startRecord=0;
+    $recordsPerPage=10;
+    $totalRecords=0;
+    $activePage=1;      /* defaults to first page */
+    $searchParam='site';
+    $selectCounty='ALL';
+    $teamRegion=null;
+    $url='#';
+    $outputHTML=null;
+
+    # initialise array to hold the sites retrieved from Query
+    $sitesArr=array();
+    $sitesArrLen=null;
+
+    # initialise array to hold the site Objects for use with JSON
+    $siteObjArr=array();
+
+    # check if a county was selected to refine the search
+    if(isset($_GET['selectCounty']))
+    {
+        $selectCounty=filter_input(INPUT_GET,'selectCounty',FILTER_SANITIZE_STRING);
+    }
+
+    # check what region the engineer is from. Value has been saved to SESSION SUPERGLOBAL
+    if(isset($_SESSION['teamRegion']))
+    {
+        $teamRegion=$_SESSION['teamRegion'];
+    }
+
+    # check which page is selected in order to display the active page
+    if(isset($_GET['pageNum']))
+    {
+        $activePage=filter_input(INPUT_GET,'pageNum',FILTER_SANITIZE_NUMBER_INT);
+    }
+
+    $totalRecords=getTotalRecordsNum($searchParam,$selectCounty,$teamRegion);
+
+    # create a Pager Object to generate the pager links
+    $pager = new Pager($totalRecords,$recordsPerPage,$searchParam,$url,$selectCounty,$activePage);
+
+    # retrieve the pager links
+    $outputHTML=$pager->getOutputHTML();
+
+    # in order to generate the records to be presented on the current page, you need to retrieve the LIMITERS
+    if(isset($_GET['startRecord']))
+    {
+        $startRecord=filter_input(INPUT_GET,'startRecord',FILTER_SANITIZE_NUMBER_INT);
+    }
+    if(isset($_GET['recordsPerPage']))
+    {
+        $recordsPerPage=filter_input(INPUT_GET,'recordsPerPage',FILTER_SANITIZE_NUMBER_INT);
+    }
+
+    # retrieve an array or reported faults
+    $sitesArr=getPageRecords($searchParam,$startRecord,$recordsPerPage,$selectCounty,$teamRegion);
+
+    # calculate size of the array
+    $sitesArrLen=sizeof($sitesArr);
+
+    //echo 'sitesArrLen is '.$sitesArrLen;exit;
+
+    # loop through array and create Site Objects from the Site Class. Then add the Objects to an array
+    for($i=0; $i<$sitesArrLen;$i++)
+    {
+        $site=new Site(
+            $sitesArr[$i]['siteId'],
+            $sitesArr[$i]['siteName'],
+            $sitesArr[$i]['county'],
+            $sitesArr[$i]['latitude'],
+            $sitesArr[$i]['longitude'],
+            $sitesArr[$i]['onAir'],
+            $sitesArr[$i]['_bsc'],
+            $sitesArr[$i]['_rnc'],
+            $sitesArr[$i]['dcsRating'],
+            $sitesArr[$i]['gsmRating'],
+            $sitesArr[$i]['usmRating'],
+            $sitesArr[$i]['lteRating'],
+            $sitesArr[$i]['txnRating'],
+            $sitesArr[$i]['mprn'],
+            $sitesArr[$i]['wentOffAir'],
+            $sitesArr[$i]['backOnAir'],
+            $sitesArr[$i]['_clusterId'],
+            $sitesArr[$i]['_fieldEngId'],
+            null,
+            null,
+            null,
+            null
+        );
+
+        # add the site Object to an array
+        $siteObjArr[]=$site;
+    }
+
+    # put the pager link at the end of the array
+    $siteObjArr[]['outputHTML']=$outputHTML;
+
+    # convert data to JSON
+    header("Cache-Control: no-cache, must-revalidate");
+    header("Expires: 0");
+    header('Content-Type: application/json');
+
+    # encode the array as JSON
+    $jsonOutput=json_encode($siteObjArr);
+
+    echo $jsonOutput;
+}
+
+/**
+ * Function displays all sites and allows the admin to turn them on and off
+ *
+ * Function utilises the Pager class to page results
+ */
+function adminSites_old()
+{
+    global $twig;
+    //$navTop=true;           //
+    //$navBottomAdmin=true;   //
+    $admin=true;
+    $adminSites=true;
+
+    $isLoggedIn=null;
+    $adminUserName=null;
+    $teamRegion=null;
+
+    # check that the user is logged in
+    # if not they get sent back to login screem
+    if(!isset($_SESSION['isLoggedIn']))
+    {
+        header('Location: ./messageAlert?messageId=14&forwardTo=adminLogin');
+        exit;
+    }
+    else
+    {
+        $isLoggedIn=$_SESSION['isLoggedIn'];
+
+        # check the username
+        if(isset($_SESSION['adminUserName']))
+            $adminUserName=$_SESSION['adminUserName'];
+
+        # check what region the engineer is from
+        if(isset($_SESSION['teamRegion']))
+        {
+            $teamRegion=$_SESSION['teamRegion'];
+        }
+    }
+
+    # array to hold the sites
+    $sitesArr=array();
+    $selectCounty='ALL';
+
+    # check if a county was selected to refine search
+    if(isset($_GET['selectCounty']))
+    {
+        $selectCounty=filter_input(INPUT_GET,'selectCounty',FILTER_SANITIZE_STRING);
+    }
+
+    ##################################################
+    # include Pager class to generate pages
+    # need to first initialise values
+    ##################################################
+    $startRecord=0;
+    $recordsPerPage=10;
+    $totalRecords=0;
+    $activePage=1;      /* defaults to first page */
+    $searchParam='site';
+    $url='./adminSites';
+    $outputHTML=null;
+
+    # check which page is selected in order to display the active page
+    if(isset($_GET['pageNum']))
+    {
+        $activePage=filter_input(INPUT_GET,'pageNum',FILTER_SANITIZE_NUMBER_INT);
+    }
+
+    # count how many records are set
+    $totalRecords=getTotalRecordsNum($searchParam,$selectCounty,$teamRegion);
+
+    # create a Pager Object for creating the links at the top of the page
+    $pager = new Pager($totalRecords,$recordsPerPage,$searchParam,$url,$selectCounty,$activePage);
+
+    $outputHTML=$pager->getOutputHTML();
+
+    # check the GET superpGlobal to see if startRecord and recordsPerPage values have been passed
+    if(isset($_GET['startRecord']))
+    {
+        $startRecord=filter_input(INPUT_GET,'startRecord',FILTER_SANITIZE_NUMBER_INT);
+    }
+
+    if(isset($_GET['recordsPerPage']))
+    {
+        $recordsPerPage=filter_input(INPUT_GET,'recordsPerPage',FILTER_SANITIZE_NUMBER_INT);
+    }
+
+    # retrieve an array or reported faults
+    $sitesArr=getPageRecords($searchParam,$startRecord,$recordsPerPage,$selectCounty,$teamRegion);
+
+    $args_array=array(
+        'adminUserName' => $adminUserName,
+        'isLoggedIn' => $isLoggedIn,
+        'navTop' => $navTop,
+        'navBottomAdmin' => $navBottomAdmin,
+        'sitesArr' => $sitesArr,
+        'selectCounty' => $selectCounty,
+        'totalRecords' => $totalRecords,
+        'outputHTML' => $outputHTML,
+        'admin' => $admin,
+        'adminSites' => $adminSites,
+        'teamRegion' => $teamRegion,
+    );
+
+    $template='adminSites';
+    echo $twig->render($template.'.html.twig',$args_array);
 }
 
 

@@ -1,4 +1,8 @@
-// when the page loads
+/**
+ * When the page loads
+ *
+ * global variables defined in displayMapAndMarker.js
+ */
 window.onload=function()
 {
 	console.log('loading data googlemap1.js...');
