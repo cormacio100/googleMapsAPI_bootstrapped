@@ -108,21 +108,51 @@
                     <h4 class="leftHeader" >Fault Reports linked to e-Mail address: {{ faultRerportEmail }}</h4>
 
 
-                    <div class="row" id="paging">
-                        <nav class="col-sm-12">
-                            <ul class="pagination pagination-sm">
-                                {{ outputHTML | raw }}
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="row" id="faultReportMiniList">
-                        <div class="col-sm-12" >
+
+                    <div class="row">
+                        <div class="col-sm-6 faultReportMiniList">
                             <ul>
-                                {% for faultReport in faultReportArr %}
+                                {% for faultReport in faultReportArrFirstFive %}
                                     <li><a href="./mapReportFault?formId=2&amp;action=review&amp;faultId={{ faultReport.faultId }}">Fault Ref:{{ faultReport.faultId }}</a></li>
                                 {% endfor %}
+                                <li>...</li>
                             </ul>
                         </div>
+                        <div class="col-sm-6 faultReportFullList">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                                View More
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog modal-sm" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">All Reported Faults for {{ faultReportEmail }}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul>
+                                                {% for faultReport in faultReportArr %}
+                                                    <li><a href="./mapReportFault?formId=2&amp;action=review&amp;faultId={{ faultReport.faultId }}">Fault Ref:{{ faultReport.faultId }}</a></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<div class="col-sm-12" >
+                                <ul>
+                                    {% for faultReport in faultReportArr %}
+                                        <li><a href="./mapReportFault?formId=2&amp;action=review&amp;faultId={{ faultReport.faultId }}">Fault Ref:{{ faultReport.faultId }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>-->
                     </div>
                     <p id="newFaultReport">Click <strong><a href="./mapReportFault?formId=2&amp;faultReportEmail={{ faultReportEmail }}">here</strong></a> to submit a new <strong>Fault Report</strong><p>
                 </div>

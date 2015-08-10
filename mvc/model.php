@@ -189,7 +189,7 @@ function checkForFaultReports($email)
 	
 	# create the query
 	$query="SELECT faultId FROM fault WHERE faultReportEmail='".$email."'";
-	
+	$query.=" ORDER BY faultId DESC";
 	# submit the query fro execution. Expecting possibly mutliple results
 	$faultReportArr = $db->getMultiRecords($query);
 	
@@ -670,7 +670,9 @@ function updatePassword($userName)
 		
 	# pager Class adds limiters to page links. These are used to limit the range of records returned
 	$query.=" LIMIT ".$startRecord.", ".$recordsPerPage;
-	
+
+    echo $query;exit;
+
 	# submit and execute the query
 	$recordsArr=$db->getMultiRecords($query);
 	

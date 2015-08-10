@@ -286,7 +286,7 @@ if(!isset($_SESSION))
 		$faultReportArr=null;
 
 		#((((((((((( Pager Values )))))))))))
-		$startRecord=0;
+		/*$startRecord=0;
 		$recordsPerPage=5;
 		$totalRecords=0;
         $activePage=1;
@@ -318,17 +318,32 @@ if(!isset($_SESSION))
         if(isset($_GET['recordsPerPage']))
         {
             $recordsPerPage = filter_input(INPUT_GET,'recordsPerPage',FILTER_SANITIZE_NUMBER_INT);
-        }
+        }*/
 
 		# check DB to see if previous faultId's exists against this email address. Only faultId's
-		//$faultReportArr=checkForFaultReports($faultReportEmail);
+		$faultReportArr=checkForFaultReports($faultReportEmail);
 
-        $faultReportArr = getPageRecords($searchParam,$startRecord,$recordsPerPage,$faultReportEmail,null);
+        //$faultReportArr = getPageRecords($searchParam,$startRecord,$recordsPerPage,$faultReportEmail,null);
+
+
+        if(sizeof($faultReportArr)>5)
+        {
+            for($i=0;$i<5;$i++)
+            {
+                $faultReportArrFirstFive[]=$faultReportArr[$i];
+            }
+        }
+        else
+        {
+            $faultReportArrFirstFive=$faultReportArr;
+        }
+
 
         # add the array to the arguments array to be used in the template
 		$args_array['faultRerportEmail']=$faultReportEmail;
 		$args_array['faultReportArr']=$faultReportArr;
-		$args_array['outputHTML']=$outputHTML;
+        $args_array['faultReportArrFirstFive']=$faultReportArrFirstFive;
+		//$args_array['outputHTML']=$outputHTML;
 		# add email address to hidden field
 		$args_array['faultReportEmail']=$faultReportEmail;
 		

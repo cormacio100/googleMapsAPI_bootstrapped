@@ -106,6 +106,13 @@ h1.noMargin
     margin-bottom:1em;
 }
 
+.faultReportMiniList ul li,
+.faultReportFullList ul li
+{
+    list-style-type:none;
+
+}
+
 /* END PAGINATION */
 
 /* FORMS */
