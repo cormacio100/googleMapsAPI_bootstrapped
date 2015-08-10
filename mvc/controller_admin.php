@@ -11,21 +11,11 @@
  */
 function admin()
 {
-	# check if the user is logged in or not
-	
-	# if not then forward to login page
-	
-	# Auto forward user to the adminLoginfunction which displays the log in form 
-	if(isset($_SESSION['isLoggedIn']))
-	{
-		header('Location: ./adminSelectRegion');
-		exit;
-	}
-	else 
-	{
-		header('Location: ./adminLogin');
-		exit;
-	}
+    # clear the user session by default upon reaching this page
+    clearUserSession();
+
+    header('Location: ./adminLogin');
+    exit;
 }
 
 /**
@@ -39,11 +29,13 @@ function adminLogin()
 
 	# checkif the user is already authenticated.
 	# If so display the list of faults instead of the login screen
-	if(isset($_SESSION['isLoggedIn']))
+	/*if(isset($_SESSION['isLoggedIn']))
 	{
 		header('Location: ./adminSelectRegion');
 		exit;
-	}
+	}*/
+
+    clearUserSession();
 
 	# otherwise the user is presented with the login form
 	$args_array=array(
@@ -224,12 +216,26 @@ function adminLogout()
 	}
 	
 	# if the user is logged in the SESSION variables get cleared and user is forwarded with a logout message	
-	unset($_SESSION['adminUserName']);
-	unset($_SESSION['teamRegion']);
-	unset($_SESSION['isLoggedIn']);
+	//unset($_SESSION['adminUserName']);
+	//unset($_SESSION['teamRegion']);
+	//unset($_SESSION['isLoggedIn']);
+
+    clearUserSession();
 
 	header('Location: ./messageAlert?messageId=13&forwardTo=adminLogin');
 }
+
+/**
+ * Function clears the admin userSession
+ */
+function clearUserSession()
+{
+    # if the user is logged in the SESSION variables get cleared and user is forwarded with a logout message
+    unset($_SESSION['adminUserName']);
+    unset($_SESSION['teamRegion']);
+    unset($_SESSION['isLoggedIn']);
+}
+
 
 /**
  * Function updates the onAir status of a site as weel as the other sites on the same link as the site
@@ -787,6 +793,7 @@ function adminUpdateFault()
 			
 			$readOnly='readonly';
 			$args_array['readonly']=$readOnly;
+            $args_array['readonly2']='';
 
 			# for menu bar
 			$args_array['navTop']=$navTop;

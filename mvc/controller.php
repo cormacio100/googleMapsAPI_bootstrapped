@@ -11,8 +11,11 @@ function index()
 {
 	global $twig; 
 	$navTop=true;
-	$navBottomHome=true; 
-	
+	$navBottomHome=true;
+
+    # clear the user session by default upon reaching this page
+    clearUserSession();
+
 	$isLoggedIn=null;
 	$firstName=null;
 	$lastName=null;

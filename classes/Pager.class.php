@@ -104,8 +104,8 @@ Class Pager
             $linkText .= '&amp;selectCounty='.$this->selectCounty;
             $linkText .= '&amp;startRecord='.$this->startRecordArr[$prevPage];
             $linkText .= '&amp;recordsPerPage='.$this->recordsPerPage;
-            $linkText .= '&amp;pageNum='.$prevPage.'"';
-            $linkText .= 'aria-label="Previous">';
+            $linkText .= '&amp;pageNum='.$prevPage.'" ';
+            $linkText .= ' aria-label="Previous">';
             $linkText .= '<span aria-hidden="true">&laquo;</span>';
             $linkText .= '<span class="sr-only">'.$prevPage.'</span>';
             $linkText .= '</a></li> ';
@@ -138,8 +138,8 @@ Class Pager
             $linkText .= '&amp;selectCounty='.$this->selectCounty;
             $linkText .= '&amp;startRecord='.$this->startRecordArr[$nextPage];
             $linkText .= '&amp;recordsPerPage='.$this->recordsPerPage;
-            $linkText .= '&amp;pageNum='.$nextPage.'"';
-            $linkText .= 'aria-label="Previous">';
+            $linkText .= '&amp;pageNum='.$nextPage.'" ';
+            $linkText .= ' aria-label="Previous">';
             $linkText .= '<span aria-hidden="true">&raquo;</span>';
             $linkText .= '<span class="sr-only">'.$nextPage.'</span>';
             $linkText .= '</a></li> ';

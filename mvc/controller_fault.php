@@ -95,6 +95,10 @@ if(!isset($_SESSION))
  */
  function mapReportFault() 
  {
+
+    # clear the admin user session by default upon reaching this page
+    clearUserSession();
+
  	global $twig; 
 	
 	//$navTop=true;
@@ -124,7 +128,10 @@ if(!isset($_SESSION))
  	$faultStatus='open';		# default value when reporting a fault
  	$faultUpdate=null;
 	$faultReportArr=array();
-	
+
+
+
+
 	# default HTML for the submit button
 	//$button='<input type="submit" id="submitFaultReport" name="submitFaultReport" value="submit" class="btn">';
 		
@@ -234,6 +241,7 @@ if(!isset($_SESSION))
 			 		$args_array['faultUpdate'] = $formattedUpdate;
 	
 					$args_array['readonly']=$readOnly;
+                    $args_array['readonly2']=$readOnly;
 					$args_array['faultStatusMenu']=$faultStatusMenu;
 					$args_array['disabled']=$disabled;
 					$args_array['classAdmin']=$classAdmin;

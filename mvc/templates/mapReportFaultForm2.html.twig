@@ -120,7 +120,7 @@
                                 {% if readonly %}
                                     <input type="text" class="form-control readOnly" id="faultType" name="faultType" value="{{ faultType }}"  {{ readonly }} >
                                 {% else %}
-                                    <select class="form-control" id="faultType" name="faultType" size="1" {{ class | raw }}  required>
+                                    <select class="form-control" id="faultType" name="faultType" size="1"   required>
                                         <option value="">-</option>
                                         <option value="all">All</option>
                                         <option value="sms">SMS</option>
@@ -132,23 +132,23 @@
                             <div class="form-group">
                                 <label for="faultFrequency">Fault Frequency:</label><span class="required"> *</span>
                                 {% if forSubmission == true %}
-                                    <select class="form-control" id="faultFrequency" name="faultFrequency" {{ class | raw }}  {{ disabled }} required>
+                                    <select class="form-control" id="faultFrequency" name="faultFrequency"  {{ disabled }} required>
                                         <option value="">-</option>
                                         <option value="intermittent">Intermittent</option>
                                         <option value="constant">Constant</option>
                                     </select>
                                 {% else %}
-                                    <input type="text" class="form-control" id="faultFrequency" value="{{ faultFrequency }}"  {{ class | raw }}  {{ readonly }} required>
+                                    <input type="text" class="form-control" id="faultFrequency" value="{{ faultFrequency }}"   {{ readonly }} required>
                                 {% endif %}
                             </div>
                             <div class="form-group">
                                 <label for="faultDateFrom">Date From:</label><span class="required"> *</span>
-                                <input type="date" class="form-control" id="faultDateFrom" name="faultDateFrom" value="{{ faultDateFrom }}" {{ class | raw }}  {{ readonly }} required>
+                                <input type="date" class="form-control" id="faultDateFrom" name="faultDateFrom" value="{{ faultDateFrom }}"  {{ readonly }} required>
                             </div>
 
                             <div class="form-group">
                                 <label for="faultDescription">Fault Description:</label><span class="required" > *</span><br>
-                                <textarea class="form-control" id="faultDescription" name="faultDescription" rows="6" cols="30" {{ class | raw }}  {{ readonly }} required>{{ faultDescription }}</textarea>
+                                <textarea class="form-control" id="faultDescription" name="faultDescription" rows="6" cols="30" {{ readonly }} required>{{ faultDescription }}</textarea>
                             </div>
                             {% if forSubmission == true %}
                                 <div>
@@ -169,7 +169,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="faultUpdate">Fault Engineer Update:</label><br>
-                                    <textarea class="form-control" id="faultUpdate" name="faultUpdate" rows="3" cols="30" {{ admin }} {{ classAdmin | raw }} {{ readonly }} >{{ faultUpdate }}</textarea>
+                                    <textarea class="form-control" id="faultUpdate" name="faultUpdate" rows="3" cols="30"  {{ readonly2 }} >{{ faultUpdate }}</textarea>
                                 </div>
                             {% endif %}
                             <div>

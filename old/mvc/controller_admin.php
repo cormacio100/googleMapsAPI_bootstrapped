@@ -237,7 +237,6 @@ function clearUserSession()
     unset($_SESSION['isLoggedIn']);
 }
 
-
 /**
  * Function updates the onAir status of a site as weel as the other sites on the same link as the site
  */

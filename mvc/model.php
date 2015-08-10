@@ -671,7 +671,6 @@ function updatePassword($userName)
 	# pager Class adds limiters to page links. These are used to limit the range of records returned
 	$query.=" LIMIT ".$startRecord.", ".$recordsPerPage;
 
-    echo $query;exit;
 
 	# submit and execute the query
 	$recordsArr=$db->getMultiRecords($query);
