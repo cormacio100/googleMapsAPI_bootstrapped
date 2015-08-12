@@ -129,9 +129,6 @@ if(!isset($_SESSION))
  	$faultUpdate=null;
 	$faultReportArr=array();
 
-
-
-
 	# default HTML for the submit button
 	//$button='<input type="submit" id="submitFaultReport" name="submitFaultReport" value="submit" class="btn">';
 		
