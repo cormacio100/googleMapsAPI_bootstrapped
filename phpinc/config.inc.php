@@ -9,7 +9,7 @@ define("DB_HOST","localhost");
 
 # Localhost LOGIN
 //define("DB_USER","root");
-//define("DB_PASSWORD","");
+//define("DB_PASSWORD","root");
 
 # USBWEBSERVER LOGIN
 define("DB_USER","root");

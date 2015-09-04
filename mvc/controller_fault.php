@@ -95,7 +95,6 @@ if(!isset($_SESSION))
  */
  function mapReportFault() 
  {
-
     # clear the admin user session by default upon reaching this page
     clearUserSession();
 
