@@ -16,8 +16,11 @@ define("DB_HOST","localhost");
 //define("DB_PASSWORD","usbw");
 
 # MAMP LOGIN
-define("DB_USER","admin");
-define("DB_PASSWORD","admin");
+//define("DB_USER","admin");
+//define("DB_PASSWORD","admin");
+
+define("DB_USER","root");
+define("DB_PASSWORD","root");
 
 # REGISTER 365 LOGIN
 //define("DB_USER","10c644-cormacio");
