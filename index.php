@@ -15,6 +15,7 @@ require_once 'mvc/controller_map.php';
 require_once 'mvc/controller_admin.php';
 require_once 'mvc/controller_fault.php';
 require_once 'mvc/controller_bootStrapTest.php';
+require_once 'mvc/controller_AJAXTest.php';
 
 require_once 'vendor/setup_twig.php';
 require_once 'vendor/Epi/Epi.php';
