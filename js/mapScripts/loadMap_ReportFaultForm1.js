@@ -3,7 +3,7 @@
  *
  * global variables defined in displayMapAndMarker.js
  */
-window.onload=function()
+function prepareMap()
 {
 	console.log('loading data googlemap1.js...');
 

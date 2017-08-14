@@ -162,6 +162,9 @@ if(!isset($_SESSION))
 		}
 	}
 	
+	//echo 'formId is ';
+	//print_r($formId); exit;
+
 	# form template displayed is dependent on which formId is passed in to function
 	if(1==$formId)
 	{

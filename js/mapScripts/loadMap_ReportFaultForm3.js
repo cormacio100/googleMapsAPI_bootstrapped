@@ -5,7 +5,7 @@
  *
  * global variables defined in displayMapAndMarker.js
  */
-window.onload=function()
+function prepareMap()
 {
 	console.log('initialising');
 	

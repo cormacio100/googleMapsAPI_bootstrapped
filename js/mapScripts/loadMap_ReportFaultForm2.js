@@ -2,7 +2,7 @@
  * when the page loads
  * global variables defined in displayMapAndMarker.js
  */
-window.onload=function()
+function prepareMap()
 {
 	console.log('loading data...');
 	

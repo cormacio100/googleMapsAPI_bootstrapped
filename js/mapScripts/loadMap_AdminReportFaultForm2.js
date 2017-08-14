@@ -1,6 +1,6 @@
 
 /* when the page loads */
-window.onload=function()
+function prepareMap()
 {
 	console.log('loading data...');
 	

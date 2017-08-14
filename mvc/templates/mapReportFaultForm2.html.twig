@@ -208,7 +208,11 @@
     <script src="js/mapScripts/googleMap2.js"></script>
     {% if readonly %}
         <script src="js/mapScripts/loadMap_AdminReportFaultForm2.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeEoDIWMtJXdXULdRpOOhpooX2QCky-KA&callback=prepareMap"></script>
     {% else %}
         <script src="js/mapScripts/loadMap_ReportFaultForm2.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeEoDIWMtJXdXULdRpOOhpooX2QCky-KA&callback=prepareMap"></script>
     {% endif %}
+    
+
 {% endblock %}
