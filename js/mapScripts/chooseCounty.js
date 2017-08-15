@@ -3,33 +3,60 @@
  */
 
 /* define center for each County */
-var myCenter=new google.maps.LatLng(53.423596, -7.934211);
-var clareCenter = new google.maps.LatLng(52.897656, -9.001446);
-var corkCenter = new google.maps.LatLng(51.888218, -8.500987);
-var cavanCenter = new google.maps.LatLng(54.004074, -7.414240);
-var carlowCenter = new google.maps.LatLng(52.835880, -6.919208);
-var donegalCenter = new google.maps.LatLng(54.897377, -7.998693);
-var dublinCenter = new google.maps.LatLng(53.347896, -6.276414);
-var galwayCenter = new google.maps.LatLng(53.271637, -9.060255);
-var kildareCenter = new google.maps.LatLng(53.161312, -6.905107);
-var kilkennyCenter = new google.maps.LatLng(52.653602, -7.245838);
-var kerryCenter = new google.maps.LatLng(52.014322, -9.769697);
-var longfordCenter = new google.maps.LatLng(53.727550, -7.795861);
-var louthCenter = new google.maps.LatLng(53.912289, -6.471961);
-var limerickCenter = new google.maps.LatLng(52.659897, -8.624132);
-var leitrimCenter = new google.maps.LatLng(54.185595, -8.064960);
-var laoisCenter = new google.maps.LatLng(52.981514, -7.371835);
-var meathCenter = new google.maps.LatLng(53.626562, -6.764452);
-var monaghanCenter = new google.maps.LatLng(54.171889, -6.910285);
-var mayoCenter = new google.maps.LatLng(53.949901, -9.334534);
-var offalyCenter = new google.maps.LatLng(53.203317, -7.658506);
-var roscommonCenter = new google.maps.LatLng(53.708854, -8.230562);
-var sligoCenter = new google.maps.LatLng(54.273512, -8.482532);
-var tipperaryCenter = new google.maps.LatLng(52.662315, -7.961775);
-var waterfordCenter = new google.maps.LatLng(52.253049, -7.113459);
-var westmeathCenter = new google.maps.LatLng(53.513374, -7.483095);
-var wicklowCenter = new google.maps.LatLng(52.990023, -6.360773);
-var wexfordCenter = new google.maps.LatLng(52.334171, -6.474478);
+//var myCenter=new google.maps.LatLng(53.423596, -7.934211);
+var myCenter = {lat:53.423596, lng:-7.934211};
+//var clareCenter = new google.maps.LatLng(52.897656, -9.001446);
+var clareCenter = {lat:52.897656, lng:-9.001446};
+//var corkCenter = new google.maps.LatLng(51.888218, -8.500987);
+var corkCenter = {lat:51.888218, lng:-8.500987};
+//var cavanCenter = new google.maps.LatLng(54.004074, -7.414240);
+var cavanCenter = {lat:54.004074, lng:-7.414240};
+//var carlowCenter = new google.maps.LatLng(52.835880, -6.919208);
+var carlowCenter = {lat:52.835880, lng:-6.919208};
+//var donegalCenter = new google.maps.LatLng(54.897377, -7.998693);
+var donegalCenter = {lat:54.897377, lng:-7.998693};
+//var dublinCenter = new google.maps.LatLng(53.347896, -6.276414);
+var dublinCenter = {lat:53.347896, lng:-6.276414};
+//var galwayCenter = new google.maps.LatLng(53.271637, -9.060255);
+var galwayCenter = {lat:53.271637, lng:-9.060255};
+//var kildareCenter = new google.maps.LatLng(53.161312, -6.905107);
+var kildareCenter = {lat:53.161312, lng:-6.905107};
+//var kilkennyCenter = new google.maps.LatLng(52.653602, -7.245838);
+var kilkennyCenter = {lat:52.653602, lng:-7.245838};
+//var kerryCenter = new google.maps.LatLng(52.014322, -9.769697);
+var kerryCenter = {lat:52.014322, lng:-9.769697};
+//var longfordCenter = new google.maps.LatLng(53.727550, -7.795861);
+var longfordCenter = {lat:53.727550, lng:-7.795861};
+//var louthCenter = new google.maps.LatLng(53.912289, -6.471961);
+var louthCenter = {lat:53.912289, lng:-6.471961};
+//var limerickCenter = new google.maps.LatLng(52.659897, -8.624132);
+var limerickCenter = {lat:52.659897, lng:-8.624132};
+//var leitrimCenter = new google.maps.LatLng(54.185595, -8.064960);
+var leitrimCenter = {lat:54.185595, lng:-8.064960};
+//var laoisCenter = new google.maps.LatLng(52.981514, -7.371835);
+var laoisCenter = {lat:52.981514, lng:-7.371835};
+//var meathCenter = new google.maps.LatLng(53.626562, -6.764452);
+var meathCenter = {lat:53.626562, lng:-6.764452};
+//var monaghanCenter = new google.maps.LatLng(54.171889, -6.910285);
+var monaghanCenter = {lat:54.171889, lng:-6.910285};
+//var mayoCenter = new google.maps.LatLng(53.949901, -9.334534);
+var mayoCenter = {lat:53.949901, lng:-9.334534};
+//var offalyCenter = new google.maps.LatLng(53.203317, -7.658506);
+var offalyCenter = {lat:53.203317, lng:-7.658506};
+//var roscommonCenter = new google.maps.LatLng(53.708854, -8.230562);
+var roscommonCenter = {lat:53.708854,lng:-8.230562};
+//var sligoCenter = new google.maps.LatLng(54.273512, -8.482532);
+var sligoCenter = {lat:54.273512, lng:-8.482532};
+//var tipperaryCenter = new google.maps.LatLng(52.662315, -7.961775);
+var tipperaryCenter = {lat:52.662315, lng:-7.961775};
+//var waterfordCenter = new google.maps.LatLng(52.253049, -7.113459);
+var waterfordCenter = {lat:52.253049, lng:-7.113459};
+//var westmeathCenter = new google.maps.LatLng(53.513374, -7.483095);
+var westmeathCenter = {lat:53.513374, lng:-7.483095};
+//var wicklowCenter = new google.maps.LatLng(52.990023, -6.360773);
+var wicklowCenter = {lat:52.990023, lng:-6.360773};
+//var wexfordCenter = new google.maps.LatLng(52.334171, -6.474478);
+var wexfordCenter = {lat:52.334171, lng:-6.474478};
 
 /* function converts full county name to abbreviated couty name - for use in Review Reported Fault page */
 function convertCountyVal(countyVal)
@@ -152,7 +179,7 @@ function checkCounty()
 	// check if the county needs to be converted from code to county name
 	if(countyVal.length==2)
 	{
-		///countyVal = convertCountyVal(countyVal);
+		//countyVal = convertCountyVal(countyVal);
 	}
 	
 	if('SELECT' == countyVal || 'ALL' == countyVal)
@@ -160,7 +187,7 @@ function checkCounty()
 		map.setCenter(myCenter);
 		map.setZoom(7);
 	}
-	else if('Clare' == countyVal || 'CE' ==countyVal)
+	else if('Clare' == countyVal || 'CE' == countyVal)
 	{
 		map.setCenter(clareCenter);
 		map.setZoom(9);

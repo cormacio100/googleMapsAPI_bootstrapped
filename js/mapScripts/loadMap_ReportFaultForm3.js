@@ -44,9 +44,10 @@ function prepareMap()
 		selectedCounty=document.getElementById('selectCounty');
 
         // display the loading div
-       // showLoading();
+       	
 
-        console.log('loading...');
+        console.log('loading selectedCounty...');
+        //console.log(selectedCounty.val(););
 
 		checkCounty();				/* see file chooseCounty.js */
 		

@@ -3,10 +3,13 @@
 -working on making pagination clientside
     -Currently programing adminSites.js
 
-test3
+// TODO
 
 =======
--Put black background all the way across the top
+
+-	Unable to log individual faults. Not saving correctly
+
+- 	have not checked all pages
 
 
 // AJAX

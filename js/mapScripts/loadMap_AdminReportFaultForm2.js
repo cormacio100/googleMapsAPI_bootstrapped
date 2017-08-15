@@ -2,8 +2,6 @@
 /* when the page loads */
 function prepareMap()
 {
-	console.log('loading data...');
-	
 	// hide instructions div 
 	document.getElementById('clickInstructions').style.display = 'none';
 	

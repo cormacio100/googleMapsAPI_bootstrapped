@@ -1,5 +1,5 @@
 /* define map variable */
-var map;
+var global_map;
 
 /* function to initialise and load the map to the page */
 function initialise()
@@ -15,7 +15,7 @@ function initialise()
 	
 	// create new google Maps object and pass in the location for where it will be displayed 
 	// as well as the properties
-	map= new google.maps.Map(document.getElementById("googleMap"),mapProp);	
+	global_map = new google.maps.Map(document.getElementById("googleMap"),mapProp);	
 
 	console.log("map loaded...");
 }
