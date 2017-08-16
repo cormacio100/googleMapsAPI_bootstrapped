@@ -1,20 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.5.1
+-- version 3.4.9
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 16, 2017 at 12:49 AM
--- Server version: 5.7.11
--- PHP Version: 5.6.19
+-- Host: localhost
+-- Generation Time: Sep 04, 2015 at 01:03 PM
+-- Server version: 5.5.20
+-- PHP Version: 5.3.9
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `googlemaps`
@@ -26,12 +26,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin`
 --
 
-CREATE TABLE `admin` (
-  `adminId` int(3) NOT NULL,
+CREATE TABLE IF NOT EXISTS `admin` (
+  `adminId` int(3) NOT NULL AUTO_INCREMENT,
   `adminUserName` varchar(15) NOT NULL,
   `adminEmail` varchar(30) NOT NULL,
-  `adminPassword` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `adminPassword` varchar(20) NOT NULL,
+  PRIMARY KEY (`adminId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `admin`
@@ -46,11 +47,12 @@ INSERT INTO `admin` (`adminId`, `adminUserName`, `adminEmail`, `adminPassword`) 
 -- Table structure for table `bsc`
 --
 
-CREATE TABLE `bsc` (
+CREATE TABLE IF NOT EXISTS `bsc` (
   `bsc` int(11) NOT NULL,
   `bscLatitude` varchar(15) NOT NULL,
   `bscLongitude` varchar(15) NOT NULL,
-  `controllerMSC` int(11) NOT NULL
+  `controllerMSC` int(11) NOT NULL,
+  PRIMARY KEY (`bsc`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -90,12 +92,13 @@ INSERT INTO `bsc` (`bsc`, `bscLatitude`, `bscLongitude`, `controllerMSC`) VALUES
 -- Table structure for table `controller`
 --
 
-CREATE TABLE `controller` (
+CREATE TABLE IF NOT EXISTS `controller` (
   `controllerId` int(2) NOT NULL,
   `controllerType` varchar(3) NOT NULL,
   `controllerLatitude` varchar(15) NOT NULL,
   `controllerLongitude` varchar(15) DEFAULT NULL,
-  `controllerMSC` int(2) NOT NULL
+  `controllerMSC` int(2) NOT NULL,
+  PRIMARY KEY (`controllerId`,`controllerType`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -141,8 +144,8 @@ INSERT INTO `controller` (`controllerId`, `controllerType`, `controllerLatitude`
 -- Table structure for table `fault`
 --
 
-CREATE TABLE `fault` (
-  `faultId` int(3) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fault` (
+  `faultId` int(3) NOT NULL AUTO_INCREMENT,
   `faultReportEmail` varchar(30) NOT NULL,
   `faultMsisdn` varchar(12) DEFAULT NULL,
   `faultAddress` varchar(50) NOT NULL,
@@ -151,20 +154,22 @@ CREATE TABLE `fault` (
   `faultFrequency` varchar(15) NOT NULL,
   `faultDescription` varchar(200) NOT NULL,
   `faultDateFrom` datetime NOT NULL,
-  `faultDateTo` datetime DEFAULT '1970-01-01 00:00:01',
-  `faultLatitude` varchar(20) NOT NULL,
-  `faultLongitude` varchar(20) NOT NULL,
+  `faultDateTo` datetime NOT NULL,
+  `faultLatitude` varchar(10) NOT NULL,
+  `faultLongitude` varchar(10) NOT NULL,
   `faultStatus` varchar(9) NOT NULL,
   `faultUpdate` varchar(200) DEFAULT NULL,
-  `_adminId` int(3) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `_adminId` int(3) DEFAULT NULL,
+  PRIMARY KEY (`faultId`),
+  KEY `_adminId` (`_adminId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=85 ;
 
 --
 -- Dumping data for table `fault`
 --
 
 INSERT INTO `fault` (`faultId`, `faultReportEmail`, `faultMsisdn`, `faultAddress`, `faultCounty`, `faultType`, `faultFrequency`, `faultDescription`, `faultDateFrom`, `faultDateTo`, `faultLatitude`, `faultLongitude`, `faultStatus`, `faultUpdate`, `_adminId`) VALUES
-(1, 'cormac.liston@gmail.com', '353872930841', '141 Biscayne Malahide ', 'Dublin', 'sms', 'constant', 'can\'t SMS from bedroom', '2015-03-29 09:36:22', '0000-00-00 00:00:00', '53.445300', '-6.137320', 'open', NULL, NULL),
+(1, 'cormac.liston@gmail.com', '353872930841', '141 Biscayne Malahide ', 'Dublin', 'sms', 'constant', 'can''t SMS from bedroom', '2015-03-29 09:36:22', '0000-00-00 00:00:00', '53.445300', '-6.137320', 'open', NULL, NULL),
 (6, 'cormac.liston@gmail.com', '353872463534', 'Salthill Hotel', 'Galway', 'sms', 'intermittent', 'Intermittenty unable to send texts from upstairs window', '2015-02-25 15:36:29', '0000-00-00 00:00:00', '53.258805', '-9.087245', 'open', '', 1),
 (7, 'cormac.liston@gmail.com', '353857972726', 'Clifden Station House Hotel, Clifden', 'Galway', 'sms', 'intermittent', 'Intermittenty unable to send texts from upstairs window', '2015-02-25 15:36:29', '0000-00-00 00:00:00', '53.488826', '-10.017729', 'open', '', 1),
 (8, 'cormac.liston@gmail.com', '353857972336', '372 Harolds Cross Road, Dublin 6W', 'Dublin', 'sms', 'intermittent', 'Unable to send SMS when using 4G', '2015-02-25 15:36:29', '0000-00-00 00:00:00', '53.317098', '-6.281120', 'open', '', 1),
@@ -223,10 +228,7 @@ INSERT INTO `fault` (`faultId`, `faultReportEmail`, `faultMsisdn`, `faultAddress
 (81, 'cormac.liston@gmail.com', '353851725368', 'Main Street, Ballyconnell', 'Cavan', 'sms', 'intermittent', 'can&#39;t send SMS from downstairs', '2015-08-07 00:00:00', '0000-00-00 00:00:00', '54.1077226', '-7.5901794', 'open', '', 1),
 (82, 'cormac.liston@gmail.com', '353851715286', 'Cootehill', 'Cavan', 'sms', 'intermittent', 'tesst', '2015-08-06 00:00:00', '0000-00-00 00:00:00', '54.0674475', '-7.0381164', 'open', 'test update', 1),
 (83, 'cormac.liston@gmail.com', '353851715286', 'carlow', 'Carlow', 'sms', 'constant', 'test', '2015-08-12 00:00:00', '0000-00-00 00:00:00', '52.8442534', '-6.6865539', 'open', '', 1),
-(84, 'cormac.liston@gmail.com', '353851715286', 'CastletownRoche', 'Cork', 'data', 'intermittent', 'test', '2015-09-17 00:00:00', '0000-00-00 00:00:00', '52.1671936', '-8.5130310', 'open', '', 1),
-(85, 'cormac.liston@outlook.com', '353851734567', '1 Glenbeigh', 'Kerry', 'all', 'intermittent', 'test', '2017-08-16 00:00:00', '1970-01-01 00:00:01', '52.05413252235478', '-9.932823227718472', 'open', '', 1),
-(86, 'luhvenechenique@gmail.com', '353851734567', '1 Kildare town', 'Kildare', 'all', 'intermittent', 'test', '2017-08-16 00:00:00', '1970-01-01 00:00:01', '53.12035950756412', '-6.9802475231699646', 'open', '', 1),
-(87, 'luhvenechenique@gmail.com', '353851734567', 'Mullagh', 'Meath', 'all', 'intermittent', 'test', '2017-08-16 00:00:00', '1970-01-01 00:00:01', '53.80384987508404', '-6.988487248308957', 'closed', 'no fault found', 1);
+(84, 'cormac.liston@gmail.com', '353851715286', 'CastletownRoche', 'Cork', 'data', 'intermittent', 'test', '2015-09-17 00:00:00', '0000-00-00 00:00:00', '52.1671936', '-8.5130310', 'open', '', 1);
 
 -- --------------------------------------------------------
 
@@ -234,13 +236,14 @@ INSERT INTO `fault` (`faultId`, `faultReportEmail`, `faultMsisdn`, `faultAddress
 -- Table structure for table `fieldengteam`
 --
 
-CREATE TABLE `fieldengteam` (
+CREATE TABLE IF NOT EXISTS `fieldengteam` (
   `fieldEngId` varchar(6) NOT NULL,
   `firstName` varchar(20) NOT NULL,
   `lastName` varchar(20) NOT NULL,
   `password` varchar(32) NOT NULL,
   `teamRegion` varchar(20) NOT NULL,
-  `teamLead` varchar(4) NOT NULL DEFAULT 'No'
+  `teamLead` varchar(4) NOT NULL DEFAULT 'No',
+  PRIMARY KEY (`fieldEngId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -275,11 +278,12 @@ INSERT INTO `fieldengteam` (`fieldEngId`, `firstName`, `lastName`, `password`, `
 -- Table structure for table `rnc`
 --
 
-CREATE TABLE `rnc` (
+CREATE TABLE IF NOT EXISTS `rnc` (
   `rnc` int(11) NOT NULL,
   `rncLatitude` varchar(15) NOT NULL,
   `rncLongitude` varchar(15) NOT NULL,
-  `controllerMSC` int(11) NOT NULL
+  `controllerMSC` int(11) NOT NULL,
+  PRIMARY KEY (`rnc`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -299,8 +303,8 @@ INSERT INTO `rnc` (`rnc`, `rncLatitude`, `rncLongitude`, `controllerMSC`) VALUES
 -- Table structure for table `site`
 --
 
-CREATE TABLE `site` (
-  `siteId` mediumint(8) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `site` (
+  `siteId` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `county` varchar(3) NOT NULL,
   `siteName` varchar(200) NOT NULL,
   `easting` double(10,2) NOT NULL,
@@ -318,9 +322,14 @@ CREATE TABLE `site` (
   `onAir` varchar(3) NOT NULL DEFAULT 'Yes',
   `wentOffAir` datetime DEFAULT NULL,
   `backOnAir` datetime DEFAULT NULL,
-  `_clusterId` smallint(5) UNSIGNED NOT NULL,
-  `_fieldEngId` varchar(6) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `_clusterId` smallint(5) unsigned NOT NULL,
+  `_fieldEngId` varchar(6) NOT NULL,
+  PRIMARY KEY (`siteId`),
+  KEY `_clusterId` (`_clusterId`),
+  KEY `_fieldEngId` (`_fieldEngId`),
+  KEY `_bsc` (`_bsc`),
+  KEY `_rnc` (`_rnc`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7961 ;
 
 --
 -- Dumping data for table `site`
@@ -329,9 +338,9 @@ CREATE TABLE `site` (
 INSERT INTO `site` (`siteId`, `county`, `siteName`, `easting`, `northing`, `latitude`, `longitude`, `_bsc`, `_rnc`, `dcsRating`, `gsmRating`, `usmRating`, `lteRating`, `txnRating`, `mprn`, `onAir`, `wentOffAir`, `backOnAir`, `_clusterId`, `_fieldEngId`) VALUES
 (1001, 'WX', 'O2 Oilgate', 99999999.99, 99999999.99, '52.424709', '-6.530632', 10, 3, 'N/A', 'N/A', 'N/A', 'N/A', 'C', '10000250502', 'No', '2015-08-08 10:56:47', '2015-07-05 20:01:57', 91, 'JJ'),
 (1002, 'WX', 'O2  Weatherglaze', 292088.00, 198526.00, '53.029797', '-6.628169', 10, 3, 'N/A', 'N/A', 'N/A', 'N/A', 'C', '10000250508', 'No', '2015-08-08 10:56:47', '2015-07-05 20:01:57', 91, 'JJ'),
-(1003, 'WX', 'O2 Ferrycarrig Hotel', 300801.30, 235986.70, '53.364704', '-6.486533', 10, 3, 'N/A', 'N/A', 'N/A', 'N/A', 'C', '10000250519', 'Yes', '2015-08-08 10:56:47', '2017-08-14 02:51:30', 91, 'JJ'),
-(1004, 'WX', 'Glenogue ESB', 297342.40, 139714.60, '52.500566', '-6.56733', 10, 3, 'N/A', 'C', 'B', 'N/A', 'A', '10000250590', 'Yes', '2015-08-08 10:56:47', '2017-08-14 02:51:30', 91, 'JJ'),
-(1005, 'WX', 'Ask Hill', 298400.00, 139900.00, '52.502042', '-6.551707', 10, 3, 'N/A', 'A', 'A', 'N/A', 'B', '10000250591', 'Yes', '2015-08-08 10:56:47', '2017-08-14 02:51:30', 91, 'JJ'),
+(1003, 'WX', 'O2 Ferrycarrig Hotel', 300801.30, 235986.70, '53.364704', '-6.486533', 10, 3, 'N/A', 'N/A', 'N/A', 'N/A', 'C', '10000250519', 'No', '2015-08-08 10:56:47', '2015-07-05 20:01:57', 91, 'JJ'),
+(1004, 'WX', 'Glenogue ESB', 297342.40, 139714.60, '52.500566', '-6.56733', 10, 3, 'N/A', 'C', 'B', 'N/A', 'A', '10000250590', 'Yes', '2015-08-08 10:56:47', '2015-08-11 15:37:27', 91, 'JJ'),
+(1005, 'WX', 'Ask Hill', 298400.00, 139900.00, '52.502042', '-6.551707', 10, 3, 'N/A', 'A', 'A', 'N/A', 'B', '10000250591', 'Yes', '2015-08-08 10:56:47', '2015-08-11 15:37:27', 91, 'JJ'),
 (1006, 'WX', 'Banoige Hill', 298300.00, 142200.00, '52.522721', '-6.5525', 10, 3, 'N/A', 'A', 'B', 'N/A', 'B', '10000250592', 'No', '2015-08-08 10:56:47', '2015-07-05 20:01:57', 91, 'JJ'),
 (1007, 'WX', 'Ferns Slieveboy', 296635.00, 140055.00, '52.503749', '-6.577644', 10, 3, 'N/A', 'A', 'N/A', 'N/A', 'B', '10000250593', 'No', '2015-08-08 10:56:47', '2015-07-05 20:01:57', 91, 'JJ'),
 (1008, 'WX', 'Data Scope Printers', 298300.00, 142200.00, '52.522721', '-6.5525', 10, 3, 'N/A', 'C', 'B', 'N/A', 'B', '10000250594', 'No', '2015-08-08 10:56:47', '2015-07-05 20:01:57', 91, 'JJ'),
@@ -450,9 +459,9 @@ INSERT INTO `site` (`siteId`, `county`, `siteName`, `easting`, `northing`, `lati
 (1234, 'KK', 'Johnswell', 312114.00, 179151.00, '52.530685', '-7.114011', 12, 3, 'N/A', 'N/A', 'B', 'N/A', 'A', '10000250878', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 41, 'JJ'),
 (1301, 'CW', 'CellcomRossmore', 271575.40, 177347.10, '52.842659', '-6.93851', 13, 3, 'N/A', 'A', 'B', 'N/A', 'A', '10000250257', 'No', '2015-08-12 11:33:13', '0000-00-00 00:00:00', 13, 'JJ'),
 (1302, 'CW', 'eircomCarlowAEH', 272822.00, 175906.00, '52.829545', '-6.920335', 13, 3, 'N/A', 'N/A', 'A', 'N/A', 'C', '10000250258', 'No', '2015-08-12 11:33:13', '2015-04-18 01:09:22', 13, 'JJ'),
-(1303, 'CW', 'Arthur\'sSupervalue', 272322.00, 176475.00, '52.834724', '-6.927625', 13, 3, 'N/A', 'A', 'A', 'N/A', 'C', '10000250259', 'Yes', '2015-08-12 11:33:13', '2017-08-15 19:04:02', 13, 'JJ'),
-(1304, 'CW', 'CarlowESB.PairedU9CW_4941', 273869.00, 177005.00, '52.839276', '-6.904556', 13, 3, 'A', 'A', 'A', 'N/A', 'B', '10000250260', 'Yes', '2015-08-12 11:33:13', '2017-08-15 19:04:02', 13, 'JJ'),
-(1305, 'CW', 'RathvillyPylon101', 272884.90, 177200.70, '52.841168', '-6.919113', 13, 3, 'N/A', 'A', 'A', 'N/A', 'B', '10000250261', 'Yes', '2015-08-12 11:33:13', '2017-08-15 19:04:02', 13, 'II'),
+(1303, 'CW', 'Arthur''sSupervalue', 272322.00, 176475.00, '52.834724', '-6.927625', 13, 3, 'N/A', 'A', 'A', 'N/A', 'C', '10000250259', 'No', '2015-08-12 11:33:13', '2015-04-18 01:09:22', 13, 'JJ'),
+(1304, 'CW', 'CarlowESB.PairedU9CW_4941', 273869.00, 177005.00, '52.839276', '-6.904556', 13, 3, 'A', 'A', 'A', 'N/A', 'B', '10000250260', 'No', '2015-08-12 11:33:13', '2015-04-18 01:09:22', 13, 'JJ'),
+(1305, 'CW', 'RathvillyPylon101', 272884.90, 177200.70, '52.841168', '-6.919113', 13, 3, 'N/A', 'A', 'A', 'N/A', 'B', '10000250261', 'No', '2015-08-12 11:33:13', '2015-04-18 01:09:22', 13, 'II'),
 (1306, 'CW', 'VodafoneTullow', 272884.90, 177200.70, '52.841168', '-6.919113', 13, 3, 'B', 'A', 'A', 'N/A', 'B', '10000250262', 'No', '2015-08-12 11:33:13', '0000-00-00 00:00:00', 13, 'II'),
 (1307, 'CW', 'PylonN80GeorgeFarm', 272586.00, 177632.00, '52.845083', '-6.923452', 13, 3, 'N/A', 'B', 'B', 'N/A', 'C', '10000250263', 'No', '2015-08-12 11:33:13', '0000-00-00 00:00:00', 13, 'II'),
 (1308, 'CW', 'VFKildavin', 266861.80, 173861.40, '52.811947', '-7.009164', 13, 3, 'N/A', 'B', 'A', 'N/A', 'C', '10000250264', 'No', '2015-08-12 11:33:13', '0000-00-00 00:00:00', 13, 'II'),
@@ -515,7 +524,7 @@ INSERT INTO `site` (`siteId`, `county`, `siteName`, `easting`, `northing`, `lati
 (1517, 'TY', 'ESBNenagh', 220916.30, 121108.80, '52.341645', '-7.69384', 15, 4, 'N/A', 'A', 'A', 'N/A', 'C', '10000251036', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 75, 'MM'),
 (1519, 'TY', 'ESBSubstationBirdhill', 204760.00, 126640.00, '52.391728', '-7.93081', 15, 4, 'N/A', 'C', 'C', 'N/A', 'C', '10000251037', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 75, 'MM'),
 (1520, 'TY', 'MunsterHotelThurles', 205493.20, 124920.80, '52.376272', '-7.920068', 15, 4, 'N/A', 'B', 'B', 'N/A', 'C', '10000251038', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 75, 'MM'),
-(1521, 'TY', 'MountO\'Meara', 219137.00, 124157.99, '52.369111', '-7.719773', 15, 4, 'N/A', 'C', 'B', 'N/A', 'C', '10000251039', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 75, 'MM'),
+(1521, 'TY', 'MountO''Meara', 219137.00, 124157.99, '52.369111', '-7.719773', 15, 4, 'N/A', 'C', 'B', 'N/A', 'C', '10000251039', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 75, 'MM'),
 (1522, 'TY', 'GleesonsPubCashel', 218000.00, 122750.00, '52.356497', '-7.73654', 15, 4, 'N/A', 'C', 'B', 'N/A', 'B', '10000251040', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 75, 'MM'),
 (1523, 'TY', 'Knockillon', 221900.00, 123498.00, '52.363077', '-7.679252', 15, 4, 'N/A', 'B', 'B', 'N/A', 'C', '10000251041', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 75, 'MM'),
 (1524, 'TY', 'Cahirabbey', 203604.50, 241441.10, '52.643991', '-8.113067', 15, 4, 'N/A', 'B', 'A', 'N/A', 'C', '10000251042', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 75, 'MM'),
@@ -553,7 +562,7 @@ INSERT INTO `site` (`siteId`, `county`, `siteName`, `easting`, `northing`, `lati
 (1703, 'CE', 'ESBCratloe', 316768.00, 235237.00, '52.983357', '-8.914257', 17, 4, 'N/A', 'B', 'C', 'N/A', 'C', '10000250099', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'MM'),
 (1704, 'CE', 'HurlersCross', 316999.00, 238900.00, '53.013937', '-9.000775', 17, 4, 'N/A', 'B', 'B', 'N/A', 'C', '10000250100', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'OO'),
 (1705, 'CE', 'ShannonAirportHouse', 320160.00, 235142.00, '52.962682', '-8.936230', 17, 4, 'N/A', 'B', 'B', 'N/A', 'C', '10000250101', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'OO'),
-(1706, 'CE', 'KilnasoolaghNewm\'t-on-Fergus', 320270.00, 236957.00, '52.943653', '-8.878552', 17, 4, 'N/A', 'B', 'B', 'N/A', 'C', '10000250102', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'OO'),
+(1706, 'CE', 'KilnasoolaghNewm''t-on-Fergus', 320270.00, 236957.00, '52.943653', '-8.878552', 17, 4, 'N/A', 'B', 'B', 'N/A', 'C', '10000250102', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'OO'),
 (1707, 'CE', 'LyonsLandClarecastle', 321022.00, 236014.00, '52.909710', '-8.892285', 17, 4, 'N/A', 'A', 'A', 'N/A', 'C', '10000250103', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'OO'),
 (1708, 'CE', 'ESBEnnis', 320260.00, 234325.00, '52.917163', '-8.812634', 17, 4, 'A', 'A', 'A', 'N/A', 'B', '10000250104', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'OO'),
 (1709, 'CE', 'Ballymaconna Barefield"', 318086.00, 235258.80, '52.929582', '-8.731610', 17, 4, 'N/A', 'B', 'B', 'N/A', 'A', '10000250105', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'OO'),
@@ -573,7 +582,7 @@ INSERT INTO `site` (`siteId`, `county`, `siteName`, `easting`, `northing`, `lati
 (1723, 'CE', 'ClarecastleESB', 109141.00, 181692.00, '52.878777', '-9.350274', 17, 4, 'N/A', 'B', 'A', 'N/A', 'C', '10000250119', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 'OO'),
 (1724, 'CE', 'StSenansRFC', 137033.20, 179220.50, '52.860557', '-8.935584', 17, 4, 'N/A', 'B', 'A', 'N/A', 'C', '10000250120', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 'OO'),
 (1725, 'CE', 'SanfieldCentre', 1337999.00, 179512.00, '52.851764', '-8.984630', 17, 4, 'N/A', 'A', 'A', 'N/A', 'C', '10000250121', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 'OO'),
-(1726, 'CE', 'Nolan\'sFarm', 147900.00, 160350.00, '52.692166', '-8.771263', 17, 4, 'N/A', 'C', 'C', 'N/A', 'C', '10000250122', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 'OO'),
+(1726, 'CE', 'Nolan''sFarm', 147900.00, 160350.00, '52.692166', '-8.771263', 17, 4, 'N/A', 'C', 'C', 'N/A', 'C', '10000250122', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 'OO'),
 (1727, 'CE', 'GraganWood', 151328.00, 159750.00, '52.687094', '-8.720481', 17, 4, 'N/A', 'C', 'C', 'N/A', 'B', '10000250123', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 'OO'),
 (1728, 'CE', 'LahinchRTE', 152262.00, 164179.00, '52.726973', '-8.707313', 17, 4, 'N/A', 'A', 'A', 'N/A', 'B', '10000250124', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 'OO'),
 (1729, 'CE', 'ESBEnnistymon', 152262.00, 164179.00, '52.726973', '-8.707313', 17, 4, 'N/A', 'A', 'B', 'N/A', 'B', '10000250125', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 3, 'OO'),
@@ -614,7 +623,7 @@ INSERT INTO `site` (`siteId`, `county`, `siteName`, `easting`, `northing`, `lati
 (1825, 'LK', 'AislingAnnacottyFootballClub', 160516.00, 155767.00, '52.652052', '-8.584142', 18, 4, 'N/A', 'B', 'B', 'N/A', 'C', '10000251147', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 51, 'MM'),
 (1828, 'LK', 'TowerconGlenbrohane', 160516.00, 155767.00, '52.652052', '-8.584142', 18, 4, 'N/A', 'B', 'N/A', 'N/A', 'C', '10000251148', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 51, 'NN'),
 (1829, 'LK', 'ESBDooradoyle', 161831.50, 156981.80, '52.663062', '-8.564846', 18, 4, 'A', 'B', 'A', 'A', 'C', '10000251149', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 51, 'MM'),
-(1830, 'LK', 'O\'NeillsSilo', 167534.00, 148769.00, '52.589635', '-8.479762', 18, 4, 'N/A', 'C', 'C', 'N/A', 'C', '10000251150', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 51, 'MM'),
+(1830, 'LK', 'O''NeillsSilo', 167534.00, 148769.00, '52.589635', '-8.479762', 18, 4, 'N/A', 'C', 'C', 'N/A', 'C', '10000251150', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 51, 'MM'),
 (1831, 'LK', 'ESBAhane110kV', 160050.00, 154172.00, '52.637686', '-8.590834', 18, 4, 'N/A', 'B', 'C', 'N/A', 'C', '10000251151', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 51, 'MM'),
 (1832, 'LK', 'ClarionHotelSuites', 158630.00, 161640.00, '52.704683', '-8.612746', 18, 4, 'N/A', 'N/A', 'A', 'N/A', 'C', '10000251152', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 51, 'MM'),
 (1833, 'LK', 'LimerickFireStation', 158863.00, 160389.00, '52.69346', '-8.609142', 18, 4, 'N/A', 'N/A', 'A', 'A', 'C', '10000251153', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 52, 'MM'),
@@ -656,7 +665,7 @@ INSERT INTO `site` (`siteId`, `county`, `siteName`, `easting`, `northing`, `lati
 (1918, 'CK', 'Ringaskiddy', 170947.00, 74422.00, '51.921718', '-8.423004', 19, 4, 'N/A', 'B', 'A', 'N/A', 'A', '10000250154', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 5, 'PP'),
 (1919, 'CK', 'RafeenBusinessPark(Shanbally)', 170834.00, 73638.00, '51.914666', '-8.42458', 19, 4, 'N/A', 'C', 'B', 'N/A', 'C', '10000250155', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 5, 'PP'),
 (1920, 'CK', 'ESBCobh', 167725.20, 71841.60, '51.89835', '-8.469589', 19, 4, 'N/A', 'B', 'B', 'N/A', 'B', '10000250156', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 5, 'NN'),
-(1921, 'CK', 'FrankO\'Mahony', 171747.00, 74464.00, '51.922136', '-8.411379', 19, 4, 'N/A', 'A', 'B', 'N/A', 'B', '10000250157', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 5, 'PP'),
+(1921, 'CK', 'FrankO''Mahony', 171747.00, 74464.00, '51.922136', '-8.411379', 19, 4, 'N/A', 'A', 'B', 'N/A', 'B', '10000250157', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 5, 'PP'),
 (1922, 'CK', 'CorkAirportBuis.Park', 166345.00, 73486.00, '51.913047', '-8.489799', 19, 4, 'N/A', 'B', 'B', 'N/A', 'B', '10000250158', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 5, 'PP'),
 (1923, 'CK', 'ESBCarrigaline', 155573.00, 66299.00, '51.847705', '-8.645405', 19, 4, 'N/A', 'A', 'B', 'N/A', 'A', '10000250159', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 5, 'PP'),
 (1924, 'CK', 'RTEMarinapt', 162850.00, 77000.00, '51.944404', '-8.540966', 19, 4, 'N/A', 'B', 'A', 'N/A', 'B', '10000250160', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 5, 'NN'),
@@ -704,7 +713,7 @@ INSERT INTO `site` (`siteId`, `county`, `siteName`, `easting`, `northing`, `lati
 (1966, 'CK', 'RigidToolsMahon', 167422.00, 71869.00, '51.898579', '-8.473996', 19, 4, 'A', 'A', 'B', 'B', 'A', '10000250202', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 8, 'PP'),
 (1967, 'CK', 'R&HHall(Cork)', 167085.00, 72127.00, '51.900878', '-8.478916', 19, 4, 'B', 'N/A', 'B', 'B', 'A', '10000250203', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 8, 'PP'),
 (1968, 'CK', 'O2SisksTogher(frmlySecuricor)', 164590.00, 50950.00, '51.710408', '-8.512999', 19, 4, 'A', 'A', 'B', 'B', 'B', '10000250204', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 8, 'OO'),
-(1969, 'CK', 'O2ModelFarmRoad(fmrlyO\'MahoneyPackaging)', 164590.00, 50950.00, '51.710408', '-8.512999', 19, 4, 'B', 'B', 'B', 'B', 'C', '10000250205', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 8, 'OO'),
+(1969, 'CK', 'O2ModelFarmRoad(fmrlyO''MahoneyPackaging)', 164590.00, 50950.00, '51.710408', '-8.512999', 19, 4, 'B', 'B', 'B', 'B', 'C', '10000250205', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 8, 'OO'),
 (1970, 'CK', 'CorkOperaHouse', 160618.00, 46927.00, '51.673989', '-8.570005', 19, 4, 'B', 'B', 'A', 'N/A', 'A', '10000250206', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 8, 'PP'),
 (1971, 'CK', 'TidyMechanical', 166108.60, 55926.20, '51.755224', '-8.491514', 19, 4, 'C', 'B', 'C', 'N/A', 'C', '10000250207', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 9, 'PP'),
 (1972, 'CK', 'Banduff Glanmire', 155375.00, 59137.00, '51.783326', '-8.647356', 19, 4, 'A', 'N/A', 'A', 'A', 'A', '10000250208', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 9, 'NN'),
@@ -793,7 +802,7 @@ INSERT INTO `site` (`siteId`, `county`, `siteName`, `easting`, `northing`, `lati
 (2303, 'RN', 'BoyleGarda', 99999999.99, 99999999.99, '53.973519', '-8.300467', 23, 5, 'N/A', 'C', 'C', 'N/A', 'C', '10000251103', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 72, 'RR'),
 (2304, 'RN', 'O2Cornafulla', 99999999.99, 99999999.99, '53.428527', '-7.994643', 23, 5, 'N/A', 'C', 'C', 'N/A', 'B', '10000251104', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 72, 'SS'),
 (2305, 'RN', 'RTECoolderry', 99999999.99, 99999999.99, '53.314024', '-8.143553', 23, 5, 'N/A', 'B', 'B', 'N/A', 'C', '10000251105', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 72, 'SS'),
-(2306, 'RN', 'O2SlieveO\'Flynn', 99999999.99, 99999999.99, '53.729130', '-8.067187', 23, 5, 'N/A', 'B', 'C', 'N/A', 'A', '10000251106', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 72, 'RR'),
+(2306, 'RN', 'O2SlieveO''Flynn', 99999999.99, 99999999.99, '53.729130', '-8.067187', 23, 5, 'N/A', 'B', 'C', 'N/A', 'A', '10000251106', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 72, 'RR'),
 (2307, 'RN', 'CoillteNewbridge', 99999999.99, 99999999.99, '53.356838', '-7.821164', 23, 5, 'N/A', 'C', 'C', 'N/A', 'C', '10000251107', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 72, 'QQ'),
 (2308, 'RN', 'CoillteSheegory Boyle', 99999999.99, 99999999.99, '53.972851', '-8.297662', 23, 5, 'N/A', 'C', 'C', 'N/A', 'C', '10000251108', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 72, 'RR'),
 (2309, 'RN', 'ShannonsideRadio', 99999999.99, 99999999.99, '53.462661', '-7.988177', 23, 5, 'N/A', 'A', 'C', 'N/A', 'C', '10000251109', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 72, 'QQ'),
@@ -947,7 +956,7 @@ INSERT INTO `site` (`siteId`, `county`, `siteName`, `easting`, `northing`, `lati
 (2604, 'DL', 'VodafoneStragaddy', 219036.00, 412638.00, '54.960935', '-7.703582', 26, 5, 'N/A', 'C', 'B', 'N/A', 'C', '10000250277', 'Yes', '2015-05-25 00:17:57', '2015-05-25 00:18:19', 15, 'QQ'),
 (2605, 'DL', 'RTEMoville', 213334.00, 412940.00, '54.963832', '-7.79258', 26, 5, 'N/A', 'C', 'B', 'N/A', 'C', '10000250278', 'Yes', '2015-05-25 00:17:57', '2015-05-25 00:18:19', 15, 'QQ'),
 (2606, 'DL', 'DorriansHotel', 217385.00, 413711.00, '54.970633', '-7.72929', 26, 5, 'N/A', 'C', 'C', 'N/A', 'C', '10000250279', 'Yes', '2015-05-25 00:17:57', '2015-05-25 00:18:19', 15, 'QQ'),
-(2607, 'DL', 'Hegarty\'sGarage', 223514.96, 404890.32, '54.891151', '-7.634297', 26, 5, 'N/A', 'N/A', 'A', 'N/A', 'C', '10000250280', 'Yes', '2015-05-25 00:17:57', '2015-05-25 00:18:19', 15, 'QQ'),
+(2607, 'DL', 'Hegarty''sGarage', 223514.96, 404890.32, '54.891151', '-7.634297', 26, 5, 'N/A', 'N/A', 'A', 'N/A', 'C', '10000250280', 'Yes', '2015-05-25 00:17:57', '2015-05-25 00:18:19', 15, 'QQ'),
 (2608, 'DL', 'Kiltoy', 212263.00, 407925.00, '54.918812', '-7.809514', 26, 5, 'N/A', 'C', 'B', 'N/A', 'C', '10000250281', 'Yes', '2015-05-25 00:21:29', '2015-05-25 00:21:55', 15, 'QQ'),
 (2609, 'DL', 'CoillteLetterkenny', 221411.00, 399909.00, '54.8465', '-7.667453', 26, 5, 'N/A', 'C', 'A', 'N/A', 'C', '10000250282', 'Yes', '2015-05-25 00:21:29', '2015-05-25 00:21:55', 15, 'TT'),
 (2610, 'DL', 'JacksonsHotelO2(formerlyGarvanHouseBallybofey)', 231874.40, 398541.20, '54.833658', '-7.50473', 26, 5, 'N/A', 'N/A', 'B', 'N/A', 'C', '10000250283', 'Yes', '2015-05-25 00:21:29', '2015-05-25 00:21:55', 15, 'QQ'),
@@ -980,7 +989,7 @@ INSERT INTO `site` (`siteId`, `county`, `siteName`, `easting`, `northing`, `lati
 (2637, 'DL', 'EircomBuncrana', 99999999.99, 99999999.99, '55.135350', '-7.453619', 26, 5, 'N/A', 'C', 'N/A', 'N/A', 'A', '10000250310', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 17, 'QQ'),
 (7101, 'DN', 'ParkHouse', 320340.00, 239862.00, '53.395423', '-6.1917', 1, 1, 'A', 'B', 'A', 'A', 'A', '10000250000', 'No', '2015-07-13 00:55:49', '0000-00-00 00:00:00', 18, 'AA'),
 (7102, 'DN', 'TempleTheatre', 320340.00, 239862.00, '53.395423', '-6.1917', 1, 1, 'A', 'B', 'A', 'A', 'B', '10000250001', 'No', '2015-07-13 00:55:49', '0000-00-00 00:00:00', 18, 'BB'),
-(7103, 'DN', 'Cassidy\'sHotel', 320230.00, 240078.60, '53.397394', '-6.193271', 1, 1, 'B', 'B', 'A', 'A', 'A', '10000250002', 'No', '2015-07-13 00:55:49', '0000-00-00 00:00:00', 18, 'BB'),
+(7103, 'DN', 'Cassidy''sHotel', 320230.00, 240078.60, '53.397394', '-6.193271', 1, 1, 'B', 'B', 'A', 'A', 'A', '10000250002', 'No', '2015-07-13 00:55:49', '0000-00-00 00:00:00', 18, 'BB'),
 (7104, 'DN', 'CIEConnolly', 320847.00, 240939.00, '53.40498', '-6.183671', 1, 1, 'A', 'B', 'A', 'N/A', 'B', '10000250003', 'No', '2015-07-13 00:55:49', '2015-04-14 00:20:08', 18, 'BB'),
 (7105, 'DN', 'R&HHall', 328523.08, 237366.04, '53.371084', '-6.069775', 1, 1, 'B', 'N/A', 'C', 'C', 'A', '10000250004', 'No', '2015-07-13 00:55:49', '2015-04-14 00:20:08', 18, 'BB'),
 (7106, 'DN', 'IlacSC', 324631.00, 240260.10, '53.398004', '-6.127075', 1, 1, 'A', 'A', 'A', 'A', 'A', '10000250005', 'No', '2015-07-13 00:55:49', '0000-00-00 00:00:00', 18, 'BB'),
@@ -1030,18 +1039,18 @@ INSERT INTO `site` (`siteId`, `county`, `siteName`, `easting`, `northing`, `lati
 (7150, 'DN', 'WicklowCourt(FmlyHogansBar)', 320335.00, 226942.00, '53.279396', '-6.19668', 1, 1, 'A', 'N/A', 'A', 'N/A', 'C', '10000250049', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 21, 'AA'),
 (7151, 'DN', 'FourSeasonsPub', 320625.00, 227675.00, '53.285913', '-6.192057', 1, 1, 'B', 'N/A', 'B', 'B', 'C', '10000250050', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 21, 'BB'),
 (7152, 'DN', 'RedCorner', 322650.00, 226980.00, '53.279208', '-6.161978', 1, 1, 'B', 'N/A', 'A', 'A', 'B', '10000250051', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 21, 'BB'),
-(7153, 'DN', 'Baker\'sPub', 310717.50, 232840.50, '53.334465', '-6.33874', 1, 1, 'B', 'N/A', 'B', 'B', 'C', '10000250052', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 21, 'BB'),
+(7153, 'DN', 'Baker''sPub', 310717.50, 232840.50, '53.334465', '-6.33874', 1, 1, 'B', 'N/A', 'B', 'B', 'C', '10000250052', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 21, 'BB'),
 (7154, 'DN', 'MISYS', 312366.60, 231243.30, '53.319773', '-6.314562', 1, 1, 'C', 'N/A', 'B', 'B', 'B', '10000250053', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 21, 'BB'),
 (7155, 'DN', 'GardaPhoenixPark', 312446.40, 229955.80, '53.308193', '-6.313822', 1, 1, 'N/A', 'A', 'A', 'N/A', 'C', '10000250054', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 21, 'AA'),
 (7156, 'DN', 'GlasnevinTennisClub', 313990.10, 231270.00, '53.319667', '-6.290202', 1, 1, 'N/A', 'C', 'C', 'C', 'C', '10000250055', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 21, 'AA'),
 (7157, 'DN', 'CreationHouse', 309950.00, 234340.10, '53.348093', '-6.349736', 1, 1, 'B', 'B', 'A', 'N/A', 'B', '10000250056', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 22, 'AA'),
 (7158, 'DN', 'FairviewCYMCA', 312193.10, 233755.90, '53.342376', '-6.316276', 1, 1, 'N/A', 'B', 'B', 'B', 'B', '10000250057', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 22, 'BB'),
 (7159, 'DN', 'CabraESB', 311900.00, 233400.00, '53.339242', '-6.3208', 1, 1, 'A', 'A', 'A', 'A', 'B', '10000250058', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 22, 'AA'),
-(7160, 'DN', 'Fagan\'sPub', 311464.00, 232877.00, '53.334637', '-6.327526', 1, 1, 'N/A', 'C', 'B', 'B', 'B', '10000250059', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 22, 'BB'),
+(7160, 'DN', 'Fagan''sPub', 311464.00, 232877.00, '53.334637', '-6.327526', 1, 1, 'N/A', 'C', 'B', 'B', 'B', '10000250059', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 22, 'BB'),
 (7161, 'DN', 'ClarionHotel', 309052.00, 236030.00, '53.363457', '-6.362632', 1, 1, 'A', 'N/A', 'A', 'A', 'C', '10000250060', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 22, 'BB'),
 (7162, 'DN', 'ConradHotel', 310583.00, 232830.00, '53.334399', '-6.340762', 1, 1, 'B', 'N/A', 'A', 'N/A', 'C', '10000250061', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 22, 'AA'),
 (7163, 'DN', 'O2CastleknockTennisClub', 311106.80, 232250.90, '53.329088', '-6.333105', 1, 1, 'N/A', 'A', 'B', 'N/A', 'C', '10000250062', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 22, 'AA'),
-(7164, 'DN', 'KellyO\'Callaghan', 313321.00, 234258.00, '53.346645', '-6.29917', 1, 1, 'B', 'N/A', 'A', 'A', 'C', '10000250063', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 22, 'AA'),
+(7164, 'DN', 'KellyO''Callaghan', 313321.00, 234258.00, '53.346645', '-6.29917', 1, 1, 'B', 'N/A', 'A', 'A', 'C', '10000250063', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 22, 'AA'),
 (7165, 'DN', 'FiveLamps', 312691.00, 233814.00, '53.342792', '-6.308783', 1, 1, 'N/A', 'A', 'A', 'A', 'C', '10000250064', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 22, 'BB'),
 (7166, 'DN', 'MotorParts', 313598.00, 231769.80, '53.324239', '-6.295904', 1, 1, 'B', 'N/A', 'A', 'A', 'C', '10000250065', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 22, 'AA'),
 (7167, 'DN', 'BathroomFittings(Rialto)', 315381.00, 238258.00, '53.382124', '-6.266795', 1, 1, 'C', 'N/A', 'C', 'C', 'C', '10000250066', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 22, 'CC'),
@@ -1166,8 +1175,8 @@ INSERT INTO `site` (`siteId`, `county`, `siteName`, `easting`, `northing`, `lati
 (7415, 'KE', 'TheCurraghRC', 295595.00, 206064.00, '53.096894', '-6.573679', 4, 2, 'C', 'A', 'C', 'N/A', 'C', '10000250435', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 34, 'FF'),
 (7416, 'KE', 'TPWaters', 278340.00, 223632.00, '53.257522', '-6.8269', 4, 2, 'N/A', 'B', 'C', 'N/A', 'C', '10000250436', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 34, 'FF'),
 (7417, 'KE', 'EircellTowerKilcullen', 272768.00, 212751.00, '53.160564', '-6.912851', 4, 2, 'N/A', 'A', 'A', 'N/A', 'A', '10000250437', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 34, 'FF'),
-(7418, 'KE', 'Nolan\'sLand', 277806.00, 210370.00, '53.138463', '-6.838127', 4, 2, 'N/A', 'B', 'B', 'N/A', 'B', '10000250438', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 34, 'FF'),
-(7419, 'KE', 'Dempsey\'sLand', 279262.00, 214736.00, '53.17747', '-6.815296', 4, 2, 'N/A', 'A', 'A', 'N/A', 'C', '10000250439', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 34, 'FF'),
+(7418, 'KE', 'Nolan''sLand', 277806.00, 210370.00, '53.138463', '-6.838127', 4, 2, 'N/A', 'B', 'B', 'N/A', 'B', '10000250438', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 34, 'FF'),
+(7419, 'KE', 'Dempsey''sLand', 279262.00, 214736.00, '53.17747', '-6.815296', 4, 2, 'N/A', 'A', 'A', 'N/A', 'C', '10000250439', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 34, 'FF'),
 (7420, 'KE', 'CurraghCarpets', 282475.00, 206600.00, '53.103895', '-6.769346', 4, 2, 'N/A', 'A', 'A', 'N/A', 'C', '10000250440', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 34, 'FF'),
 (7421, 'KE', 'SheehyMotors', 272914.00, 212359.00, '53.157022', '-6.910758', 4, 2, 'N/A', 'N/A', 'B', 'N/A', 'C', '10000250441', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 34, 'GG'),
 (7422, 'KE', 'MarriotHotelJohnstown', 282700.00, 200900.00, '53.052655', '-6.767451', 4, 2, 'N/A', 'B', 'C', 'N/A', 'C', '10000250442', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 34, 'HH'),
@@ -1195,7 +1204,7 @@ INSERT INTO `site` (`siteId`, `county`, `siteName`, `easting`, `northing`, `lati
 (7444, 'KE', 'CellbridgeG.C.(Barnhall)', 289095.80, 224044.90, '53.259536', '-6.665665', 4, 2, 'N/A', 'C', 'C', 'N/A', 'B', '10000250464', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 36, 'FF'),
 (7445, 'KE', 'eircomCappagh', 289180.00, 218050.00, '53.205671', '-6.66608', 4, 2, 'N/A', 'A', 'A', 'N/A', 'A', '10000250465', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 36, 'HH'),
 (7446, 'KE', 'SilkenThomas', 284100.00, 216934.00, '53.196473', '-6.742379', 4, 2, 'N/A', 'A', 'B', 'N/A', 'C', '10000250466', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 36, 'FF'),
-(7447, 'KE', 'NaasTown(formerlyO\'Driscolls)', 289426.00, 219318.00, '53.21702', '-6.662044', 4, 2, 'B', 'A', 'A', 'N/A', 'C', '10000250467', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 36, 'GG'),
+(7447, 'KE', 'NaasTown(formerlyO''Driscolls)', 289426.00, 219318.00, '53.21702', '-6.662044', 4, 2, 'B', 'A', 'A', 'N/A', 'C', '10000250467', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 36, 'GG'),
 (7448, 'KE', 'BallymoreEustacePylon113', 289291.00, 219488.00, '53.21857', '-6.664017', 4, 2, 'N/A', 'B', 'B', 'N/A', 'B', '10000250468', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 36, 'FF'),
 (7449, 'KE', 'MinchMalt.PairedU9KE_4948', 289291.00, 219488.00, '53.21857', '-6.664017', 4, 2, 'A', 'A', 'A', 'N/A', 'A', '10000250469', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 36, 'FF'),
 (7450, 'KE', 'Newhall', 283705.00, 213259.00, '53.163522', '-6.749249', 4, 2, 'N/A', 'B', 'B', 'N/A', 'A', '10000250470', 'Yes', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 36, 'GG'),
@@ -1437,18 +1446,20 @@ INSERT INTO `site` (`siteId`, `county`, `siteName`, `easting`, `northing`, `lati
 -- Table structure for table `sitecluster`
 --
 
-CREATE TABLE `sitecluster` (
-  `clusterId` smallint(5) UNSIGNED NOT NULL,
-  `b_siteId` smallint(5) UNSIGNED NOT NULL,
-  `a_siteId` smallint(5) UNSIGNED DEFAULT NULL,
-  `hop2` smallint(5) UNSIGNED DEFAULT NULL,
-  `hop3` smallint(5) UNSIGNED DEFAULT NULL,
-  `hop4` smallint(5) UNSIGNED DEFAULT NULL,
-  `hop5` smallint(5) UNSIGNED DEFAULT NULL,
-  `hop6` smallint(5) UNSIGNED DEFAULT NULL,
-  `hop7` smallint(5) UNSIGNED DEFAULT NULL,
-  `hop8` smallint(5) UNSIGNED DEFAULT NULL,
-  `hop9` smallint(5) UNSIGNED DEFAULT NULL
+CREATE TABLE IF NOT EXISTS `sitecluster` (
+  `clusterId` smallint(5) unsigned NOT NULL,
+  `b_siteId` smallint(5) unsigned NOT NULL,
+  `a_siteId` smallint(5) unsigned DEFAULT NULL,
+  `hop2` smallint(5) unsigned DEFAULT NULL,
+  `hop3` smallint(5) unsigned DEFAULT NULL,
+  `hop4` smallint(5) unsigned DEFAULT NULL,
+  `hop5` smallint(5) unsigned DEFAULT NULL,
+  `hop6` smallint(5) unsigned DEFAULT NULL,
+  `hop7` smallint(5) unsigned DEFAULT NULL,
+  `hop8` smallint(5) unsigned DEFAULT NULL,
+  `hop9` smallint(5) unsigned DEFAULT NULL,
+  PRIMARY KEY (`clusterId`,`b_siteId`),
+  KEY `b_siteId` (`b_siteId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -2630,83 +2641,6 @@ INSERT INTO `sitecluster` (`clusterId`, `b_siteId`, `a_siteId`, `hop2`, `hop3`, 
 (94, 1050, 1049, 1048, 1043, NULL, NULL, NULL, NULL, NULL, NULL),
 (94, 1051, 1050, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`adminId`);
-
---
--- Indexes for table `bsc`
---
-ALTER TABLE `bsc`
-  ADD PRIMARY KEY (`bsc`);
-
---
--- Indexes for table `controller`
---
-ALTER TABLE `controller`
-  ADD PRIMARY KEY (`controllerId`,`controllerType`);
-
---
--- Indexes for table `fault`
---
-ALTER TABLE `fault`
-  ADD PRIMARY KEY (`faultId`),
-  ADD KEY `_adminId` (`_adminId`);
-
---
--- Indexes for table `fieldengteam`
---
-ALTER TABLE `fieldengteam`
-  ADD PRIMARY KEY (`fieldEngId`);
-
---
--- Indexes for table `rnc`
---
-ALTER TABLE `rnc`
-  ADD PRIMARY KEY (`rnc`);
-
---
--- Indexes for table `site`
---
-ALTER TABLE `site`
-  ADD PRIMARY KEY (`siteId`),
-  ADD KEY `_clusterId` (`_clusterId`),
-  ADD KEY `_fieldEngId` (`_fieldEngId`),
-  ADD KEY `_bsc` (`_bsc`),
-  ADD KEY `_rnc` (`_rnc`);
-
---
--- Indexes for table `sitecluster`
---
-ALTER TABLE `sitecluster`
-  ADD PRIMARY KEY (`clusterId`,`b_siteId`),
-  ADD KEY `b_siteId` (`b_siteId`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `admin`
---
-ALTER TABLE `admin`
-  MODIFY `adminId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `fault`
---
-ALTER TABLE `fault`
-  MODIFY `faultId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
---
--- AUTO_INCREMENT for table `site`
---
-ALTER TABLE `site`
-  MODIFY `siteId` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7961;
 --
 -- Constraints for dumped tables
 --

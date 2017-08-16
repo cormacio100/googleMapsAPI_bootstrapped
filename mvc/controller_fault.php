@@ -369,6 +369,7 @@ if(!isset($_SESSION))
   */
   function createReportFault()
   {
+
 	# form variables
 	$faultCounty=null;
 	$faultAddress=null;
@@ -397,6 +398,8 @@ if(!isset($_SESSION))
 	$faultReportCreated=false; # has the fault report been created
 	$newFaultReportId=null;
 	
+	//print_r($_POST);exit;
+
 	# check that the button was pressed to report the fault
 	if(isset($_POST['submitFaultReport']))
 	{

@@ -235,17 +235,24 @@ function createFaultReport($faultCounty,$faultAddress,$faultMsisdn,$faultType,$f
 	# default administrator ID
 	$_adminId=1;
 	
-	$resultArr=array();	# array to return result in
+	$resultArr=array();		# array to return result in
 	
 	$inserted=null;
 	$newReportArr=array();
 	
 	# create the Database object
 	$db=new Database;
+
+	if(empty($faultDateTo))
+	{
+		$faultDateTo = '1970-01-01 00:00:01';
+	}
 	
 	# create the query
 	$query="INSERT INTO `googlemaps`.`fault` (`faultId`, `faultReportEmail`, `faultAddress`,`faultCounty`,  `faultMsisdn`, `faultType`, `faultFrequency`, `faultDescription`, `faultDateFrom`, `faultDateTo`, `faultLatitude`, `faultLongitude`, `faultStatus`, `faultUpdate`, `_adminId`) 
 			VALUES (NULL,'".$faultReportEmail."','".$faultAddress."','".$faultCounty."','".$faultMsisdn."','".$faultType."','".$faultFrequency."','".$faultDescription."','".$faultDateFrom."','".$faultDateTo."','".$faultLatitude."','".$faultLongitude."','".$faultStatus."','".$faultUpdate."','".$_adminId."')";
+
+	echo $query; //exit;
 
 	# submit and execute the query
 	$inserted=$db->insertRecord($query);
