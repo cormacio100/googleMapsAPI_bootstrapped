@@ -25,11 +25,11 @@ They can also, reset sites by turning them on and off. This sometimes fixes the 
 
 ## Tech Used
 -	[WAMP version 3.0.4 32bit](http://www.wampserver.com/en/download-wampserver-32bits/)
--	**PHP** Mini-Framework called [**Epiphany**] (https://github.com/jmathai/epiphany)
+-	[**PHP** Mini-Framework called **Epiphany**](https://github.com/jmathai/epiphany)
 -	**MySQL**
 -	**Javascript**
 -	**CSS**
--	[**Google Maps Javascript API**] (https://developers.google.com/maps/documentation/javascript/)
+-	[**Google Maps Javascript API**](https://developers.google.com/maps/documentation/javascript/)
 -	[**Bootstrap 2**](http://getbootstrap.com/2.3.2/)
 
 ## Contributing
