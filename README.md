@@ -24,8 +24,8 @@ They can also, reset sites by turning them on and off. This sometimes fixes the 
 -	Sites "off air" script not yet linked to a live network
 
 ## Tech Used
--	[WAMP version 3.0.4 32bit](http://www.wampserver.com/en/download-wampserver-32bits/)
--	[**PHP** Mini-Framework called **Epiphany**](https://github.com/jmathai/epiphany)
+-	[**WAMP version 3.0.4 32bit**](http://www.wampserver.com/en/download-wampserver-32bits/)
+-	[**PHP Mini-Framework called Epiphany**](https://github.com/jmathai/epiphany)
 -	**MySQL**
 -	**Javascript**
 -	**CSS**
